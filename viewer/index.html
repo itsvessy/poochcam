@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f5f3eb">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Poochcam">
+  <base href="/watch/">
+  <title>Poochcam · Home</title>
+  <link rel="icon" href="icon.png">
+  <link rel="apple-touch-icon" href="icon.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="style.css?v=3">
+  <script type="module" src="app.js?v=3"></script>
+</head>
+<body>
+  <svg class="symbols" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="i-paw" viewBox="0 0 80 80"><ellipse cx="21" cy="25" rx="9" ry="12" transform="rotate(-25 21 25)"/><ellipse cx="39" cy="18" rx="9" ry="12"/><ellipse cx="58" cy="25" rx="9" ry="12" transform="rotate(25 58 25)"/><ellipse cx="68" cy="42" rx="7" ry="10" transform="rotate(40 68 42)"/><path d="M19 59c0-11 12-24 22-24s22 13 22 24c0 15-14 5-22 5S19 74 19 59Z"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="m9 5 10 7-10 7Z"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></symbol>
+    <symbol id="i-sound" viewBox="0 0 24 24"><path d="M11 4 5 9H2v6h3l6 5ZM15 8a6 6 0 0 1 0 8M18 5a10 10 0 0 1 0 14"/></symbol>
+    <symbol id="i-muted" viewBox="0 0 24 24"><path d="M11 4 5 9H2v6h3l6 5ZM16 9l6 6M22 9l-6 6"/></symbol>
+    <symbol id="i-expand" viewBox="0 0 24 24"><path d="M9 3H3v6M15 3h6v6M21 15v6h-6M3 15v6h6"/></symbol>
+    <symbol id="i-collapse" viewBox="0 0 24 24"><path d="M3 9h6V3M21 9h-6V3M15 21v-6h6M9 21v-6H3"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+    <symbol id="i-retry" viewBox="0 0 24 24"><path d="M20 7v5h-5M20 12a8 8 0 1 0-2 5"/></symbol>
+  </svg>
+  <main class="viewer">
+    <header class="heading">
+      <div class="identity"><svg class="identity-paw" aria-hidden="true"><use href="#i-paw"/></svg><h1>Poochcam</h1></div>
+      <button id="help-open" class="quiet" type="button" aria-haspopup="dialog">Help</button>
+    </header>
+    <div class="camera-heading">
+      <h2>Home</h2>
+      <div id="status" class="status" data-state="idle" role="status" aria-live="polite" aria-atomic="true"><span class="dot" aria-hidden="true"></span><span id="status-text">Ready to watch</span></div>
+    </div>
+    <section id="room" class="room" aria-label="Home camera" data-state="idle">
+      <video id="video" playsinline preload="auto" aria-label="Home camera video" disableRemotePlayback></video>
+      <div id="placeholder" class="placeholder">
+        <div class="room-mark"><svg class="paw" aria-hidden="true"><use href="#i-paw"/></svg><span class="spinner" aria-hidden="true"></span></div>
+        <h3 id="placeholder-title">A moment at home.</h3>
+        <p id="placeholder-detail">See the room. Hear your dog.<br>Tap Watch live below.</p>
+      </div>
+      <div id="paused" class="paused" hidden><svg class="icon" aria-hidden="true"><use href="#i-pause"/></svg><strong>Viewing paused</strong><span>The camera keeps running.</span></div>
+      <div id="buffering" class="buffering" hidden><span class="small-spinner" aria-hidden="true"></span>Reconnecting…</div>
+      <button id="fullscreen" class="frame-control" type="button" aria-label="Expand view" title="Expand view" disabled hidden><svg class="icon" aria-hidden="true"><use id="fullscreen-icon" href="#i-expand"/></svg></button>
+    </section>
+    <div class="viewing-tools">
+      <div class="controls" role="group" aria-label="Viewing controls">
+        <button id="watch" class="primary" type="button" aria-controls="video" disabled><svg class="icon" aria-hidden="true"><use id="watch-icon" href="#i-play"/></svg><span id="watch-label">Preparing…</span></button>
+        <button id="sound" class="secondary" type="button" aria-label="Sound" aria-pressed="true" aria-controls="video" disabled><svg class="icon" aria-hidden="true"><use id="sound-icon" href="#i-sound"/></svg><span id="sound-label">Sound on</span></button>
+      </div>
+      <p id="message" class="message">Video and sound start together.</p>
+    </div>
+    <dialog id="help" aria-labelledby="help-title">
+      <div class="sheet-heading"><h2 id="help-title">Viewing help</h2><button id="help-close" class="quiet icon-button" type="button" aria-label="Close help" autofocus><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button></div>
+      <div class="help-section"><h3>No picture?</h3><p>Open Poochcam on the camera phone and start the camera. Check that both phones can reach your camera server.</p></div>
+      <div class="help-section"><h3>No sound?</h3><p>Turn Sound on below the picture, then use your phone’s volume buttons. Keep this page open while listening.</p></div>
+      <button id="reconnect" class="secondary reconnect" type="button" disabled><svg class="icon" aria-hidden="true"><use href="#i-retry"/></svg>Reconnect viewer</button>
+      <p class="help-note">Reconnect only refreshes your view. It doesn’t restart the camera.</p>
+      <a class="fallback" href="/dogcam/">Open fallback viewer <span aria-hidden="true">↗</span></a>
+    </dialog>
+    <noscript><p>Enable JavaScript for the viewing controls, or <a href="/dogcam/">open the original viewer</a>.</p></noscript>
+  </main>
+</body>
+</html>

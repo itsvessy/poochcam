@@ -1,0 +1,101 @@
+import AVFoundation
+@testable import Moblin
+import Testing
+
+struct HttpClientSuite {
+    @Test
+    func responseParserNoData() {
+        let parser = HttpResponseParser()
+        let (done, data) = parser.parse()
+        #expect(!done)
+        #expect(data == nil)
+    }
+
+    @Test
+    func responseParserEmptyBody() {
+        let parser = HttpResponseParser()
+        parser.append(data: "HTTP/1.1 200 OK\r\n\r\n".utf8Data)
+        let (done, data) = parser.parse()
+        #expect(done)
+        #expect(data == Data())
+    }
+
+    @Test
+    func responseParserBody() {
+        let parser = HttpResponseParser()
+        let body = "1234567890".utf8Data
+        parser.append(data: "HTTP/1.1 200 OK\r\nContent-Length: \(body.count)\r\n\r\n".utf8Data + body)
+        let (done, data) = parser.parse()
+        #expect(done)
+        #expect(data == body)
+    }
+
+    @Test
+    func responseParserHalfHeader() {
+        let parser = HttpResponseParser()
+        let body = "1234567890".utf8Data
+        parser.append(data: "HTTP/1.1 200 OK\r\nContent-Le".utf8Data)
+        var (done, data) = parser.parse()
+        #expect(!done)
+        #expect(data == nil)
+        parser.append(data: "ngth: \(body.count)\r\n\r\n".utf8Data + body)
+        (done, data) = parser.parse()
+        #expect(done)
+        #expect(data == body)
+    }
+
+    @Test
+    func responseParserHalfBody() {
+        let parser = HttpResponseParser()
+        let body = "1234567890".utf8Data
+        parser
+            .append(data: "HTTP/1.1 200 OK\r\nContent-Length: \(body.count)\r\n\r\n".utf8Data + body[0 ..< 5])
+        var (done, data) = parser.parse()
+        #expect(!done)
+        #expect(data == nil)
+        parser.append(data: body[5...])
+        (done, data) = parser.parse()
+        #expect(done)
+        #expect(data == body)
+    }
+
+    @Test
+    func responseParserStatus400() {
+        let parser = HttpResponseParser()
+        parser.append(data: "HTTP/1.1 400 OK\r\n\r\n".utf8Data)
+        let (done, data) = parser.parse()
+        #expect(done)
+        #expect(data == nil)
+    }
+
+    @Test
+    func responseParserGetLineCrash() {
+        let parser = HttpResponseParser()
+        parser.append(data: "HTTP/1.1 400 OK\r".utf8Data)
+        var (done, data) = parser.parse()
+        #expect(!done)
+        #expect(data == nil)
+        parser.append(data: "\n\r\n".utf8Data)
+        (done, data) = parser.parse()
+        #expect(done)
+        #expect(data == nil)
+    }
+
+    @Test
+    func responseParserRejectsNegativeContentLength() {
+        let parser = HttpResponseParser()
+        parser.append(data: "HTTP/1.1 200 OK\r\nContent-Length: -1\r\n\r\n".utf8Data)
+        let (done, data) = parser.parse()
+        #expect(done)
+        #expect(data == nil)
+    }
+
+    @Test
+    func responseParserRejectsNonDecimalContentLength() {
+        let parser = HttpResponseParser()
+        parser.append(data: "HTTP/1.1 200 OK\r\nContent-Length: nope\r\n\r\n".utf8Data)
+        let (done, data) = parser.parse()
+        #expect(done)
+        #expect(data == nil)
+    }
+}

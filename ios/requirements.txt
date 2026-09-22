@@ -1,0 +1,17 @@
+systest
+ruff
+pylint
+deep_translator
+moblin_assistant
+requests
+av
+pyperclip
+isort
+mypy
+playwright
+simba_soam
+irwin
+xdg-base-dirs
+pyleetspeak==0.1.0
+pyphen
+tqdm

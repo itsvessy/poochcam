@@ -1,0 +1,250 @@
+import MetalPetal
+import SceneKit
+import SwiftUI
+import Vision
+import VRMSceneKit
+
+private class PngCoordinate: Decodable {
+    // periphery:ignore
+    let x: Double
+    // periphery:ignore
+    let y: Double
+
+    required init(from decoder: any Decoder) throws {
+        let value = try decoder.singleValueContainer().decode(String.self)
+        if let match = value.firstMatch(of: /Vector2\(([-\d]+), ([-\d]+)\)/) {
+            x = Double(match.1) ?? 0
+            y = Double(match.2) ?? 0
+        } else {
+            x = 0
+            y = 0
+        }
+    }
+}
+
+private enum BlinkTalkState: Int {
+    case closed = 1
+    case open = 2
+}
+
+private class PngTuberImage: Decodable {
+    let costumeLayers: [Int]
+    // periphery:ignore
+    let identification: Int
+    // var ignoreBounce: Bool
+    let imageData: EffectImageCgImage
+    // periphery:ignore
+    let offset: PngCoordinate
+    // periphery:ignore
+    let parentId: Int?
+    // periphery:ignore
+    let pos: PngCoordinate
+    let showBlink: BlinkTalkState?
+    let showTalk: BlinkTalkState?
+    let zIndex: Int
+
+    enum CodingKeys: CodingKey {
+        case costumeLayers
+        case identification
+        case imageData
+        case offset
+        case parentId
+        case pos
+        case showBlink
+        case showTalk
+        case zindex
+    }
+
+    required init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let costumeLayersData = try container.decode(String.self, forKey: .costumeLayers).utf8Data
+        costumeLayers = try JSONDecoder().decode([Int].self, from: costumeLayersData)
+        guard costumeLayers.count == 10 else {
+            throw "Not 10 costumes: \(costumeLayers.count)"
+        }
+        identification = try container.decode(Int.self, forKey: .identification)
+        guard let imageDataData = try Data(base64Encoded: container.decode(String.self, forKey: .imageData)
+            .utf8Data),
+            let cgImage = UIImage(data: imageDataData)?.cgImage
+        else {
+            throw "Failed to decode image data"
+        }
+        imageData = cgImage.toEffectImage()
+        offset = try container.decode(PngCoordinate.self, forKey: .offset)
+        parentId = try container.decode(Int?.self, forKey: .parentId)
+        pos = try container.decode(PngCoordinate.self, forKey: .pos)
+        showBlink = try BlinkTalkState(rawValue: container.decode(Int.self, forKey: .showBlink))
+        showTalk = try BlinkTalkState(rawValue: container.decode(Int.self, forKey: .showTalk))
+        zIndex = try container.decode(Int.self, forKey: .zindex)
+    }
+}
+
+private class PngTuberFile {
+    var images: [PngTuberImage]
+
+    init(images: [PngTuberImage]) {
+        self.images = images
+    }
+}
+
+final class PngTuberEffect: VideoEffect, @unchecked Sendable {
+    private let model: PngTuberFile?
+    private var videoSourceId: UUID = .init()
+    private var sceneWidget: SettingsSceneWidget?
+    private var mirror: Bool = false
+    private var isMouthOpen = false
+    private var isLeftEyeOpen = true
+    private var currentCostumeImages: [PngTuberImage] = []
+    private var sensitivity = SettingsSensitivity()
+
+    init(model: URL, costume: Int) {
+        do {
+            let model = try JSONDecoder().decode([String: PngTuberImage].self, from: Data(contentsOf: model))
+            let images = model.sorted(by: { Int($0.key) ?? 0 < Int($1.key) ?? 0 }).map(\.value)
+            self.model = PngTuberFile(images: images)
+        } catch {
+            logger.info("png-tuber: Failed to load model with error: \(error)")
+            self.model = nil
+        }
+        super.init()
+        setCostume(number: costume)
+    }
+
+    func setVideoSourceId(videoSourceId: UUID) {
+        processorPipelineQueue.async {
+            self.videoSourceId = videoSourceId
+        }
+    }
+
+    func setSceneWidget(sceneWidget: SettingsSceneWidget) {
+        processorPipelineQueue.async {
+            self.sceneWidget = sceneWidget
+        }
+    }
+
+    func setSettings(mirror: Bool, sensitivity: SettingsSensitivity) {
+        processorPipelineQueue.async {
+            self.mirror = mirror
+            self.sensitivity = sensitivity
+        }
+    }
+
+    override func execute(_ image: CIImage, _ info: VideoEffectInfo) -> CIImage {
+        guard let sceneWidget else {
+            return image
+        }
+        updateModelPose(size: image.extent.size, info: info)
+        var pngTuberImage: CIImage?
+        for costumeImage in visibleCostumeImages() {
+            let layerImage = costumeImage.imageData.getCiImage()
+            if let currentImage = pngTuberImage {
+                pngTuberImage = layerImage.composited(over: currentImage)
+            } else {
+                pngTuberImage = layerImage
+            }
+        }
+        return pngTuberImage?
+            .resizeMirror(sceneWidget.layout, image.extent.size, mirror)
+            .move(sceneWidget.layout, image.extent.size)
+            .composited(over: image)
+            .cropped(to: image.extent) ?? image
+    }
+
+    override func executeMetalPetal(_ image: MTIImage, _ info: VideoEffectInfo) -> MTIImage {
+        guard let sceneWidget else {
+            return image
+        }
+        updateModelPose(size: image.extent.size, info: info)
+        let layerImages = visibleCostumeImages().map { $0.imageData.getMetalPetalImage() }
+        guard !layerImages.isEmpty else {
+            return image
+        }
+        let backgroundSize = image.extent.size
+        let contentSize = layerImages.reduce(CGSize.zero) {
+            CGSize(width: max($0.width, $1.extent.width), height: max($0.height, $1.extent.height))
+        }
+        let scale = min(toPixels(sceneWidget.layout.size, backgroundSize.width) / contentSize.width,
+                        toPixels(sceneWidget.layout.size, backgroundSize.height) / contentSize.height)
+        let size = CGSize(width: contentSize.width * scale, height: contentSize.height * scale)
+        let position = metalPetalLayerPosition(sceneWidget.layout, size, backgroundSize)
+        let filter = MTIMultilayerCompositingFilter()
+        filter.inputBackgroundImage = image
+        filter.layers = layerImages.map { layerImage in
+            let layerSize = CGSize(width: layerImage.extent.width * scale,
+                                   height: layerImage.extent.height * scale)
+            let x = if mirror {
+                position.x + size.width / 2 - layerSize.width / 2
+            } else {
+                position.x - size.width / 2 + layerSize.width / 2
+            }
+            let y = position.y + size.height / 2 - layerSize.height / 2
+            return .init(content: layerImage,
+                         contentFlipOptions: mirror ? .flipHorizontally : [],
+                         position: CGPoint(x: x, y: y),
+                         size: layerSize)
+        }
+        return filter.outputImage ?? image
+    }
+
+    private func visibleCostumeImages() -> [PngTuberImage] {
+        currentCostumeImages.filter { shouldShowImage(image: $0) }
+    }
+
+    private func shouldShowImage(image: PngTuberImage) -> Bool {
+        switch image.showBlink {
+        case .closed:
+            if isLeftEyeOpen {
+                return false
+            }
+        case .open:
+            if !isLeftEyeOpen {
+                return false
+            }
+        default:
+            break
+        }
+        switch image.showTalk {
+        case .closed:
+            if isMouthOpen {
+                return false
+            }
+        case .open:
+            if !isMouthOpen {
+                return false
+            }
+        default:
+            break
+        }
+        return true
+    }
+
+    private func updateModelPose(size: CGSize, info: VideoEffectInfo) {
+        if let detection = info.faceDetections(videoSourceId)?.first,
+           let rotationAngle = detection.calcFaceAngle(imageSize: size)
+        {
+            isMouthOpen = detection.isMouthOpen(rotationAngle: rotationAngle,
+                                                sensitivity: sensitivity.mouth) > 0.15
+            isLeftEyeOpen = -(detection.isLeftEyeOpen(
+                rotationAngle: rotationAngle,
+                sensitivity: sensitivity.eyes
+            ) - 1) > 0.1
+        }
+    }
+
+    private func setCostume(number: Int) {
+        guard let model, number >= 1, number <= 10 else {
+            return
+        }
+        currentCostumeImages.removeAll()
+        for image in model.images.sorted(by: { $0.zIndex < $1.zIndex }) {
+            guard image.costumeLayers[number - 1] == 1 else {
+                continue
+            }
+            currentCostumeImages.append(image)
+        }
+    }
+
+    override func needsFaceDetections(_: Double) -> VideoEffectDetectionsMode {
+        .interval(videoSourceId, 0.1)
+    }
+}

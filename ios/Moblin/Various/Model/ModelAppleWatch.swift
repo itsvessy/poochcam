@@ -1,0 +1,676 @@
+import SwiftUI
+import WatchConnectivity
+
+extension Model {
+    nonisolated func isWatchReachable() -> Bool {
+        WCSession.default.activationState == .activated && WCSession.default.isReachable
+    }
+
+    private func sendMessageToWatch(
+        type: WatchMessageToWatch,
+        data: Any,
+        replyHandler: (([String: Any]) -> Void)? = nil,
+        errorHandler: ((any Error) -> Void)? = nil
+    ) {
+        WCSession.default.sendMessage(
+            WatchMessageToWatch.pack(type: type, data: data),
+            replyHandler: replyHandler,
+            errorHandler: errorHandler
+        )
+    }
+
+    func sendInitToWatch() {
+        setLowFpsImage()
+        sendSettingsToWatch()
+        if !isWatchReachable() {
+            remoteControlAssistantStopPreview(user: .watch)
+        }
+        if isWatchRemoteControl() {
+            if isWatchReachable() {
+                remoteControlAssistantStartPreview(user: .watch)
+            }
+            sendRemoteControlAssistantStatusToWatch()
+        } else {
+            sendZoomToWatch(x: zoom.x)
+            zoomPresetsMayHaveChanged()
+            sendZoomPresetToWatch()
+            sendScenesToWatchLocal()
+            sendSceneToWatch(id: sceneSelector.selectedSceneId)
+            resetWorkoutStats()
+            trySendNextChatPostToWatch()
+            sendAudioLevelToWatch(audioLevel: audio.level.level)
+            sendThermalStateToWatch(thermalState: statusOther.thermalState)
+            sendIsLiveToWatch(isLive: isLive)
+            sendIsRecordingToWatch(isRecording: isRecording)
+            sendIsMutedToWatch(isMuteOn: isMuteOn)
+            sendViewerCountWatch()
+            sendScoreboardPlayersToWatch()
+            if let widget = getEnabledScoreboardWidgetsInSelectedScene()
+                .filter({ $0.scoreboard.sport == .padel || $0.scoreboard.sport == .generic })
+                .first
+            {
+                let scoreboard = widget.scoreboard
+                switch scoreboard.sport {
+                case .padel:
+                    sendUpdatePadelScoreboardToWatch(id: widget.id, padel: scoreboard.padel)
+                case .generic:
+                    sendUpdateGenericScoreboardToWatch(id: widget.id, generic: scoreboard.generic)
+                default:
+                    break
+                }
+            } else {
+                for widgetId in scoreboardEffects.keys {
+                    sendRemoveScoreboardToWatch(id: widgetId)
+                }
+            }
+        }
+    }
+
+    func sendSpeedAndTotalToWatch(speedAndTotal: String) {
+        guard isWatchReachable() else {
+            return
+        }
+        sendMessageToWatch(type: .speedAndTotal, data: speedAndTotal)
+    }
+
+    func sendRecordingLengthToWatch(recordingLength: String) {
+        guard isWatchReachable() else {
+            return
+        }
+        sendMessageToWatch(type: .recordingLength, data: recordingLength)
+    }
+
+    func sendAudioLevelToWatch(audioLevel: Float) {
+        guard isWatchReachable() else {
+            return
+        }
+        sendMessageToWatch(type: .audioLevel, data: audioLevel)
+    }
+
+    func sendThermalStateToWatch(thermalState: ProcessInfo.ThermalState) {
+        guard isWatchReachable() else {
+            return
+        }
+        sendMessageToWatch(type: .thermalState, data: thermalState.rawValue)
+    }
+
+    func sendViewerCountWatch() {
+        guard isWatchReachable() else {
+            return
+        }
+        sendMessageToWatch(type: .viewerCount, data: statusTopLeft.numberOfViewersCompact)
+    }
+
+    func sendUpdatePadelScoreboardToWatch(id: UUID, padel: SettingsWidgetPadelScoreboard) {
+        guard isWatchReachable() else {
+            return
+        }
+        var data: Data
+        do {
+            var home = [padel.homePlayer1]
+            var away = [padel.awayPlayer1]
+            if padel.type == .doubles {
+                home.append(padel.homePlayer2)
+                away.append(padel.awayPlayer2)
+            }
+            let score = padel.score.map { WatchProtocolPadelScoreboardScore(
+                home: $0.home,
+                away: $0.away
+            ) }
+            let message = WatchProtocolPadelScoreboard(id: id, home: home, away: away, score: score)
+            data = try JSONEncoder().encode(message)
+        } catch {
+            return
+        }
+        sendMessageToWatch(type: .padelScoreboard, data: data)
+    }
+
+    func sendUpdateGenericScoreboardToWatch(id: UUID, generic: SettingsWidgetGenericScoreboard) {
+        guard isWatchReachable() else {
+            return
+        }
+        var data: Data
+        do {
+            let message = WatchProtocolGenericScoreboard(id: id,
+                                                         homeTeam: generic.home,
+                                                         awayTeam: generic.away,
+                                                         homeScore: generic.score.home,
+                                                         awayScore: generic.score.away,
+                                                         clockMinutes: generic.clock.minutes,
+                                                         clockSeconds: generic.clock.seconds,
+                                                         clockMaximum: generic.clock.maximum,
+                                                         isClockStopped: generic.clock.isStopped,
+                                                         title: generic.title)
+            data = try JSONEncoder().encode(message)
+        } catch {
+            return
+        }
+        sendMessageToWatch(type: .genericScoreboard, data: data)
+    }
+
+    func sendRemoveScoreboardToWatch(id: UUID) {
+        guard isWatchReachable() else {
+            return
+        }
+        sendMessageToWatch(type: .removeScoreboard, data: id.uuidString)
+    }
+
+    func sendScoreboardPlayersToWatch() {
+        guard isWatchReachable() else {
+            return
+        }
+        var data: Data
+        do {
+            let message = database.scoreboardPlayers.map { WatchProtocolScoreboardPlayer(
+                id: $0.id,
+                name: $0.name
+            ) }
+            data = try JSONEncoder().encode(message)
+        } catch {
+            return
+        }
+        sendMessageToWatch(type: .scoreboardPlayers, data: data)
+    }
+
+    private func resetWorkoutStats() {
+        heartRates.removeAll()
+        workoutActiveEnergyBurned = nil
+        workoutDistance = nil
+        workoutPower = nil
+        workoutStepCount = nil
+    }
+
+    private func enqueueWatchChatPost(post: ChatPost) {
+        guard WCSession.default.isWatchAppInstalled else {
+            return
+        }
+        guard !post.isRedLine() else {
+            return
+        }
+        let displayName = post.displayName(nicknames: database.chat.nicknames,
+                                           displayStyle: database.chat.displayStyle)
+        let userColor = WatchProtocolColor(
+            red: post.userColor.red,
+            green: post.userColor.green,
+            blue: post.userColor.blue
+        )
+        let post = WatchProtocolChatMessage(
+            id: nextWatchChatPostId,
+            timestamp: post.timestamp,
+            displayName: displayName,
+            userColor: userColor,
+            userBadges: post.userBadges,
+            segments: post.segments
+                .map { WatchProtocolChatSegment(text: $0.text, url: $0.url?.absoluteString) },
+            highlight: post.highlight?.toWatchProtocol()
+        )
+        nextWatchChatPostId += 1
+        watchChatPosts.append(post)
+        if watchChatPosts.count > maximumNumberOfWatchChatMessages {
+            _ = watchChatPosts.popFirst()
+        }
+    }
+
+    func trySendNextChatPostToWatch() {
+        guard isWatchReachable(), let post = watchChatPosts.popFirst() else {
+            return
+        }
+        var data: Data
+        do {
+            data = try JSONEncoder().encode(post)
+        } catch {
+            logger.info("watch: Chat message send failed")
+            return
+        }
+        sendMessageToWatch(type: .chatMessage, data: data)
+    }
+
+    func sendChatMessageToWatch(post: ChatPost) {
+        enqueueWatchChatPost(post: post)
+    }
+
+    func sendPreviewToWatch(image: Data) {
+        guard isWatchReachable() else {
+            return
+        }
+        sendMessageToWatch(type: .preview, data: image)
+    }
+
+    func sendZoomToWatch(x: Float) {
+        guard isWatchReachable() else {
+            return
+        }
+        sendMessageToWatch(type: .zoom, data: x)
+    }
+
+    func sendZoomPresetsToWatch(presets: [SettingsZoomPreset]) {
+        guard isWatchReachable() else {
+            return
+        }
+        let zoomPresets = presets.map { WatchProtocolZoomPreset(id: $0.id, name: $0.name) }
+        do {
+            let zoomPresets = try JSONEncoder().encode(zoomPresets)
+            sendMessageToWatch(type: .zoomPresets, data: zoomPresets)
+        } catch {}
+    }
+
+    func sendZoomPresetToWatch() {
+        guard isWatchReachable() else {
+            return
+        }
+        let zoomPreset: UUID = if cameraPosition == .front {
+            zoom.frontPresetId
+        } else {
+            zoom.backPresetId
+        }
+        sendMessageToWatch(type: .zoomPreset, data: zoomPreset.uuidString)
+    }
+
+    private func sendScenesToWatch(scenes: [WatchProtocolScene]) {
+        guard isWatchReachable() else {
+            return
+        }
+        do {
+            try sendMessageToWatch(type: .scenes, data: JSONEncoder().encode(scenes))
+        } catch {}
+    }
+
+    private func sendScenesToWatchLocal() {
+        sendScenesToWatch(scenes: enabledScenes.map { WatchProtocolScene(id: $0.id, name: $0.name) })
+    }
+
+    private func sendScenesToWatchRemoteControl() {
+        guard let scenes = remoteControl.settings?.scenes else {
+            return
+        }
+        sendScenesToWatch(scenes: scenes.map { WatchProtocolScene(id: $0.id, name: $0.name) })
+    }
+
+    func sendSceneToWatch(id: UUID) {
+        guard isWatchReachable() else {
+            return
+        }
+        sendMessageToWatch(type: .scene, data: id.uuidString)
+    }
+
+    func sendSettingsToWatch() {
+        guard isWatchReachable() else {
+            return
+        }
+        do {
+            let settings = try JSONEncoder().encode(database.watch)
+            sendMessageToWatch(type: .settings, data: settings)
+        } catch {}
+    }
+
+    func sendIsLiveToWatch(isLive: Any) {
+        guard isWatchReachable() else {
+            return
+        }
+        sendMessageToWatch(type: .isLive, data: isLive)
+    }
+
+    func sendIsRecordingToWatch(isRecording: Any) {
+        guard isWatchReachable() else {
+            return
+        }
+        sendMessageToWatch(type: .isRecording, data: isRecording)
+    }
+
+    func sendIsMutedToWatch(isMuteOn: Any) {
+        guard isWatchReachable() else {
+            return
+        }
+        sendMessageToWatch(type: .isMuted, data: isMuteOn)
+    }
+
+    func sendRemoteControlAssistantStatusToWatch() {
+        if let general = remoteControl.general {
+            if let thermalState = general.flame?.toThermalState() {
+                sendThermalStateToWatch(thermalState: thermalState)
+            }
+            if let isLive = general.isLive {
+                sendIsLiveToWatch(isLive: isLive)
+            }
+            if let isRecording = general.isRecording {
+                sendIsRecordingToWatch(isRecording: isRecording)
+            }
+            if let isMuted = general.isMuted {
+                sendIsMutedToWatch(isMuteOn: isMuted)
+            }
+        }
+        if let topLeft = remoteControl.topLeft {
+            if let zoom = topLeft.zoom {
+                sendZoomToWatch(x: Float(zoom.message) ?? 0.0)
+            }
+        }
+        if let topRight = remoteControl.topRight {
+            if let recordingMessage = topRight.recording?.message {
+                sendRecordingLengthToWatch(recordingLength: recordingMessage)
+            }
+            if let bitrateMessage = topRight.bitrate?.message {
+                sendSpeedAndTotalToWatch(speedAndTotal: bitrateMessage)
+            }
+            if let audioInfo = topRight.audioInfo {
+                sendAudioLevelToWatch(audioLevel: audioInfo.audioLevel.toFloat())
+            }
+        }
+        sendScenesToWatchRemoteControl()
+        sendSceneToWatch(id: remoteControl.scene)
+    }
+
+    func isWatchRemoteControl() -> Bool {
+        database.watch.viaRemoteControl
+    }
+
+    func isWatchLocal() -> Bool {
+        !isWatchRemoteControl()
+    }
+}
+
+extension Model: WCSessionDelegate {
+    nonisolated func session(
+        _: WCSession,
+        activationDidCompleteWith activationState: WCSessionActivationState,
+        error _: (any Error)?
+    ) {
+        logger.debug("watch: \(activationState)")
+        switch activationState {
+        case .activated:
+            DispatchQueue.main.async {
+                self.setLowFpsImage()
+            }
+        default:
+            break
+        }
+    }
+
+    nonisolated func sessionDidBecomeInactive(_: WCSession) {
+        logger.debug("watch: Session inactive")
+    }
+
+    nonisolated func sessionDidDeactivate(_: WCSession) {
+        logger.debug("watch: Session deactive")
+    }
+
+    nonisolated func sessionReachabilityDidChange(_: WCSession) {
+        logger.debug("watch: Reachability changed to \(isWatchReachable())")
+        DispatchQueue.main.async {
+            self.sendInitToWatch()
+        }
+    }
+
+    private nonisolated func makePng(_ uiImage: UIImage) -> Data {
+        for height in [35.0, 25.0, 15.0] {
+            guard let pngData = uiImage.resize(height: height).pngData() else {
+                return Data()
+            }
+            if pngData.count < 15000 {
+                return pngData
+            }
+        }
+        return Data()
+    }
+
+    private nonisolated func handleGetImage(_ data: Any, _ replyHandler: @escaping ([String: Any]) -> Void) {
+        guard let urlString = data as? String else {
+            replyHandler(["data": Data()])
+            return
+        }
+        guard let url = URL(string: urlString) else {
+            replyHandler(["data": Data()])
+            return
+        }
+        httpRequest(request: URLRequest(url: url)) { data, response, _ in
+            guard let response = response?.http else {
+                replyHandler(["data": Data()])
+                return
+            }
+            guard response.isSuccessful, let data else {
+                replyHandler(["data": Data()])
+                return
+            }
+            guard let uiImage = UIImage(data: data) else {
+                replyHandler(["data": Data()])
+                return
+            }
+            replyHandler(["data": self.makePng(uiImage)])
+        }
+    }
+
+    private nonisolated func handleSetIsLive(_ data: Any) {
+        guard let value = data as? Bool else {
+            return
+        }
+        DispatchQueue.main.async {
+            if self.isWatchRemoteControl() {
+                self.remoteControlAssistantSetLive(on: value)
+            } else {
+                if value {
+                    self.startStream()
+                } else {
+                    _ = self.stopStream()
+                }
+            }
+        }
+    }
+
+    private nonisolated func handleSetIsRecording(_ data: Any) {
+        guard let value = data as? Bool else {
+            return
+        }
+        DispatchQueue.main.async {
+            if self.isWatchRemoteControl() {
+                self.remoteControlAssistantSetRecord(on: value)
+            } else {
+                if value {
+                    self.startRecording()
+                } else {
+                    self.stopRecording()
+                }
+            }
+        }
+    }
+
+    private nonisolated func handleSetIsMuted(_ data: Any) {
+        guard let value = data as? Bool else {
+            return
+        }
+        DispatchQueue.main.async {
+            if self.isWatchRemoteControl() {
+                self.remoteControlAssistantSetMute(on: value)
+            } else {
+                self.setIsMuted(value: value)
+            }
+        }
+    }
+
+    private nonisolated func handleSkipCurrentChatTextToSpeechMessage() {
+        DispatchQueue.main.async {
+            if self.isWatchLocal() {
+                self.chatTextToSpeech.skipCurrentMessage()
+            }
+        }
+    }
+
+    private nonisolated func handleSetZoomMessage(_ data: Any) {
+        guard let x = data as? Float else {
+            return
+        }
+        DispatchQueue.main.async {
+            if self.isWatchLocal() {
+                self.setZoomX(x: x, rate: self.database.zoom.speed)
+            } else {
+                self.remoteControlAssistantSetZoom(x: x)
+            }
+        }
+    }
+
+    private nonisolated func handleSetZoomPresetMessage(_ data: Any) {
+        guard let data = data as? String else {
+            return
+        }
+        guard let zoomPresetId = UUID(uuidString: data) else {
+            return
+        }
+        DispatchQueue.main.async {
+            if self.isWatchLocal() {
+                self.setZoomPreset(id: zoomPresetId)
+            }
+        }
+    }
+
+    private nonisolated func handleSetSceneMessage(_ data: Any) {
+        guard let data = data as? String else {
+            return
+        }
+        guard let sceneId = UUID(uuidString: data) else {
+            return
+        }
+        DispatchQueue.main.async {
+            if self.isWatchLocal() {
+                self.selectScene(id: sceneId)
+            } else {
+                self.remoteControlAssistantSetScene(id: sceneId)
+            }
+        }
+    }
+
+    private nonisolated func handleUpdateWorkoutStats(_ data: Any) {
+        guard let data = data as? Data else {
+            return
+        }
+        guard let stats = try? JSONDecoder().decode(WatchProtocolWorkoutStats.self, from: data) else {
+            return
+        }
+        DispatchQueue.main.async {
+            if self.isWatchLocal() {
+                self.handleWorkout(stats: stats)
+            }
+        }
+    }
+
+    private nonisolated func handleUpdatePadelScoreboard(_ data: Any) {
+        guard let data = data as? Data else {
+            return
+        }
+        guard let action = try? JSONDecoder().decode(WatchProtocolPadelScoreboardAction.self, from: data)
+        else {
+            return
+        }
+        DispatchQueue.main.async {
+            guard self.isWatchLocal() else {
+                return
+            }
+            self.handleUpdatePadelScoreboard(action: action)
+        }
+    }
+
+    private nonisolated func handleUpdateGenericScoreboard(_ data: Any) {
+        guard let data = data as? Data else {
+            return
+        }
+        guard let action = try? JSONDecoder().decode(WatchProtocolGenericScoreboardAction.self, from: data)
+        else {
+            return
+        }
+        DispatchQueue.main.async {
+            guard self.isWatchLocal() else {
+                return
+            }
+            self.handleUpdateGenericScoreboard(action: action)
+        }
+    }
+
+    private nonisolated func handleCreateStreamMarker() {
+        DispatchQueue.main.async {
+            if self.isWatchLocal() {
+                self.createStreamMarker()
+            }
+        }
+    }
+
+    private nonisolated func handleInstantReplay(_ data: Any) {
+        guard let data = data as? Data else {
+            return
+        }
+        guard let instantReplay = try? JSONDecoder().decode(WatchProtocolInstantReplay.self, from: data)
+        else {
+            return
+        }
+        DispatchQueue.main.async {
+            if self.isWatchLocal() {
+                self.instantReplay(start: SettingsReplay.stop - Double(instantReplay.duration), delay: 1)
+            } else {
+                logger.info("Instant replay via remote control not yet supported.")
+            }
+        }
+    }
+
+    private nonisolated func handleSaveReplay() {
+        DispatchQueue.main.async {
+            if self.isWatchLocal() {
+                _ = self.saveReplay()
+            } else {
+                logger.info("Save replay via remote control not yet supported.")
+            }
+        }
+    }
+
+    nonisolated func session(
+        _: WCSession,
+        didReceiveMessage message: [String: Any],
+        replyHandler: @escaping ([String: Any]) -> Void
+    ) {
+        guard let (type, data) = WatchMessageFromWatch.unpack(message) else {
+            logger.info("watch: Invalid message")
+            replyHandler([:])
+            return
+        }
+        switch type {
+        case .getImage:
+            handleGetImage(data, replyHandler)
+        default:
+            replyHandler([:])
+        }
+    }
+
+    nonisolated func session(_: WCSession, didReceiveMessage message: [String: Any]) {
+        guard let (type, data) = WatchMessageFromWatch.unpack(message) else {
+            logger.info("watch: Invalid message")
+            return
+        }
+        switch type {
+        case .setIsLive:
+            handleSetIsLive(data)
+        case .setIsRecording:
+            handleSetIsRecording(data)
+        case .setIsMuted:
+            handleSetIsMuted(data)
+        case .keepAlive:
+            break
+        case .skipCurrentChatTextToSpeechMessage:
+            handleSkipCurrentChatTextToSpeechMessage()
+        case .setZoom:
+            handleSetZoomMessage(data)
+        case .setZoomPreset:
+            handleSetZoomPresetMessage(data)
+        case .setScene:
+            handleSetSceneMessage(data)
+        case .updateWorkoutStats:
+            handleUpdateWorkoutStats(data)
+        case .updatePadelScoreboard:
+            handleUpdatePadelScoreboard(data)
+        case .updateGenericScoreboard:
+            handleUpdateGenericScoreboard(data)
+        case .createStreamMarker:
+            handleCreateStreamMarker()
+        case .instantReplay:
+            handleInstantReplay(data)
+        case .saveReplay:
+            handleSaveReplay()
+        case .getImage:
+            break
+        }
+    }
+}

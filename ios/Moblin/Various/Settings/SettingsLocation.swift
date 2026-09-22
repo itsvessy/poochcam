@@ -1,0 +1,129 @@
+import Foundation
+
+class SettingsPrivacyRegion: Codable, Identifiable {
+    var id: UUID = .init()
+    var latitude: Double = 0
+    var longitude: Double = 0
+    var latitudeDelta: Double = 30
+    var longitudeDelta: Double = 30
+}
+
+private func formatMeters(value: Int) -> String {
+    if value == 1 {
+        String(localized: "\(value) meter")
+    } else {
+        String(localized: "\(value) meters")
+    }
+}
+
+enum SettingsLocationDesiredAccuracy: Codable, CaseIterable {
+    case best
+    case nearestTenMeters
+    case hundredMeters
+
+    func toString() -> String {
+        switch self {
+        case .best:
+            String(localized: "Best")
+        case .nearestTenMeters:
+            formatMeters(value: 10)
+        case .hundredMeters:
+            formatMeters(value: 100)
+        }
+    }
+}
+
+enum SettingsLocationDistanceFilter: Codable, CaseIterable {
+    case none
+    case oneMeter
+    case threeMeters
+    case fiveMeters
+    case tenMeters
+    case twentyMeters
+    case fiftyMeters
+    case hundredMeters
+    case twoHundredMeters
+
+    func toString() -> String {
+        switch self {
+        case .none:
+            String(localized: "None")
+        case .oneMeter:
+            formatMeters(value: 1)
+        case .threeMeters:
+            formatMeters(value: 3)
+        case .fiveMeters:
+            formatMeters(value: 5)
+        case .tenMeters:
+            formatMeters(value: 10)
+        case .twentyMeters:
+            formatMeters(value: 20)
+        case .fiftyMeters:
+            formatMeters(value: 50)
+        case .hundredMeters:
+            formatMeters(value: 100)
+        case .twoHundredMeters:
+            formatMeters(value: 200)
+        }
+    }
+}
+
+class SettingsLocation: Codable, ObservableObject {
+    @Published var enabled: Bool = false
+    @Published var privacyRegions: [SettingsPrivacyRegion] = []
+    @Published var distance: Double = 0.0
+    @Published var splitDistance: Double = 0.0
+    @Published var altitudeAscent: Double = 0.0
+    @Published var altitudeDescent: Double = 0.0
+    @Published var splitAltitudeAscent: Double = 0.0
+    @Published var splitAltitudeDescent: Double = 0.0
+    @Published var resetWhenGoingLive: Bool = false
+    @Published var desiredAccuracy: SettingsLocationDesiredAccuracy = .best
+    @Published var distanceFilter: SettingsLocationDistanceFilter = .none
+
+    enum CodingKeys: CodingKey {
+        case enabled
+        case privacyRegions
+        case distance
+        case splitDistance
+        case altitudeAscent
+        case altitudeDescent
+        case splitAltitudeAscent
+        case splitAltitudeDescent
+        case resetWhenGoingLive
+        case desiredAccuracy
+        case distanceFilter
+    }
+
+    func encode(to encoder: any Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(.enabled, enabled)
+        try container.encode(.privacyRegions, privacyRegions)
+        try container.encode(.distance, distance)
+        try container.encode(.splitDistance, splitDistance)
+        try container.encode(.altitudeAscent, altitudeAscent)
+        try container.encode(.altitudeDescent, altitudeDescent)
+        try container.encode(.splitAltitudeAscent, splitAltitudeAscent)
+        try container.encode(.splitAltitudeDescent, splitAltitudeDescent)
+        try container.encode(.resetWhenGoingLive, resetWhenGoingLive)
+        try container.encode(.desiredAccuracy, desiredAccuracy)
+        try container.encode(.distanceFilter, distanceFilter)
+    }
+
+    init() {}
+
+    required init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        enabled = container.decode(.enabled, Bool.self, false)
+        privacyRegions = container.decode(.privacyRegions, [SettingsPrivacyRegion].self, [])
+        distance = container.decode(.distance, Double.self, 0.0)
+        splitDistance = container.decode(.splitDistance, Double.self, 0.0)
+        altitudeAscent = container.decode(.altitudeAscent, Double.self, 0.0)
+        altitudeDescent = container.decode(.altitudeDescent, Double.self, 0.0)
+        splitAltitudeAscent = container.decode(.splitAltitudeAscent, Double.self, 0.0)
+        splitAltitudeDescent = container.decode(.splitAltitudeDescent, Double.self, 0.0)
+        resetWhenGoingLive = container.decode(.resetWhenGoingLive, Bool.self, false)
+        desiredAccuracy = container.decode(.desiredAccuracy, SettingsLocationDesiredAccuracy.self, .best)
+        distanceFilter = container.decode(.distanceFilter, SettingsLocationDistanceFilter.self, .none)
+    }
+}

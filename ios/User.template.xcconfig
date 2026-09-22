@@ -1,0 +1,5 @@
+// Copy Config/User.xcconfig.example to Config/User.xcconfig for local signing.
+// Your Team ID, found at https://developer.apple.com/account.
+DEVELOPMENT_TEAM = YOUR_PERSONAL_TEAM_ID
+BASE_PRODUCT_BUNDLE_IDENTIFIER = com.example.poochcam
+CAPABILITIES = free

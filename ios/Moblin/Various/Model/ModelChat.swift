@@ -1,0 +1,545 @@
+import Collections
+import Foundation
+import SwiftUI
+import WrappingHStack
+
+let maximumNumberOfChatMessages = 50
+let maximumNumberOfInteractiveChatMessages = 100
+
+extension Model {
+    func pauseChat() {
+        chat.pause(redLine: createRedLineChatPost())
+    }
+
+    func endOfChatReachedWhenPaused() {
+        chat.endReachedWhenPaused()
+    }
+
+    func disableInteractiveChat() {
+        chat.endReachedWhenPaused()
+    }
+
+    func pauseQuickButtonChat() {
+        quickButtonChat.pause(redLine: createRedLineChatPost())
+    }
+
+    func endOfQuickButtonChatReachedWhenPaused() {
+        quickButtonChat.endReachedWhenPaused()
+    }
+
+    func pauseQuickButtonChatAlerts() {
+        quickButtonChatState.chatAlertsPaused = true
+        quickButtonChatState.pausedChatAlertsPostsCount = 0
+        pausedQuickButtonChatAlertsPosts = [createRedLineChatPost()]
+        while let post = newQuickButtonChatAlertsPosts.popFirst() {
+            pausedQuickButtonChatAlertsPosts.append(post)
+        }
+    }
+
+    func endOfQuickButtonChatAlertsReachedWhenPaused() {
+        while let post = pausedQuickButtonChatAlertsPosts.popFirst() {
+            if post.isRedLine() {
+                if quickButtonChatState.chatAlertsPosts.first?.isRedLine() == true {
+                    continue
+                }
+                if pausedQuickButtonChatAlertsPosts.isEmpty {
+                    continue
+                }
+            }
+            if quickButtonChatState.chatAlertsPosts.count > maximumNumberOfInteractiveChatMessages - 1 {
+                quickButtonChatState.chatAlertsPosts.removeLast()
+            }
+            quickButtonChatState.chatAlertsPosts.prepend(post)
+        }
+        quickButtonChatState.chatAlertsPaused = false
+    }
+
+    func removeOldChatMessages(now: ContinuousClock.Instant) {
+        if chat.paused {
+            return
+        }
+        guard database.chat.maximumAgeEnabled else {
+            return
+        }
+        while let post = chat.posts.last {
+            if post.timestampTime.duration(to: now) > .seconds(database.chat.maximumAge) {
+                chat.posts.removeLast()
+            } else {
+                break
+            }
+        }
+    }
+
+    func updateChat() {
+        chat.update()
+        quickButtonChat.update()
+        if externalDisplay.chatEnabled {
+            externalDisplayChat.update()
+        }
+        if quickButtonChatState.chatAlertsPaused {
+            quickButtonChatState.pausedChatAlertsPostsCount = max(
+                pausedQuickButtonChatAlertsPosts.count - 1,
+                0
+            )
+        } else {
+            while let post = newQuickButtonChatAlertsPosts.popFirst() {
+                if quickButtonChatState.chatAlertsPosts.count > maximumNumberOfInteractiveChatMessages - 1 {
+                    quickButtonChatState.chatAlertsPosts.removeLast()
+                }
+                quickButtonChatState.chatAlertsPosts.prepend(post)
+            }
+        }
+        chatWidgetChat.update()
+    }
+
+    func isAlertMessage(post: ChatPost) -> Bool {
+        switch post.highlight?.kind {
+        case .redemption:
+            true
+        case .newFollower:
+            true
+        default:
+            false
+        }
+    }
+
+    func reloadChats() {
+        reloadTwitchChat()
+        reloadKickPusher()
+        reloadYouTubeLiveChat()
+        reloadSoopChat()
+        reloadOpenStreamingPlatformChat()
+    }
+
+    func updateChatMoreThanOneChatConfigured() {
+        let moreThanOneStreamingPlatform = isMoreThanOneChatConfigured()
+        chat.moreThanOneStreamingPlatform = moreThanOneStreamingPlatform
+        quickButtonChat.moreThanOneStreamingPlatform = moreThanOneStreamingPlatform
+        externalDisplayChat.moreThanOneStreamingPlatform = moreThanOneStreamingPlatform
+        chatWidgetChat.moreThanOneStreamingPlatform = moreThanOneStreamingPlatform
+    }
+
+    private func createRedLineChatPost() -> ChatPost {
+        defer {
+            chatPostId += 1
+        }
+        return ChatPost(
+            id: chatPostId,
+            messageId: nil,
+            displayName: nil,
+            user: nil,
+            userColor: .init(red: 0, green: 0, blue: 0),
+            userBadges: [],
+            segments: [],
+            timestamp: "",
+            timestampTime: .now,
+            isAction: false,
+            isSubscriber: false,
+            bits: nil,
+            highlight: nil,
+            live: true,
+            filter: nil,
+            platform: nil,
+            sourceChannelIcon: nil,
+            state: ChatPostState()
+        )
+    }
+
+    private func isMoreThanOneChatConfigured() -> Bool {
+        var numberOfChats = 0
+        if isTwitchChatConfigured() {
+            numberOfChats += 1
+        }
+        if isKickPusherConfigured() {
+            numberOfChats += 1
+        }
+        if isYouTubeLiveChatConfigured() {
+            numberOfChats += 1
+        }
+        if isSoopChatConfigured() {
+            numberOfChats += 1
+        }
+        if isOpenStreamingPlatformChatConfigured() {
+            numberOfChats += 1
+        }
+        return numberOfChats > 1
+    }
+
+    func isChatConfigured() -> Bool {
+        isTwitchChatConfigured() || isKickPusherConfigured() ||
+            isYouTubeLiveChatConfigured() || isSoopChatConfigured() ||
+            isOpenStreamingPlatformChatConfigured()
+    }
+
+    func isRemoteControlChatAndEvents(platform: Platform?) -> Bool {
+        switch platform {
+        case .twitch, nil:
+            break
+        default:
+            return false
+        }
+        return useRemoteControlForChatAndEvents
+    }
+
+    func isChatConnected() -> Bool {
+        if isTwitchChatConfigured(), !isTwitchChatConnected() {
+            return false
+        }
+        if isKickPusherConfigured(), !isKickPusherConnected() {
+            return false
+        }
+        if isYouTubeLiveChatConfigured(), !isYouTubeLiveChatConnected() {
+            return false
+        }
+        if isSoopChatConfigured(), !isSoopChatConnected() {
+            return false
+        }
+        if isOpenStreamingPlatformChatConfigured(), !isOpenStreamingPlatformChatConnected() {
+            return false
+        }
+        return true
+    }
+
+    func hasChatEmotes() -> Bool {
+        hasTwitchChatEmotes()
+            || hasKickPusherEmotes()
+            || hasYouTubeLiveChatEmotes()
+            || hasSoopChatEmotes()
+            || hasOpenStreamingPlatformChatEmotes()
+    }
+
+    func resetChat() {
+        chatTextToSpeech.reset(running: true)
+    }
+
+    func sendChatMessage(message: String) {
+        if stream.twitchSendMessagesTo, stream.twitchLoggedIn {
+            sendTwitchChatMessage(message: message) { _ in }
+        }
+        if stream.kickSendMessagesTo, stream.kickLoggedIn {
+            sendKickChatMessage(message: message)
+        }
+    }
+
+    func sendChatMessageShowLogin(message: String) {
+        if stream.twitchSendMessagesTo {
+            sendTwitchChatMessage(message: message) {
+                switch $0 {
+                case .authError:
+                    self.showTwitchAuth = true
+                    self.twitchLogin(stream: self.stream)
+                default:
+                    break
+                }
+            }
+        }
+        if stream.kickSendMessagesTo {
+            if stream.kickLoggedIn {
+                sendKickChatMessage(message: message)
+            } else {
+                makeNotLoggedInToKickToast()
+            }
+        }
+    }
+
+    private func evaluateFilters(user: String?, segments: [ChatPostSegment]) -> SettingsChatFilter? {
+        database.chat.filters.first(where: { $0.isMatching(user: user, segments: segments) })
+    }
+
+    func appendChatMessage(
+        platform: Platform,
+        messageId: String?,
+        displayName: String?,
+        user: String?,
+        userId: String?,
+        userColor: RgbColor?,
+        userBadges: [URL],
+        segments: [ChatPostSegment],
+        timestamp: String,
+        timestampTime: ContinuousClock.Instant,
+        isAction: Bool,
+        isSubscriber: Bool,
+        isModerator: Bool,
+        isOwner: Bool,
+        bits: String?,
+        highlight: ChatHighlight?,
+        live: Bool,
+        sourceChannelIcon: URL? = nil
+    ) {
+        let filter = evaluateFilters(user: user, segments: segments)
+        if database.chat.botEnabled, live, filter?.chatBot != false,
+           segments.first?.text?.trim().starts(with: "!") == true
+        {
+            if chatBotMessages.count < 25 || isModerator {
+                chatBotMessages.append(ChatBotMessage(
+                    platform: platform,
+                    user: user,
+                    isOwner: isOwner,
+                    isModerator: isModerator,
+                    isSubscriber: isSubscriber,
+                    userId: userId,
+                    segments: segments
+                ))
+            }
+        }
+        if pollEnabled, live, filter?.poll != false {
+            handlePollVote(vote: segments.first?.text?.trim())
+        }
+        let post = ChatPost(
+            id: chatPostId,
+            messageId: messageId,
+            displayName: displayName,
+            user: user,
+            userId: userId,
+            userColor: userColor?.makeReadableOnDarkBackground() ?? database.chat.usernameColor,
+            userBadges: userBadges,
+            segments: segments,
+            timestamp: timestamp,
+            timestampTime: timestampTime,
+            isAction: isAction,
+            isSubscriber: isSubscriber,
+            bits: bits,
+            highlight: highlight ?? (isModerator ? ChatHighlight.makeModerator() : nil),
+            live: live,
+            filter: filter,
+            platform: platform,
+            sourceChannelIcon: sourceChannelIcon,
+            state: ChatPostState()
+        )
+        chatPostId += 1
+        if isTextToSpeechEnabledForMessage(post: post) {
+            let message = post.text()
+            if !message.trimmingCharacters(in: .whitespaces).isEmpty {
+                chatTextToSpeech.say(
+                    messageId: post.messageId,
+                    user: post.shortDisplayName(nicknames: database.chat.nicknames),
+                    userId: post.userId,
+                    message: message,
+                    isRedemption: post.isRedemption()
+                )
+            }
+        }
+        if filter?.print != false, isAnyConnectedCatPrinterPrintingChat() {
+            printChatMessage(post: post)
+        }
+        if filter?.showOnScreen != false {
+            chat.appendMessage(post: post)
+            quickButtonChat.appendMessage(post: post)
+            for browserEffect in browserEffects.values {
+                browserEffect.sendChatMessage(post: post)
+            }
+            if isWatchLocal() {
+                sendChatMessageToWatch(post: post)
+            }
+            if externalDisplay.chatEnabled {
+                externalDisplayChat.appendMessage(post: post)
+            }
+            if highlight != nil {
+                if quickButtonChatState.chatAlertsPaused {
+                    if pausedQuickButtonChatAlertsPosts.count < 2 * maximumNumberOfInteractiveChatMessages {
+                        pausedQuickButtonChatAlertsPosts.append(post)
+                    }
+                } else {
+                    newQuickButtonChatAlertsPosts.append(post)
+                }
+            }
+            if !enabledChatEffects.isEmpty {
+                chatWidgetChat.appendMessage(post: post)
+            }
+            for effect in enabledChatEmoteComboEffects {
+                effect.appendMessage(post: post)
+            }
+        }
+    }
+
+    func reloadChatMessages() {
+        chat.posts = newPostIds(posts: chat.posts)
+        quickButtonChat.posts = newPostIds(posts: quickButtonChat.posts)
+        externalDisplayChat.posts = newPostIds(posts: externalDisplayChat.posts)
+        chatWidgetChat.posts = newPostIds(posts: chatWidgetChat.posts)
+        quickButtonChatState.chatAlertsPosts = newPostIds(posts: quickButtonChatState.chatAlertsPosts)
+    }
+
+    private func newPostIds(posts: Deque<ChatPost>) -> Deque<ChatPost> {
+        var newPosts: Deque<ChatPost> = []
+        for post in posts {
+            var newPost = post
+            newPost.id = chatPostId
+            chatPostId += 1
+            newPosts.append(newPost)
+        }
+        return newPosts
+    }
+
+    func isShowingStatusChat() -> Bool {
+        database.show.chat && isChatConfigured()
+    }
+
+    func updateStatusChatText() {
+        let status: String
+        var statuses: [ChatPlatformStatus] = []
+        if !isChatConfigured() {
+            status = String(localized: "Not configured")
+        } else if isRemoteControlChatAndEvents(platform: nil) {
+            if isRemoteControlStreamerConnected() {
+                status = String(localized: "Connected (remote control)")
+            } else {
+                status = String(localized: "Disconnected (remote control)")
+            }
+        } else {
+            if isTwitchChatConfigured() {
+                statuses.append(ChatPlatformStatus(platform: .twitch, connected: isTwitchChatConnected()))
+            }
+            if isKickPusherConfigured() {
+                statuses.append(ChatPlatformStatus(platform: .kick, connected: isKickPusherConnected()))
+            }
+            if isYouTubeLiveChatConfigured() {
+                statuses.append(ChatPlatformStatus(platform: .youTube,
+                                                   connected: isYouTubeLiveChatConnected()))
+            }
+            if isSoopChatConfigured() {
+                statuses.append(ChatPlatformStatus(platform: .soop, connected: isSoopChatConnected()))
+            }
+            if isOpenStreamingPlatformChatConfigured() {
+                statuses.append(ChatPlatformStatus(platform: .openStreamingPlatform,
+                                                   connected: isOpenStreamingPlatformChatConnected()))
+            }
+            if statuses.allSatisfy(\.connected) {
+                status = String(localized: "Connected")
+            } else {
+                status = String(localized: "Disconnected")
+            }
+        }
+        if status != statusTopLeft.statusChatText {
+            statusTopLeft.statusChatText = status
+        }
+        if statuses != statusTopLeft.chatPlatformStatuses {
+            statusTopLeft.chatPlatformStatuses = statuses
+        }
+    }
+
+    func printChatMessage(post: ChatPost) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            let message = HStack {
+                WrappingHStack(
+                    alignment: .leading,
+                    horizontalSpacing: 0,
+                    verticalSpacing: 0,
+                    fitContentWidth: true
+                ) {
+                    let chat = self.database.chat
+                    Text(post.displayName(nicknames: chat.nicknames, displayStyle: chat.displayStyle))
+                        .lineLimit(1)
+                        .padding(.trailing, 0)
+                    if post.isRedemption() {
+                        Text(" ")
+                    } else {
+                        Text(": ")
+                    }
+                    ForEach(post.segments) { segment in
+                        if let text = segment.text {
+                            Text(text)
+                        }
+                        if let url = segment.url {
+                            CacheAsyncImage(url: url) { image in
+                                image
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                            } placeholder: {
+                                Image("AppIconNoBackground")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                            }
+                            .frame(height: 45)
+                            Text(" ")
+                        }
+                    }
+                }
+                .foregroundStyle(.black)
+                .font(.system(size: CGFloat(30), weight: .bold, design: .default))
+                Spacer()
+            }
+            .frame(width: 384)
+            let renderer = ImageRenderer(content: message)
+            guard let image = renderer.uiImage else {
+                return
+            }
+            guard let ciImage = CIImage(image: image) else {
+                return
+            }
+            for catPrinter in self.catPrinters.values
+                where self.getCatPrinterSettings(catPrinter: catPrinter)?.printChat == true
+            {
+                catPrinter.print(image: ciImage, feedPaperDelay: 3)
+            }
+        }
+    }
+
+    func banUser(post: ChatPost) {
+        guard let user = post.user else {
+            return
+        }
+        switch post.platform {
+        case .twitch:
+            guard let userId = post.userId else {
+                return
+            }
+            banTwitchUser(user: user, userId: userId, duration: nil) { _ in }
+        case .kick:
+            banKickUser(user: user, duration: nil) { _ in }
+        default:
+            makeErrorToast(title: "Ban not supported for this platform")
+        }
+    }
+
+    func timeoutUser(post: ChatPost, duration: Int) {
+        guard let user = post.user else {
+            return
+        }
+        switch post.platform {
+        case .twitch:
+            guard let userId = post.userId else {
+                return
+            }
+            banTwitchUser(user: user, userId: userId, duration: duration) { _ in }
+        case .kick:
+            banKickUser(user: user, duration: duration) { _ in }
+        default:
+            makeErrorToast(title: "Timeout not supported for this platform")
+        }
+    }
+
+    func deleteMessage(post: ChatPost) {
+        guard let messageId = post.messageId else {
+            return
+        }
+        switch post.platform {
+        case .twitch:
+            deleteTwitchChatMessage(messageId: messageId)
+        case .kick:
+            deleteKickMessage(messageId: messageId)
+        default:
+            makeErrorToast(title: "Delete message not supported for this platform")
+        }
+    }
+
+    func copyMessage(post: ChatPost) {
+        UIPasteboard.general.string = post.text()
+    }
+
+    func deleteChatMessage(messageId: String) {
+        chat.deleteMessage(messageId: messageId)
+        quickButtonChat.deleteMessage(messageId: messageId)
+        externalDisplayChat.deleteMessage(messageId: messageId)
+        chatWidgetChat.deleteMessage(messageId: messageId)
+        chatTextToSpeech.delete(messageId: messageId)
+    }
+
+    func deleteChatUser(userId: String) {
+        chat.deleteUser(userId: userId)
+        quickButtonChat.deleteUser(userId: userId)
+        externalDisplayChat.deleteUser(userId: userId)
+        chatWidgetChat.deleteUser(userId: userId)
+        chatTextToSpeech.delete(userId: userId)
+    }
+}

@@ -1,0 +1,207 @@
+[
+  {
+    "name": "alerttoast",
+    "source": "https://github.com/eerimoq/AlertToast.git",
+    "revision": "8153b58666a2854466fc06945ec5ffdfa763e92b",
+    "notices": [
+      "LICENSE.md"
+    ],
+    "status": "notice-found"
+  },
+  {
+    "name": "appauth-ios",
+    "source": "https://github.com/openid/AppAuth-iOS.git",
+    "revision": "145104f5ea9d58ae21b60add007c33c1cc0c948e",
+    "notices": [
+      "LICENSE"
+    ],
+    "status": "notice-found"
+  },
+  {
+    "name": "blacksharklib.swift",
+    "source": "https://github.com/Spillmaker/BlackSharkLib.swift",
+    "revision": "f3411d01200e64aa76f605fd689f93d819133d39",
+    "notices": [
+      "LICENSE"
+    ],
+    "status": "notice-found"
+  },
+  {
+    "name": "crcswift",
+    "source": "https://github.com/eerimoq/CrcSwift.git",
+    "revision": "a4ba023bf64187eb73cf799120f9bba600c43a51",
+    "notices": [
+      "LICENSE"
+    ],
+    "status": "notice-found"
+  },
+  {
+    "name": "datachannel",
+    "source": "https://github.com/eerimoq/DataChannel",
+    "revision": "17f2aa22dfdc28c0ac4f0adee7cc02e8162060bb",
+    "notices": [],
+    "status": "license-not-found-review-required"
+  },
+  {
+    "name": "libwebp-xcode",
+    "source": "https://github.com/SDWebImage/libwebp-Xcode.git",
+    "revision": "0d60654eeefd5d7d2bef3835804892c40225e8b2",
+    "notices": [
+      "libwebp/COPYING"
+    ],
+    "status": "notice-found"
+  },
+  {
+    "name": "metalpetal",
+    "source": "https://github.com/eerimoq/MetalPetal",
+    "revision": "8787ff999db2f3942541eaa480673d26cdfdbd10",
+    "notices": [
+      "LICENSE"
+    ],
+    "status": "notice-found"
+  },
+  {
+    "name": "nwwebsocket",
+    "source": "https://github.com/eerimoq/NWWebSocket",
+    "revision": "883fac3d524d1367d4cb82dd5dfca718ab3f2142",
+    "notices": [
+      "LICENSE.md"
+    ],
+    "status": "notice-found"
+  },
+  {
+    "name": "rist",
+    "source": "https://github.com/eerimoq/Rist",
+    "revision": "5bbccbc71852367be9e7ff463e2638b409e04589",
+    "notices": [],
+    "status": "license-not-found-review-required"
+  },
+  {
+    "name": "sdwebimage",
+    "source": "https://github.com/SDWebImage/SDWebImage.git",
+    "revision": "2de3a496eaf6df9a1312862adcfd54acd73c39c0",
+    "notices": [
+      "LICENSE"
+    ],
+    "status": "notice-found"
+  },
+  {
+    "name": "sdwebimageswiftui",
+    "source": "https://github.com/SDWebImage/SDWebImageSwiftUI",
+    "revision": "0e331457ca9af2f0b08bcaa138a91ffb907b004f",
+    "notices": [
+      "LICENSE"
+    ],
+    "status": "notice-found"
+  },
+  {
+    "name": "sdwebimagewebpcoder",
+    "source": "https://github.com/SDWebImage/SDWebImageWebPCoder",
+    "revision": "12d83edbcc795fb7b5c0c3cb74d739108d3357d2",
+    "notices": [
+      "LICENSE"
+    ],
+    "status": "notice-found"
+  },
+  {
+    "name": "srtswift",
+    "source": "https://github.com/eerimoq/SrtSwift",
+    "revision": "fb06b843ccd2a804672928a7bfdb3ab9b8a15579",
+    "notices": [],
+    "status": "license-not-found-review-required"
+  },
+  {
+    "name": "streamdeck-kit-ipad",
+    "source": "https://github.com/elgatosf/streamdeck-kit-ipad.git",
+    "revision": "23c3770bd51aa016a681d88d108cb0ab712171d5",
+    "notices": [
+      "LICENSE"
+    ],
+    "status": "notice-found"
+  },
+  {
+    "name": "swift-collections",
+    "source": "https://github.com/apple/swift-collections.git",
+    "revision": "6675bc0ff86e61436e615df6fc5174e043e57924",
+    "notices": [
+      "LICENSE.txt"
+    ],
+    "status": "notice-found"
+  },
+  {
+    "name": "swift-protobuf",
+    "source": "https://github.com/apple/swift-protobuf.git",
+    "revision": "f6506eaa86ed2e01cb0ae14a75035b7fdbf0918f",
+    "notices": [
+      "LICENSE.txt",
+      "Sources/protobuf/abseil/LICENSE",
+      "Sources/protobuf/protobuf/LICENSE",
+      "Sources/protobuf/protobuf/third_party/utf8_range/LICENSE"
+    ],
+    "status": "notice-found"
+  },
+  {
+    "name": "swift-system",
+    "source": "https://github.com/apple/swift-system.git",
+    "revision": "7c6ad0fc39d0763e0b699210e4124afd5041c5df",
+    "notices": [
+      "LICENSE.txt"
+    ],
+    "status": "notice-found"
+  },
+  {
+    "name": "swift-zip-archive",
+    "source": "https://github.com/adam-fowler/swift-zip-archive",
+    "revision": "b04d3d130b9a8b212db9d97da3b8853b024887be",
+    "notices": [
+      "LICENSE"
+    ],
+    "status": "notice-found"
+  },
+  {
+    "name": "swiftcube",
+    "source": "https://github.com/eerimoq/SwiftCube",
+    "revision": "b83b5e6cbebb3a88508facba4a9af571c0499208",
+    "notices": [
+      "LICENSE"
+    ],
+    "status": "notice-found"
+  },
+  {
+    "name": "truetime.swift",
+    "source": "https://github.com/Gisman4ik/TrueTime.swift",
+    "revision": "78f7945469ad8dd6344987f8e62afc13b8c32bc2",
+    "notices": [
+      "LICENSE"
+    ],
+    "status": "notice-found"
+  },
+  {
+    "name": "vrmkit",
+    "source": "https://github.com/eerimoq/VRMKit",
+    "revision": "071e0bc6a0f4f0ba2385c05332b0adb172d0f7ec",
+    "notices": [
+      "LICENSE",
+      "Sources/VRMKit/Extensions/MoreCodable/LICENSE"
+    ],
+    "status": "notice-found"
+  },
+  {
+    "name": "wrappinghstack",
+    "source": "https://github.com/ksemianov/WrappingHStack",
+    "revision": "3300f68b6bf5f8a75ee7ca8a40f136a558053d10",
+    "notices": [
+      "LICENSE"
+    ],
+    "status": "notice-found"
+  },
+  {
+    "name": "xmlcoder",
+    "source": "https://github.com/CoreOffice/XMLCoder",
+    "revision": "b2b5d72345bab9e1938a483cf862b498aeed3796",
+    "notices": [
+      "LICENSE"
+    ],
+    "status": "notice-found"
+  }
+]

@@ -1,0 +1,48 @@
+import AVFoundation
+import Rist
+
+class RistServerClient {
+    weak var server: RistServer?
+    private let reader: MpegTsReader
+    private let virtualDestinationPort: UInt16
+
+    init(virtualDestinationPort: UInt16, latency: Double, softwareDecoding: Bool) {
+        self.virtualDestinationPort = virtualDestinationPort
+        reader = MpegTsReader(name: "rist-server",
+                              decoderQueue: ristServerQueue,
+                              timecodesEnabled: false,
+                              softwareDecoding: softwareDecoding,
+                              targetLatency: latency)
+        reader.delegate = self
+    }
+
+    func handlePacketFromClient(packet: Data) {
+        do {
+            try reader.handlePacketFromClient(packet: packet)
+        } catch {
+            logger.info("rist-server-client: Got corrupt packet \(error).")
+        }
+    }
+}
+
+extension RistServerClient: MpegTsReaderDelegate {
+    func mpegTsReaderAudioBuffer(_ sampleBuffer: CMSampleBuffer) {
+        server?.delegate.ristServerOnAudioBuffer(
+            virtualDestinationPort: virtualDestinationPort,
+            sampleBuffer
+        )
+    }
+
+    func mpegTsReaderVideoBuffer(_ sampleBuffer: CMSampleBuffer) {
+        server?.delegate.ristServerOnVideoBuffer(
+            virtualDestinationPort: virtualDestinationPort,
+            sampleBuffer
+        )
+    }
+
+    func mpegTsReaderSetTargetLatencies(_ videoTargetLatency: Double, _ audioTargetLatency: Double) {
+        server?.delegate.ristServerSetTargetLatencies(virtualDestinationPort: virtualDestinationPort,
+                                                      videoTargetLatency,
+                                                      audioTargetLatency)
+    }
+}

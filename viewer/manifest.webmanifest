@@ -1,0 +1,10 @@
+{
+  "name": "Poochcam",
+  "short_name": "Poochcam",
+  "start_url": "/watch/",
+  "scope": "/watch/",
+  "display": "standalone",
+  "background_color": "#f5f3eb",
+  "theme_color": "#f5f3eb",
+  "icons": [{"src": "icon.png", "sizes": "1024x1024", "type": "image/png"}]
+}

@@ -1,0 +1,85 @@
+import Network
+import SwiftUI
+
+struct RistServerStreamSettingsView: View {
+    @EnvironmentObject var model: Model
+    @ObservedObject var status: StatusOther
+    @ObservedObject var ristServer: SettingsRistServer
+    @ObservedObject var stream: SettingsRistServerStream
+
+    private func submitPort(value: String) {
+        guard let port = UInt16(value.trim()) else {
+            return
+        }
+        stream.virtualDestinationPort = port
+        model.reloadRistServer()
+    }
+
+    private func submitLatency(value: String) {
+        guard let latency = Int32(value) else {
+            return
+        }
+        stream.latency = latency
+    }
+
+    var body: some View {
+        NavigationLink {
+            Form {
+                Section {
+                    NameEditView(name: $stream.name, existingNames: ristServer.streams)
+                        .disabled(model.ristServerEnabled())
+                } footer: {
+                    Text("The stream name is shown in the list of cameras in scene settings.")
+                }
+                Section {
+                    TextEditNavigationView(
+                        title: String(localized: "Virtual port"),
+                        value: String(stream.virtualDestinationPort),
+                        onChange: isValidPort,
+                        onSubmit: submitPort,
+                        keyboardType: .numbersAndPunctuation
+                    )
+                    .disabled(ristServer.enabled)
+                } footer: {
+                    Text("The virtual destination port for this stream.")
+                }
+                Section {
+                    TextEditNavigationView(
+                        title: String(localized: "Latency"),
+                        value: String(stream.latency),
+                        onChange: isValidIngestLatency,
+                        onSubmit: submitLatency,
+                        footers: [String(localized: "5 or more milliseconds. 2000 ms by default.")],
+                        keyboardType: .numbersAndPunctuation,
+                        valueFormat: { "\($0) ms" }
+                    )
+                    .disabled(ristServer.enabled)
+                } footer: {
+                    Text("The higher, the lower risk of stuttering.")
+                }
+                Section {
+                    UrlsView(
+                        status: status,
+                        showIPv6: false,
+                        formatUrl: {
+                            "rist://\($0):\(ristServer.port)?virt-dst-port=\(stream.virtualDestinationPort)"
+                        }
+                    )
+                } header: {
+                    Text("Publish URLs")
+                } footer: {
+                    VStack(alignment: .leading) {
+                        Text("""
+                        Enter one of the URLs into the RIST publisher device to send video \
+                        to this stream. Usually enter the WiFi or Personal Hotspot URL.
+                        """)
+                    }
+                }
+            }
+            .navigationTitle("Stream")
+        } label: {
+            IngestStreamItemView(name: stream.name,
+                                 connected: model.isRistStreamConnected(port: stream.virtualDestinationPort))
+        }
+    }
+}

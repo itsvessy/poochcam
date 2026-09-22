@@ -1,0 +1,343 @@
+import Collections
+import Combine
+import MetalPetal
+import SwiftUI
+import WrappingHStack
+
+private let borderWidth = 1.5
+
+private struct HighlightMessageView: View {
+    @ObservedObject var settings: SettingsWidgetChat
+    let highlight: ChatHighlight
+
+    private func backgroundColor() -> Color {
+        if settings.backgroundColorEnabled {
+            settings.backgroundColorColor.opacity(0.6)
+        } else {
+            .clear
+        }
+    }
+
+    private func shadowColor() -> Color {
+        if settings.shadowColorEnabled {
+            settings.shadowColorColor
+        } else {
+            .clear
+        }
+    }
+
+    private func frameHeightEmotes() -> CGFloat {
+        CGFloat(settings.fontSize * 1.7)
+    }
+
+    var body: some View {
+        if let titleSegments = highlight.titleSegments {
+            WrappingHStack(
+                alignment: .leading,
+                horizontalSpacing: 0,
+                verticalSpacing: 0,
+                fitContentWidth: true
+            ) {
+                Image(systemName: highlight.image)
+                Text(" ")
+                ForEach(titleSegments, id: \.id) { segment in
+                    if let text = segment.text {
+                        Text(text)
+                            .foregroundStyle(highlight.messageColor(defaultColor: settings.messageColorColor))
+                    }
+                    if let url = segment.url {
+                        CacheAsyncImage(url: url) { image in
+                            image
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                        } placeholder: {
+                            EmptyView()
+                        }
+                        .padding(.vertical, settings.shadowColorEnabled ? 1.5 : 0)
+                        .frame(height: frameHeightEmotes())
+                    }
+                }
+            }
+            .stroke(color: shadowColor(), width: settings.shadowColorEnabled ? borderWidth : 0)
+            .padding(.leading, 5)
+            .font(.system(size: CGFloat(settings.fontSize)))
+            .background(backgroundColor())
+            .foregroundStyle(.white)
+            .cornerRadius(5)
+        }
+    }
+}
+
+private struct LineView: View {
+    let post: ChatPost
+    @ObservedObject var settings: SettingsWidgetChat
+    let platform: Bool
+
+    private func usernameColor() -> Color {
+        post.userColor.color()
+    }
+
+    private func messageColor(usernameColor _: Color) -> Color {
+        settings.messageColorColor
+    }
+
+    private func backgroundColor() -> Color {
+        if settings.backgroundColorEnabled {
+            settings.backgroundColorColor.opacity(0.6)
+        } else {
+            .clear
+        }
+    }
+
+    private func shadowColor() -> Color {
+        if settings.shadowColorEnabled {
+            settings.shadowColorColor
+        } else {
+            .clear
+        }
+    }
+
+    private func frameHeightBadges() -> CGFloat {
+        CGFloat(settings.fontSize * 1.4)
+    }
+
+    private func frameHeightEmotes() -> CGFloat {
+        CGFloat(settings.fontSize * 1.7)
+    }
+
+    var body: some View {
+        let usernameColor = usernameColor()
+        let messageColor = messageColor(usernameColor: usernameColor)
+        WrappingHStack(
+            alignment: .leading,
+            horizontalSpacing: 0,
+            verticalSpacing: 0,
+            fitContentWidth: true
+        ) {
+            if platform, let image = post.platform?.imageName() {
+                Image(image)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .padding(2)
+                    .frame(height: frameHeightBadges())
+            }
+            if settings.sharedChatIcons, let iconUrl = post.sourceChannelIcon {
+                CacheAsyncImage(url: iconUrl) { image in
+                    image.resizable().aspectRatio(contentMode: .fit)
+                } placeholder: {
+                    EmptyView()
+                }
+                .padding(2)
+                .frame(height: frameHeightBadges())
+            }
+            if settings.badges {
+                ForEach(post.userBadges, id: \.self) { url in
+                    CacheAsyncImage(url: url) { image in
+                        image
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                    } placeholder: {
+                        EmptyView()
+                    }
+                    .padding(2)
+                    .frame(height: frameHeightBadges())
+                }
+            }
+            Text(post.displayName(nicknames: settings.nicknames, displayStyle: settings.displayStyle))
+                .foregroundStyle(usernameColor)
+                .lineLimit(1)
+                .padding(.trailing, 0)
+                .bold(settings.boldUsername)
+            if post.isRedemption() {
+                Text(" ")
+            } else {
+                Text(": ")
+            }
+            ForEach(post.segments) { segment in
+                if let text = segment.text {
+                    Text(text)
+                        .foregroundStyle(messageColor)
+                        .bold(settings.boldMessage)
+                        .italic(post.isAction)
+                }
+                if let url = segment.url {
+                    CacheAsyncImage(url: url) { image in
+                        image
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                    } placeholder: {
+                        EmptyView()
+                    }
+                    .padding(.vertical, settings.shadowColorEnabled ? 1.5 : 0)
+                    .frame(height: frameHeightEmotes())
+                    Text(" ")
+                }
+            }
+        }
+        .stroke(color: shadowColor(), width: settings.shadowColorEnabled ? borderWidth : 0)
+        .padding(.leading, 5)
+        .font(.system(size: CGFloat(settings.fontSize)))
+        .background(backgroundColor())
+        .foregroundStyle(.white)
+        .cornerRadius(5)
+    }
+}
+
+private struct PostView: View {
+    let settings: SettingsWidgetChat
+    let post: ChatPost
+    @ObservedObject var state: ChatPostState
+    let moreThanOneStreamingPlatform: Bool
+
+    var body: some View {
+        if !state.deleted {
+            if let highlight = post.highlight {
+                HStack(spacing: 0) {
+                    Rectangle()
+                        .frame(width: 3)
+                        .foregroundStyle(highlight.barColor)
+                    VStack(alignment: .leading, spacing: 1) {
+                        HighlightMessageView(settings: settings, highlight: highlight)
+                        LineView(post: post, settings: settings, platform: moreThanOneStreamingPlatform)
+                    }
+                }
+            } else {
+                LineView(post: post, settings: settings, platform: moreThanOneStreamingPlatform)
+                    .padding(.leading, 3)
+            }
+        }
+    }
+}
+
+private struct ChatView: View {
+    @ObservedObject var settings: SettingsWidgetChat
+    @ObservedObject var chat: ChatProvider
+
+    private func width() -> Double {
+        20 * Double(settings.fontSize)
+    }
+
+    var body: some View {
+        VStack(spacing: 1) {
+            Spacer()
+            ForEach(chat.posts.reversed()) { post in
+                HStack {
+                    PostView(settings: settings,
+                             post: post,
+                             state: post.state,
+                             moreThanOneStreamingPlatform: chat.moreThanOneStreamingPlatform)
+                    Spacer()
+                }
+            }
+        }
+        .frame(width: width())
+        .foregroundStyle(.white)
+    }
+}
+
+final class ChatEffect: VideoEffect, @unchecked Sendable {
+    private var sceneWidget = SettingsSceneWidget(widgetId: .init())
+    private var chatImage: EffectImageCgImage?
+    private var renderer: ImageRenderer<ChatView>?
+    private var settings = SettingsWidgetChat()
+    private var height: Double = 1
+    private let chat: ChatProvider
+    private var cancellable: AnyCancellable?
+    private var started: Bool = false
+
+    init(chat: ChatProvider) {
+        self.chat = chat
+    }
+
+    func start() {
+        guard !started else {
+            return
+        }
+        started = true
+        DispatchQueue.main.async {
+            self.startInternal()
+        }
+    }
+
+    func stop() {
+        guard started else {
+            return
+        }
+        started = false
+        DispatchQueue.main.async {
+            self.stopInternal()
+        }
+    }
+
+    func setSceneWidget(sceneWidget: SettingsSceneWidget) {
+        processorPipelineQueue.async {
+            self.sceneWidget = sceneWidget
+        }
+    }
+
+    func setSettings(settings: SettingsWidgetChat) {
+        self.settings.update(other: settings)
+        let maximumHeight = settings.height
+        processorPipelineQueue.async {
+            self.height = Double(maximumHeight)
+        }
+    }
+
+    @MainActor
+    private func startInternal() {
+        renderer = ImageRenderer(content: ChatView(settings: settings, chat: chat))
+        cancellable = renderer?.objectWillChange.sink { [weak self] in
+            guard let self else {
+                return
+            }
+            setChatImage(image: renderer?.cgImage)
+        }
+        setChatImage(image: renderer?.cgImage)
+    }
+
+    private func stopInternal() {
+        renderer = nil
+        cancellable = nil
+    }
+
+    private func setChatImage(image: CGImage?) {
+        let chatImage = image?.toEffectImage()
+        processorPipelineQueue.async {
+            self.chatImage = chatImage
+        }
+    }
+
+    override func execute(_ image: CIImage, _: VideoEffectInfo) -> CIImage {
+        guard var chatImage = chatImage?.getCiImage() else {
+            return image
+        }
+        let height = Double(image.extent.height) * height
+        if chatImage.extent.height > height {
+            chatImage = chatImage.cropped(to: CGRect(
+                x: chatImage.extent.minX,
+                y: chatImage.extent.minY,
+                width: chatImage.extent.width,
+                height: height
+            ))
+        }
+        return chatImage
+            .move(sceneWidget.layout, image.extent.size)
+            .cropped(to: image.extent)
+            .composited(over: image)
+    }
+
+    override func executeMetalPetal(_ image: MTIImage, _: VideoEffectInfo) -> MTIImage {
+        guard let chatImage = chatImage?.getMetalPetalImage() else {
+            return image
+        }
+        var contentRegion = chatImage.extent
+        let height = Double(image.extent.height) * height
+        if contentRegion.height > height {
+            contentRegion = CGRect(x: contentRegion.minX,
+                                   y: contentRegion.maxY - height,
+                                   width: contentRegion.width,
+                                   height: height)
+        }
+        return chatImage.moveComposited(sceneWidget.layout, image, contentRegion)
+    }
+}

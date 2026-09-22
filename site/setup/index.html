@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Poochcam: a simple portrait iPhone dog camera with audio and a self-hosted browser viewer.">
+<meta name="referrer" content="no-referrer"><title>Set up your camera · Poochcam</title>
+<link rel="icon" href="../assets/icon.png"><link rel="stylesheet" href="../style.css"></head>
+<body><a class="skip" href="#main">Skip to content</a><header><a class="brand" href="../"><img src="../assets/icon.png" width="36" height="36" alt="">Poochcam</a><nav aria-label="Main navigation"><a href="../">Home</a><a href="../setup/" aria-current="page">Setup</a><a href="../support/">Support</a><a href="../privacy/">Privacy</a><a href="../credits/">Credits</a></nav></header>
+<main id="main">
+<p class="eyebrow">Setup</p><h1>A home for your camera feed.</h1>
+<p class="lead">Set up a server once. Then everyday use is one button.</p>
+<ol class="steps"><li><h2>Prepare your server</h2><p>You need a Linux server with Docker Compose, a public DNS hostname and ports 80, 443 and 1936 available. It can be a small VPS. Keep it updated and protect access to it.</p>
+<p>Use the <a href="https://github.com/itsvessy/poochcam/blob/main/docs/SERVER.md">complete server guide</a> to generate passwords, install a certificate and enable renewal. Plain RTMP is only suitable inside a trusted private network or VPN.</p></li>
+<li><h2>Add the connection on your iPhone</h2><p>Open Poochcam and paste the complete publishing address from the server setup into Camera connection. Add the HTTPS viewing link if you want to share it with a QR code. Save, then allow Camera and Microphone access.</p></li>
+<li><h2>Choose the room and start</h2><p>Stand the camera phone in portrait, connect external power and choose a picture quality. Tap Start Camera. Use Dark Screen after positioning the camera; keep Poochcam in the foreground.</p></li>
+<li><h2>Check your other phone</h2><p>Open the viewing link and enter the separate viewer username and password. Tap Watch live, turn sound on and check the picture and audio before leaving.</p></li></ol>
+<aside class="note"><h2>What to expect</h2><p>Internet publishing uses RTMPS; browser viewing uses HTTPS. Your server receives and can access the media. The feed has a short delay. Reopening Poochcam requires tapping Start Camera again. No outage alerts are included.</p></aside></main><footer><p>Poochcam · Based on <a href="https://github.com/eerimoq/moblin">Moblin</a>.</p><p>A free app for your own server.</p></footer></body></html>

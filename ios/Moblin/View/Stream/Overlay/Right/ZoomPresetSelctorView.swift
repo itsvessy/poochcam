@@ -1,0 +1,168 @@
+import SwiftUI
+
+private struct PickerItemView: View {
+    @ObservedObject var preset: SettingsZoomPreset
+
+    var body: some View {
+        Text(preset.name)
+            .minimumScaleFactor(pickerLabelMinimumScaleFactor)
+    }
+}
+
+private struct ZoomPresetView: View {
+    @EnvironmentObject var model: Model
+    @ObservedObject var database: Database
+    @Binding var presets: [SettingsZoomPreset]
+    @Binding var selectedPresetId: UUID
+    let width: CGFloat
+
+    private func segmentWidth() -> Double {
+        if database.bigButtons {
+            zoomSegmentWidthBig
+        } else {
+            zoomSegmentWidth
+        }
+    }
+
+    private func height() -> Double {
+        if database.bigButtons {
+            segmentHeightBig
+        } else {
+            segmentHeight
+        }
+    }
+
+    var body: some View {
+        SegmentedHPicker(items: presets, selectedItem: Binding(get: {
+            presets.first { $0.id == selectedPresetId }
+        }, set: { value in
+            if let value {
+                model.setZoomPreset(id: value.id)
+            }
+        })) {
+            PickerItemView(preset: $0)
+                .frame(
+                    width: min(segmentWidth(), (width - 20) / CGFloat(presets.count)),
+                    height: height()
+                )
+        }
+        .background(pickerBackgroundColor)
+        .foregroundStyle(.white)
+        .frame(width: min(segmentWidth() * Double(presets.count), max(width - 20, 1)))
+        .cornerRadius(7)
+        .overlay(
+            RoundedRectangle(cornerRadius: 7)
+                .stroke(pickerBorderColor)
+        )
+        .padding(.bottom, 5)
+    }
+}
+
+private struct ZoomPresetVView: View {
+    @EnvironmentObject var model: Model
+    @ObservedObject var database: Database
+    @Binding var presets: [SettingsZoomPreset]
+    @Binding var selectedPresetId: UUID
+    let width: CGFloat
+
+    private func segmentWidth() -> Double {
+        if database.bigButtons {
+            zoomSegmentWidthBig
+        } else {
+            zoomSegmentWidth
+        }
+    }
+
+    private func height() -> Double {
+        if database.bigButtons {
+            segmentHeightBig
+        } else {
+            segmentHeight
+        }
+    }
+
+    var body: some View {
+        SegmentedVPicker(items: presets.reversed(), selectedItem: Binding(get: {
+            presets.first { $0.id == selectedPresetId }
+        }, set: { value in
+            if let value {
+                model.setZoomPreset(id: value.id)
+            }
+        })) {
+            PickerItemView(preset: $0)
+                .frame(
+                    width: min(segmentWidth(), (width - 20) / CGFloat(presets.count)),
+                    height: height()
+                )
+        }
+        .background(pickerBackgroundColor)
+        .foregroundStyle(.white)
+        .frame(width: segmentWidth())
+        .cornerRadius(7)
+        .overlay(
+            RoundedRectangle(cornerRadius: 7)
+                .stroke(pickerBorderColor)
+        )
+        .padding(.bottom, 5)
+    }
+}
+
+struct StreamOverlayRightZoomPresetSelctorView: View {
+    let model: Model
+    @ObservedObject var zoom: Zoom
+    let width: CGFloat
+
+    private func presets() -> Binding<[SettingsZoomPreset]> {
+        if model.cameraPosition == .front {
+            $zoom.frontZoomPresets
+        } else {
+            $zoom.backZoomPresets
+        }
+    }
+
+    private func selectedPresetId() -> Binding<UUID> {
+        if model.cameraPosition == .front {
+            $zoom.frontPresetId
+        } else {
+            $zoom.backPresetId
+        }
+    }
+
+    var body: some View {
+        VStack(alignment: .trailing, spacing: 1) {
+            ZoomPresetView(database: model.database,
+                           presets: presets(),
+                           selectedPresetId: selectedPresetId(),
+                           width: width)
+        }
+    }
+}
+
+struct StreamOverlayRightZoomPresetVSelctorView: View {
+    let model: Model
+    @ObservedObject var zoom: Zoom
+    let width: CGFloat
+
+    private func presets() -> Binding<[SettingsZoomPreset]> {
+        if model.cameraPosition == .front {
+            $zoom.frontZoomPresets
+        } else {
+            $zoom.backZoomPresets
+        }
+    }
+
+    private func selectedPresetId() -> Binding<UUID> {
+        if model.cameraPosition == .front {
+            $zoom.frontPresetId
+        } else {
+            $zoom.backPresetId
+        }
+    }
+
+    var body: some View {
+        ZoomPresetVView(database: model.database,
+                        presets: presets(),
+                        selectedPresetId: selectedPresetId(),
+                        width: width)
+    }
+}

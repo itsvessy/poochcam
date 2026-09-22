@@ -1,0 +1,4 @@
+// Copy to User.xcconfig (ignored by git); use your personal Apple developer team.
+DEVELOPMENT_TEAM = YOUR_PERSONAL_TEAM_ID
+BASE_PRODUCT_BUNDLE_IDENTIFIER = com.vessy.poochcam
+CAPABILITIES = free

@@ -1,0 +1,351 @@
+import Foundation
+
+struct YouTubeApiLiveBroadcastThumbnail: Codable {
+    let url: String
+}
+
+struct YouTubeApiLiveBroadcastThumbnails: Codable {
+    let `default`: YouTubeApiLiveBroadcastThumbnail
+}
+
+struct YouTubeApiLiveBroadcastSnippet: Codable {
+    let title: String
+    let thumbnails: YouTubeApiLiveBroadcastThumbnails
+    let scheduledStartTime: String?
+}
+
+struct YouTubeApiLiveBroadcastStatus: Codable {
+    let privacyStatus: String
+
+    func visibility() -> YouTubeApiLiveBroadcaseVisibility? {
+        YouTubeApiLiveBroadcaseVisibility(rawValue: privacyStatus)
+    }
+}
+
+struct YouTubeApiLiveBroadcastContentDetails: Codable {
+    let boundStreamId: String?
+    let enableAutoStart: Bool
+    let enableAutoStop: Bool
+}
+
+struct YouTubeApiLiveBroadcast: Codable, Identifiable {
+    let id: String
+    let snippet: YouTubeApiLiveBroadcastSnippet
+    let status: YouTubeApiLiveBroadcastStatus
+    let contentDetails: YouTubeApiLiveBroadcastContentDetails
+}
+
+struct YouTubeApiLiveStreamIngestInfo: Codable {
+    let streamName: String
+    let ingestionAddress: String
+}
+
+struct YouTubeApiLiveStreamCdn: Codable {
+    let ingestionInfo: YouTubeApiLiveStreamIngestInfo
+}
+
+struct YouTubeApiLiveStream: Codable {
+    let id: String
+    let cdn: YouTubeApiLiveStreamCdn
+}
+
+struct YouTubeApiLiveStreamsListResponse: Codable {
+    let items: [YouTubeApiLiveStream]
+}
+
+private func serialize(_ value: Any) -> Data {
+    (try? JSONSerialization.data(withJSONObject: value))!
+}
+
+enum YouTubeApiLiveBroadcaseVisibility: String, Codable, CaseIterable {
+    case `public`
+    case `private`
+    case unlisted
+
+    func toString() -> String {
+        switch self {
+        case .public:
+            String(localized: "Public")
+        case .private:
+            String(localized: "Private")
+        case .unlisted:
+            String(localized: "Unlisted")
+        }
+    }
+}
+
+struct YouTubeApiListVideoStreamingDetails: Codable {
+    let concurrentViewers: String?
+    let actualStartTime: String?
+    let actualEndTime: String?
+
+    func isLive() -> Bool {
+        actualStartTime != nil && actualEndTime == nil
+    }
+}
+
+struct YouTubeApiListVideo: Codable {
+    let liveStreamingDetails: YouTubeApiListVideoStreamingDetails
+}
+
+struct YouTubeApiListVideosResponse: Codable {
+    let items: [YouTubeApiListVideo]
+}
+
+struct YouTubeApiLiveBroadcastListResponse: Codable {
+    let items: [YouTubeApiLiveBroadcast]
+}
+
+struct YouTubeApiChannelSnippet: Codable {
+    let customUrl: String?
+}
+
+struct YouTubeApiChannel: Codable {
+    let snippet: YouTubeApiChannelSnippet
+}
+
+struct YouTubeApiChannelListResponse: Codable {
+    let items: [YouTubeApiChannel]
+}
+
+class YouTubeApi {
+    private let accessToken: String
+
+    init(accessToken: String) {
+        self.accessToken = accessToken
+    }
+
+    func listVideos(
+        videoIds: String,
+        onCompleted: @escaping (NetworkResponse<YouTubeApiListVideosResponse>) -> Void
+    ) {
+        let subPath = makeUrl("videos", [
+            ("part", "liveStreamingDetails"),
+            ("id", videoIds),
+        ])
+        doGet(subPath: subPath) {
+            switch $0 {
+            case let .success(data):
+                if let response = try? JSONDecoder().decode(YouTubeApiListVideosResponse.self, from: data) {
+                    onCompleted(.success(response))
+                } else {
+                    onCompleted(.error)
+                }
+            case .authError:
+                onCompleted(.authError)
+            case .error:
+                onCompleted(.error)
+            }
+        }
+    }
+
+    func listLiveBroadcasts(
+        status: String,
+        onCompleted: @escaping (NetworkResponse<YouTubeApiLiveBroadcastListResponse>)
+            -> Void
+    ) {
+        let subPath = makeUrl("liveBroadcasts", [
+            ("part", "snippet,contentDetails,status"),
+            ("broadcastStatus", status),
+        ])
+        doGet(subPath: subPath) {
+            switch $0 {
+            case let .success(data):
+                if let response = try? JSONDecoder().decode(
+                    YouTubeApiLiveBroadcastListResponse.self,
+                    from: data
+                ) {
+                    onCompleted(.success(response))
+                } else {
+                    onCompleted(.error)
+                }
+            case .authError:
+                onCompleted(.authError)
+            case .error:
+                onCompleted(.error)
+            }
+        }
+    }
+
+    func insertLiveBroadcast(title: String,
+                             visibility: YouTubeApiLiveBroadcaseVisibility,
+                             autoStop: Bool,
+                             onCompleted: @escaping (NetworkResponse<YouTubeApiLiveBroadcast>) -> Void)
+    {
+        let subPath = makeUrl("liveBroadcasts", [("part", "snippet,contentDetails,status")])
+        let body: [String: Any] = [
+            "snippet": [
+                "title": title,
+                "scheduledStartTime": Date().ISO8601Format(),
+            ],
+            "status": [
+                "privacyStatus": visibility.rawValue,
+                "selfDeclaredMadeForKids": false,
+            ],
+            "contentDetails": [
+                "enableAutoStart": true,
+                "enableAutoStop": autoStop,
+            ],
+        ]
+        doPost(subPath: subPath, body: serialize(body)) {
+            switch $0 {
+            case let .success(data):
+                if let response = try? JSONDecoder().decode(YouTubeApiLiveBroadcast.self, from: data) {
+                    onCompleted(.success(response))
+                } else {
+                    onCompleted(.error)
+                }
+            case .authError:
+                onCompleted(.authError)
+            case .error:
+                onCompleted(.error)
+            }
+        }
+    }
+
+    func deleteLiveBroadcast(id: String, onCompleted: @escaping (NetworkResponse<Void>) -> Void) {
+        let subPath = makeUrl("liveBroadcasts", [("id", id)])
+        doDelete(subPath: subPath) {
+            switch $0 {
+            case .success:
+                onCompleted(.success(()))
+            case .authError:
+                onCompleted(.authError)
+            case .error:
+                onCompleted(.error)
+            }
+        }
+    }
+
+    func bindLiveBroadcast(boardcastId: String, streamId: String, onCompleted: @escaping (Bool) -> Void) {
+        let subPath = makeUrl("liveBroadcasts/bind", [
+            ("id", boardcastId),
+            ("streamId", streamId),
+            ("part", "snippet,contentDetails,status"),
+        ])
+        doPost(subPath: subPath, body: Data()) {
+            switch $0 {
+            case .success:
+                onCompleted(true)
+            default:
+                onCompleted(false)
+            }
+        }
+    }
+
+    func transitionLiveBroadcast(id: String, status: String, onCompleted: @escaping (Bool) -> Void) {
+        let subPath = makeUrl("liveBroadcasts/transition", [
+            ("id", id),
+            ("broadcastStatus", status),
+            ("part", "snippet,contentDetails,status"),
+        ])
+        doPost(subPath: subPath, body: Data()) {
+            switch $0 {
+            case .success:
+                onCompleted(true)
+            default:
+                onCompleted(false)
+            }
+        }
+    }
+
+    func listLiveStreams(onCompleted: @escaping (NetworkResponse<YouTubeApiLiveStreamsListResponse>)
+        -> Void)
+    {
+        let subPath = makeUrl("liveStreams", [
+            ("part", "snippet,cdn,contentDetails,status"),
+            ("mine", "true"),
+        ])
+        doGet(subPath: subPath) {
+            switch $0 {
+            case let .success(data):
+                if let response = try? JSONDecoder().decode(
+                    YouTubeApiLiveStreamsListResponse.self,
+                    from: data
+                ) {
+                    onCompleted(.success(response))
+                } else {
+                    onCompleted(.error)
+                }
+            case .authError:
+                onCompleted(.authError)
+            case .error:
+                onCompleted(.error)
+            }
+        }
+    }
+
+    func listChannels(onCompleted: @escaping (NetworkResponse<YouTubeApiChannelListResponse>) -> Void) {
+        let subPath = makeUrl("channels", [
+            ("part", "snippet"),
+            ("mine", "true"),
+        ])
+        doGet(subPath: subPath) {
+            switch $0 {
+            case let .success(data):
+                if let response = try? JSONDecoder().decode(
+                    YouTubeApiChannelListResponse.self,
+                    from: data
+                ) {
+                    onCompleted(.success(response))
+                } else {
+                    onCompleted(.error)
+                }
+            case .authError:
+                onCompleted(.authError)
+            case .error:
+                onCompleted(.error)
+            }
+        }
+    }
+
+    private func doGet(subPath: String, onComplete: @escaping ((OperationResult) -> Void)) {
+        guard let url = URL(string: "https://youtube.googleapis.com/youtube/v3/\(subPath)") else {
+            return
+        }
+        doRequest(createRequest(url: url, method: "GET"), onComplete)
+    }
+
+    private func doPost(subPath: String, body: Data, onComplete: @escaping (OperationResult) -> Void) {
+        guard let url = URL(string: "https://youtube.googleapis.com/youtube/v3/\(subPath)") else {
+            return
+        }
+        var request = createRequest(url: url, method: "POST", json: true)
+        request.httpBody = body
+        doRequest(request, onComplete)
+    }
+
+    private func doDelete(subPath: String, onComplete: @escaping ((OperationResult) -> Void)) {
+        guard let url = URL(string: "https://youtube.googleapis.com/youtube/v3/\(subPath)") else {
+            return
+        }
+        doRequest(createRequest(url: url, method: "DELETE"), onComplete)
+    }
+
+    private func doRequest(_ request: URLRequest, _ onComplete: @escaping (OperationResult) -> Void) {
+        httpRequest(request: request) { data, response, error in
+            guard error == nil, let data, response?.http?.isSuccessful == true else {
+                if let data, let data = String(bytes: data, encoding: .utf8) {
+                    logger.info("youtube-api: Error response body: \(data)")
+                }
+                if response?.http?.isUnauthorized == true {
+                    onComplete(.authError)
+                } else {
+                    onComplete(.error)
+                }
+                return
+            }
+            onComplete(.success(data))
+        }
+    }
+
+    private func createRequest(url: URL, method: String, json: Bool = false) -> URLRequest {
+        var request = URLRequest(url: url)
+        request.httpMethod = method
+        request.setAuthorization("Bearer \(accessToken)")
+        if json {
+            request.setContentType("application/json")
+        }
+        return request
+    }
+}

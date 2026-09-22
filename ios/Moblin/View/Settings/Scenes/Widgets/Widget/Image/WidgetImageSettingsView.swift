@@ -1,0 +1,79 @@
+import PhotosUI
+import SwiftUI
+
+struct WidgetImagePickerView: View {
+    let model: Model
+    let widget: SettingsWidget
+    @Binding var image: UIImage?
+    let sizeScale: Double
+    @State var presentingPicker: Bool = false
+    @State private var selectedImageItem: PhotosPickerItem?
+
+    func loadImage() {
+        if let data = model.imageStorage.tryRead(id: widget.id) {
+            image = UIImage(data: data)
+        } else {
+            image = nil
+        }
+    }
+
+    var body: some View {
+        Section {
+            Button {
+                presentingPicker = true
+            } label: {
+                if let image {
+                    HCenter {
+                        Image(uiImage: image)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 1920 / sizeScale, height: 1080 / sizeScale)
+                    }
+                } else {
+                    HCenter {
+                        Text("Select image")
+                    }
+                }
+            }
+            .photosPicker(isPresented: $presentingPicker,
+                          selection: $selectedImageItem,
+                          matching: .images)
+            .onChange(of: selectedImageItem) { imageItem in
+                imageItem?.loadTransferable(type: Data.self) { result in
+                    switch result {
+                    case let .success(data?):
+                        model.imageStorage.write(id: widget.id, data: data)
+                        DispatchQueue.main.async {
+                            loadImage()
+                            model.getImageEffect(id: widget.id)?.loadImage(
+                                imageStorage: model.imageStorage,
+                                widgetId: widget.id
+                            )
+                        }
+                    case .success(nil):
+                        logger.info("widget: image is nil")
+                    case let .failure(error):
+                        logger.info("widget: image error: \(error)")
+                    }
+                }
+            }
+            .onAppear {
+                model.checkPhotoLibraryAuthorization()
+                if image == nil {
+                    loadImage()
+                }
+            }
+        }
+    }
+}
+
+struct WidgetImageSettingsView: View {
+    let model: Model
+    let widget: SettingsWidget
+    @State private var image: UIImage?
+
+    var body: some View {
+        WidgetImagePickerView(model: model, widget: widget, image: $image, sizeScale: 6)
+        WidgetEffectsView(model: model, widget: widget)
+    }
+}

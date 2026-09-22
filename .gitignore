@@ -1,0 +1,27 @@
+.DS_Store
+.build/
+build/
+artifacts/
+server/state/
+*.mobileprovision
+*.p12
+*.p8
+*.key
+*.pem
+*.ipa
+*.xcarchive/
+*.tar.gz
+.env
+ios/Config/User.xcconfig
+**/xcuserdata/
+**/__pycache__/
+# Local design references, generated exports and simulator screenshots.
+ios/Design/
+# Local operational evidence and publication handoffs never belong in source.
+runtime/
+diagnostics/
+backups/
+publication-private/
+*.log
+.env.*
+!.env.example

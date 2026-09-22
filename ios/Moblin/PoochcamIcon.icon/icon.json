@@ -1,0 +1,273 @@
+{
+  "fill-specializations": [
+    {
+      "value": {
+        "solid": "srgb:0.13725,0.23922,0.20000,1"
+      }
+    },
+    {
+      "appearance": "dark",
+      "value": {
+        "solid": "srgb:0.10196,0.19608,0.15686,1"
+      }
+    },
+    {
+      "appearance": "tinted",
+      "value": {
+        "solid": "gray:0.2,1"
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "04 \u00b7 Friendly expression",
+      "layers": [
+        {
+          "name": "Warm bright eyes",
+          "image-name": "05-eyes.svg",
+          "glass": false,
+          "hidden": false,
+          "position": {
+            "scale": 1,
+            "translation-in-points": [
+              0,
+              0
+            ]
+          },
+          "fill-specializations": [
+            {
+              "appearance": "dark",
+              "value": {
+                "solid": "srgb:0.96471,0.92549,0.84314,1"
+              }
+            },
+            {
+              "appearance": "tinted",
+              "value": {
+                "solid": "gray:1,1"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Nose and smile",
+          "image-name": "04-expression.svg",
+          "glass": false,
+          "hidden": false,
+          "position": {
+            "scale": 1,
+            "translation-in-points": [
+              0,
+              0
+            ]
+          },
+          "fill-specializations": [
+            {
+              "appearance": "dark",
+              "value": {
+                "solid": "srgb:0.06275,0.13725,0.10588,1"
+              }
+            },
+            {
+              "appearance": "tinted",
+              "value": {
+                "solid": "gray:0.02,1"
+              }
+            }
+          ]
+        }
+      ],
+      "shadow": {
+        "kind": "neutral",
+        "opacity": 0
+      },
+      "translucency": {
+        "enabled": false,
+        "value": 0
+      },
+      "specular": false
+    },
+    {
+      "name": "03 \u00b7 Tongue to the side",
+      "layers": [
+        {
+          "name": "Left side tongue",
+          "image-name": "07-side-tongue.svg",
+          "glass": true,
+          "hidden": false,
+          "position": {
+            "scale": 1,
+            "translation-in-points": [
+              0,
+              0
+            ]
+          },
+          "fill-specializations": [
+            {
+              "appearance": "dark",
+              "value": {
+                "solid": "srgb:0.85098,0.50588,0.60000,1"
+              }
+            },
+            {
+              "appearance": "tinted",
+              "value": {
+                "solid": "gray:0.6,1"
+              }
+            }
+          ]
+        }
+      ],
+      "shadow": {
+        "kind": "neutral",
+        "opacity": 0.06
+      },
+      "translucency": {
+        "enabled": false,
+        "value": 0
+      },
+      "specular": false
+    },
+    {
+      "name": "02 \u00b7 Tapered cream muzzle",
+      "layers": [
+        {
+          "name": "Cream muzzle and chin",
+          "image-name": "03-muzzle.svg",
+          "glass": true,
+          "hidden": false,
+          "position": {
+            "scale": 1,
+            "translation-in-points": [
+              0,
+              0
+            ]
+          },
+          "fill-specializations": [
+            {
+              "appearance": "dark",
+              "value": {
+                "solid": "srgb:0.89804,0.85098,0.74902,1"
+              }
+            },
+            {
+              "appearance": "tinted",
+              "value": {
+                "solid": "gray:0.95,1"
+              }
+            }
+          ]
+        }
+      ],
+      "shadow": {
+        "kind": "neutral",
+        "opacity": 0.12
+      },
+      "translucency": {
+        "enabled": false,
+        "value": 0
+      },
+      "specular": false
+    },
+    {
+      "name": "01 \u00b7 Face fills the square",
+      "layers": [
+        {
+          "name": "Mint ear folds",
+          "image-name": "06-ear-folds.svg",
+          "glass": false,
+          "hidden": false,
+          "position": {
+            "scale": 1,
+            "translation-in-points": [
+              0,
+              0
+            ]
+          },
+          "fill-specializations": [
+            {
+              "appearance": "dark",
+              "value": {
+                "solid": "srgb:0.55294,0.79608,0.67843,1"
+              }
+            },
+            {
+              "appearance": "tinted",
+              "value": {
+                "solid": "gray:0.7,1"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Floppy ears at tile edges",
+          "image-name": "02-ears.svg",
+          "glass": true,
+          "hidden": false,
+          "position": {
+            "scale": 1,
+            "translation-in-points": [
+              0,
+              0
+            ]
+          },
+          "fill-specializations": [
+            {
+              "appearance": "dark",
+              "value": {
+                "solid": "srgb:0.04706,0.12941,0.09804,1"
+              }
+            },
+            {
+              "appearance": "tinted",
+              "value": {
+                "solid": "gray:0.12,1"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Soft forehead wave",
+          "image-name": "01-head.svg",
+          "glass": false,
+          "hidden": false,
+          "position": {
+            "scale": 1,
+            "translation-in-points": [
+              0,
+              0
+            ]
+          },
+          "fill-specializations": [
+            {
+              "appearance": "dark",
+              "value": {
+                "solid": "srgb:0.20392,0.34510,0.28627,1"
+              }
+            },
+            {
+              "appearance": "tinted",
+              "value": {
+                "solid": "gray:0.24,1"
+              }
+            }
+          ]
+        }
+      ],
+      "shadow": {
+        "kind": "neutral",
+        "opacity": 0.08
+      },
+      "translucency": {
+        "enabled": false,
+        "value": 0
+      },
+      "specular": false
+    }
+  ],
+  "supported-platforms": {
+    "squares": [
+      "iOS"
+    ]
+  }
+}

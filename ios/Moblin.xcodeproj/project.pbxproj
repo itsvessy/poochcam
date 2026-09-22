@@ -1,0 +1,1648 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 71;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0312E4302C00F24E00C6F878 /* ReplayKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0312E42F2C00F24E00C6F878 /* ReplayKit.framework */; };
+		0318D36A2CF51D6900E12F3B /* SwiftProtobuf in Frameworks */ = {isa = PBXBuildFile; productRef = 0318D3692CF51D6900E12F3B /* SwiftProtobuf */; };
+		0320D8762AED36860030418F /* WrappingHStack in Frameworks */ = {isa = PBXBuildFile; productRef = 0320D8752AED36860030418F /* WrappingHStack */; };
+		032303212F671CC600790A63 /* ZipArchive in Frameworks */ = {isa = PBXBuildFile; productRef = 03AA00012F6500000000AA00 /* ZipArchive */; };
+		033BEAC42C0FCC0B005F4E06 /* NWWebSocket in Frameworks */ = {isa = PBXBuildFile; productRef = 033BEAC32C0FCC0B005F4E06 /* NWWebSocket */; };
+		035351942F1C271700428DAC /* AppAuthCore in Frameworks */ = {isa = PBXBuildFile; productRef = 035351932F1C271700428DAC /* AppAuthCore */; };
+		035351962F1C27A500428DAC /* AppAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 035351952F1C27A500428DAC /* AppAuth */; };
+		035503F22FE7C9B500067E65 /* StreamDeckKit in Frameworks */ = {isa = PBXBuildFile; productRef = 035503F12FE7C9B500067E65 /* StreamDeckKit */; };
+		0360FD162F228EEB00FF8847 /* MetalPetal in Frameworks */ = {isa = PBXBuildFile; productRef = 0360FD152F228EEB00FF8847 /* MetalPetal */; };
+		0375F6E62F5354BE005BE7A8 /* Rist in Frameworks */ = {isa = PBXBuildFile; productRef = 0375F6E52F5354BE005BE7A8 /* Rist */; };
+		0375F6E92F535715005BE7A8 /* Rist in Frameworks */ = {isa = PBXBuildFile; productRef = 0375F6E82F535715005BE7A8 /* Rist */; };
+		0375F6EC2F53844C005BE7A8 /* DataChannel in Frameworks */ = {isa = PBXBuildFile; productRef = 0375F6EB2F53844C005BE7A8 /* DataChannel */; };
+		0375F6EF2F539602005BE7A8 /* Srt in Frameworks */ = {isa = PBXBuildFile; productRef = 0375F6EE2F539602005BE7A8 /* Srt */; };
+		0375FD7B2F539AAC005BE7A8 /* Srt in Frameworks */ = {isa = PBXBuildFile; productRef = 0375FD7A2F539AAC005BE7A8 /* Srt */; };
+		0376F6F92B9511030056B3D2 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0376F6F82B9511030056B3D2 /* WidgetKit.framework */; };
+		0376F6FB2B9511030056B3D2 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0376F6FA2B9511030056B3D2 /* SwiftUI.framework */; };
+		0376F7042B9511040056B3D2 /* MoblinWidget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 0376F6F72B9511030056B3D2 /* MoblinWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		0377239A2DE35191007D040D /* VRMKit in Frameworks */ = {isa = PBXBuildFile; productRef = 037723992DE35191007D040D /* VRMKit */; };
+		0377239C2DE35191007D040D /* VRMSceneKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0377239B2DE35191007D040D /* VRMSceneKit */; };
+		03A08B7C2AC295620018BA95 /* AlertToast in Frameworks */ = {isa = PBXBuildFile; productRef = 03A08B7B2AC295620018BA95 /* AlertToast */; };
+		03A707B12B8EBE4D003BB7BE /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = 03A707B02B8EBE4D003BB7BE /* Collections */; };
+		03A974282AC137A000610E21 /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = 03A974272AC137A000610E21 /* Collections */; };
+		03AC6B952D17786700832A7E /* TrueTime in Frameworks */ = {isa = PBXBuildFile; productRef = 03AC6B942D17786700832A7E /* TrueTime */; };
+		03B279832D45EB9C007DEDB2 /* SwiftCube in Frameworks */ = {isa = PBXBuildFile; productRef = 03B279822D45EB9C007DEDB2 /* SwiftCube */; };
+		03B7DAB52BA640C100CEFC1B /* XMLCoder in Frameworks */ = {isa = PBXBuildFile; productRef = 03B7DAB42BA640C100CEFC1B /* XMLCoder */; };
+		03BC11672AE5654700C38FC4 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 03BC11662AE5654700C38FC4 /* SDWebImageSwiftUI */; };
+		03BC116B2AE56C2200C38FC4 /* SDWebImageWebPCoder in Frameworks */ = {isa = PBXBuildFile; productRef = 03BC116A2AE56C2200C38FC4 /* SDWebImageWebPCoder */; };
+		03ECDF5D2B8E5F0B00BD920E /* WrappingHStack in Frameworks */ = {isa = PBXBuildFile; productRef = 03ECDF5C2B8E5F0B00BD920E /* WrappingHStack */; };
+		03F465EC2C441D1400630708 /* CrcSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 03F465EB2C441D1400630708 /* CrcSwift */; };
+		882D0C162DF76F5B0035BFAF /* BlackSharkLib in Frameworks */ = {isa = PBXBuildFile; productRef = 882D0C152DF76F5B0035BFAF /* BlackSharkLib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		0376F7022B9511040056B3D2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 035E9E2B2A9A02D6009D4F5A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0376F6F62B9511030056B3D2;
+			remoteInfo = "Moblin Widget App Extension";
+		};
+		03E649472E634D2800728501 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 035E9E2B2A9A02D6009D4F5A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 035E9E322A9A02D6009D4F5A;
+			remoteInfo = Moblin;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		0376F7082B9511040056B3D2 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				0376F7042B9511040056B3D2 /* MoblinWidget.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		0312E42E2C00F24E00C6F878 /* Moblin Screen Recording.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Moblin Screen Recording.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0312E42F2C00F24E00C6F878 /* ReplayKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReplayKit.framework; path = System/Library/Frameworks/ReplayKit.framework; sourceTree = SDKROOT; };
+		035E9E332A9A02D6009D4F5A /* Poochcam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Poochcam.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0376F6F72B9511030056B3D2 /* MoblinWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MoblinWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		0376F6F82B9511030056B3D2 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		0376F6FA2B9511030056B3D2 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		03AA0006000000000000AA02 /* MoblinLiveActivity.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MoblinLiveActivity.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		03E649432E634D2800728501 /* MoblinTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MoblinTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		03ECDF462B8E4E5E00BD920E /* Moblin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Moblin.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		030AC5B02F4988A600496F6F /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Base.xcconfig,
+				Moblin.xcconfig,
+				MoblinLiveActivity.xcconfig,
+				MoblinScreenRecording.xcconfig,
+				MoblinTests.xcconfig,
+				MoblinWatch.xcconfig,
+				MoblinWidget.xcconfig,
+				User.xcconfig,
+			);
+			target = 035E9E322A9A02D6009D4F5A /* Moblin */;
+		};
+		030AC5B12F4988A600496F6F /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Base.xcconfig,
+				Moblin.xcconfig,
+				MoblinLiveActivity.xcconfig,
+				MoblinScreenRecording.xcconfig,
+				MoblinTests.xcconfig,
+				MoblinWatch.xcconfig,
+				MoblinWidget.xcconfig,
+				User.xcconfig,
+			);
+			target = 03ECDF452B8E4E5E00BD920E /* MoblinWatch */;
+		};
+		030AC5B22F4988A600496F6F /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Base.xcconfig,
+				Moblin.xcconfig,
+				MoblinLiveActivity.xcconfig,
+				MoblinScreenRecording.xcconfig,
+				MoblinTests.xcconfig,
+				MoblinWatch.xcconfig,
+				MoblinWidget.xcconfig,
+				User.xcconfig,
+			);
+			target = 0312E42D2C00F24E00C6F878 /* Moblin Screen Recording */;
+		};
+		03298F0B2F991AD6009E4D0C /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Localizable.xcstrings,
+			);
+			target = 03AA0002000000000000AA02 /* MoblinLiveActivity */;
+		};
+		037D9E9F2E38AC1600C0AF9A /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 035E9E322A9A02D6009D4F5A /* Moblin */;
+		};
+		037D9ECB2E38AC1B00C0AF9A /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"Various/CMFormatDescription+Extension.swift",
+				"Various/CMSampleBuffer+Extension.swift",
+			);
+			target = 03ECDF452B8E4E5E00BD920E /* MoblinWatch */;
+		};
+		037D9ECC2E38AC1B00C0AF9A /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				View/StreamOverlayIconAndTextView.swift,
+				View/StreamOverlayTextView.swift,
+				View/ThermalStateView.swift,
+			);
+			target = 0312E42D2C00F24E00C6F878 /* Moblin Screen Recording */;
+		};
+		037D9EF52E38AC2000C0AF9A /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Shared/WatchProtocol.swift,
+				Shared/WatchSettings.swift,
+			);
+			target = 035E9E322A9A02D6009D4F5A /* Moblin */;
+		};
+		037D9EF62E38AC2000C0AF9A /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 03ECDF452B8E4E5E00BD920E /* MoblinWatch */;
+		};
+		037D9F022E38AC2300C0AF9A /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 0376F6F62B9511030056B3D2 /* MoblinWidget */;
+		};
+		037D9F162E38AC2700C0AF9A /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Shared/SampleBufferCommon.swift,
+				Shared/SampleBufferReceiver.swift,
+			);
+			target = 035E9E322A9A02D6009D4F5A /* Moblin */;
+		};
+		037D9F172E38AC2700C0AF9A /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+				Shared/SampleBufferReceiver.swift,
+			);
+			target = 0312E42D2C00F24E00C6F878 /* Moblin Screen Recording */;
+		};
+		03A0001F2E00000000000001 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Shared/MoblinLiveActivity.swift,
+			);
+			target = 035E9E322A9A02D6009D4F5A /* Moblin */;
+		};
+		03AA000B000000000000AA02 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 03AA0002000000000000AA02 /* MoblinLiveActivity */;
+		};
+		03CBFBF12F0063CF0001864A /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Localizable.xcstrings,
+			);
+			target = 0376F6F62B9511030056B3D2 /* MoblinWidget */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		030AC5AF2F4988A000496F6F /* Config */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (030AC5B02F4988A600496F6F /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 030AC5B12F4988A600496F6F /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 030AC5B22F4988A600496F6F /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Config; sourceTree = "<group>"; };
+		037D9C902E38AC1600C0AF9A /* Moblin */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (037D9E9F2E38AC1600C0AF9A /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Moblin; sourceTree = "<group>"; };
+		037D9EAC2E38AC1B00C0AF9A /* Common */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (037D9ECB2E38AC1B00C0AF9A /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 03CBFBF12F0063CF0001864A /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 03298F0B2F991AD6009E4D0C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 037D9ECC2E38AC1B00C0AF9A /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Common; sourceTree = "<group>"; };
+		037D9EE42E38AC2000C0AF9A /* Moblin Watch */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (037D9EF52E38AC2000C0AF9A /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 037D9EF62E38AC2000C0AF9A /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = "Moblin Watch"; sourceTree = "<group>"; };
+		037D9EFC2E38AC2300C0AF9A /* Moblin Widget */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (037D9F022E38AC2300C0AF9A /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = "Moblin Widget"; sourceTree = "<group>"; };
+		037D9F0C2E38AC2600C0AF9A /* Moblin Screen Recording */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (037D9F162E38AC2700C0AF9A /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 037D9F172E38AC2700C0AF9A /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = "Moblin Screen Recording"; sourceTree = "<group>"; };
+		03AA000A000000000000AA02 /* Moblin Live Activity */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (03A0001F2E00000000000001 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 03AA000B000000000000AA02 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = "Moblin Live Activity"; sourceTree = "<group>"; };
+		03E649442E634D2800728501 /* MoblinTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = MoblinTests; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0312E42B2C00F24E00C6F878 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0312E4302C00F24E00C6F878 /* ReplayKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		035E9E302A9A02D6009D4F5A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				032303212F671CC600790A63 /* ZipArchive in Frameworks */,
+				03B7DAB52BA640C100CEFC1B /* XMLCoder in Frameworks */,
+				033BEAC42C0FCC0B005F4E06 /* NWWebSocket in Frameworks */,
+				03BC11672AE5654700C38FC4 /* SDWebImageSwiftUI in Frameworks */,
+				0318D36A2CF51D6900E12F3B /* SwiftProtobuf in Frameworks */,
+				03AC6B952D17786700832A7E /* TrueTime in Frameworks */,
+				0320D8762AED36860030418F /* WrappingHStack in Frameworks */,
+				0375F6EC2F53844C005BE7A8 /* DataChannel in Frameworks */,
+				035351962F1C27A500428DAC /* AppAuth in Frameworks */,
+				03F465EC2C441D1400630708 /* CrcSwift in Frameworks */,
+				0377239A2DE35191007D040D /* VRMKit in Frameworks */,
+				03B279832D45EB9C007DEDB2 /* SwiftCube in Frameworks */,
+				0375FD7B2F539AAC005BE7A8 /* Srt in Frameworks */,
+				0360FD162F228EEB00FF8847 /* MetalPetal in Frameworks */,
+				882D0C162DF76F5B0035BFAF /* BlackSharkLib in Frameworks */,
+				0375F6EF2F539602005BE7A8 /* Srt in Frameworks */,
+				035351942F1C271700428DAC /* AppAuthCore in Frameworks */,
+				0375F6E62F5354BE005BE7A8 /* Rist in Frameworks */,
+				03A974282AC137A000610E21 /* Collections in Frameworks */,
+				03A08B7C2AC295620018BA95 /* AlertToast in Frameworks */,
+				035503F22FE7C9B500067E65 /* StreamDeckKit in Frameworks */,
+				0377239C2DE35191007D040D /* VRMSceneKit in Frameworks */,
+				0375F6E92F535715005BE7A8 /* Rist in Frameworks */,
+				03BC116B2AE56C2200C38FC4 /* SDWebImageWebPCoder in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0376F6F42B9511030056B3D2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0376F6FB2B9511030056B3D2 /* SwiftUI.framework in Frameworks */,
+				0376F6F92B9511030056B3D2 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		03AA0004000000000000AA02 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		03E649402E634D2800728501 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		03ECDF432B8E4E5E00BD920E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				03A707B12B8EBE4D003BB7BE /* Collections in Frameworks */,
+				03ECDF5D2B8E5F0B00BD920E /* WrappingHStack in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		035D372A2AB103E600045B92 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0376F6F82B9511030056B3D2 /* WidgetKit.framework */,
+				0376F6FA2B9511030056B3D2 /* SwiftUI.framework */,
+				0312E42F2C00F24E00C6F878 /* ReplayKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		035E9E2A2A9A02D6009D4F5A = {
+			isa = PBXGroup;
+			children = (
+				030AC5AF2F4988A000496F6F /* Config */,
+				037D9EAC2E38AC1B00C0AF9A /* Common */,
+				037D9C902E38AC1600C0AF9A /* Moblin */,
+				037D9EE42E38AC2000C0AF9A /* Moblin Watch */,
+				037D9EFC2E38AC2300C0AF9A /* Moblin Widget */,
+				03AA000A000000000000AA02 /* Moblin Live Activity */,
+				037D9F0C2E38AC2600C0AF9A /* Moblin Screen Recording */,
+				03E649442E634D2800728501 /* MoblinTests */,
+				035E9E342A9A02D6009D4F5A /* Products */,
+				035D372A2AB103E600045B92 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		035E9E342A9A02D6009D4F5A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				035E9E332A9A02D6009D4F5A /* Poochcam.app */,
+				03ECDF462B8E4E5E00BD920E /* Moblin.app */,
+				0376F6F72B9511030056B3D2 /* MoblinWidget.appex */,
+				0312E42E2C00F24E00C6F878 /* Moblin Screen Recording.appex */,
+				03E649432E634D2800728501 /* MoblinTests.xctest */,
+				03AA0006000000000000AA02 /* MoblinLiveActivity.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0312E42D2C00F24E00C6F878 /* Moblin Screen Recording */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0312E43B2C00F24E00C6F878 /* Build configuration list for PBXNativeTarget "Moblin Screen Recording" */;
+			buildPhases = (
+				0312E42A2C00F24E00C6F878 /* Sources */,
+				0312E42B2C00F24E00C6F878 /* Frameworks */,
+				0312E42C2C00F24E00C6F878 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				030AC5AF2F4988A000496F6F /* Config */,
+				037D9EAC2E38AC1B00C0AF9A /* Common */,
+				037D9F0C2E38AC2600C0AF9A /* Moblin Screen Recording */,
+			);
+			name = "Moblin Screen Recording";
+			productName = "Moblin Capture";
+			productReference = 0312E42E2C00F24E00C6F878 /* Moblin Screen Recording.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		035E9E322A9A02D6009D4F5A /* Moblin */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 035E9E412A9A02D7009D4F5A /* Build configuration list for PBXNativeTarget "Moblin" */;
+			buildPhases = (
+				035E9E2F2A9A02D6009D4F5A /* Sources */,
+				035E9E302A9A02D6009D4F5A /* Frameworks */,
+				035E9E312A9A02D6009D4F5A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				030AC5AF2F4988A000496F6F /* Config */,
+				037D9C902E38AC1600C0AF9A /* Moblin */,
+				037D9EAC2E38AC1B00C0AF9A /* Common */,
+			);
+			name = Moblin;
+			packageProductDependencies = (
+				03A974272AC137A000610E21 /* Collections */,
+				03A08B7B2AC295620018BA95 /* AlertToast */,
+				03BC11662AE5654700C38FC4 /* SDWebImageSwiftUI */,
+				03BC116A2AE56C2200C38FC4 /* SDWebImageWebPCoder */,
+				0320D8752AED36860030418F /* WrappingHStack */,
+				03B7DAB42BA640C100CEFC1B /* XMLCoder */,
+				033BEAC32C0FCC0B005F4E06 /* NWWebSocket */,
+				03F465EB2C441D1400630708 /* CrcSwift */,
+				0318D3692CF51D6900E12F3B /* SwiftProtobuf */,
+				03AC6B942D17786700832A7E /* TrueTime */,
+				03B279822D45EB9C007DEDB2 /* SwiftCube */,
+				037723992DE35191007D040D /* VRMKit */,
+				0377239B2DE35191007D040D /* VRMSceneKit */,
+				882D0C152DF76F5B0035BFAF /* BlackSharkLib */,
+				035351932F1C271700428DAC /* AppAuthCore */,
+				035351952F1C27A500428DAC /* AppAuth */,
+				0360FD152F228EEB00FF8847 /* MetalPetal */,
+				0375F6E52F5354BE005BE7A8 /* Rist */,
+				0375F6E82F535715005BE7A8 /* Rist */,
+				0375F6EB2F53844C005BE7A8 /* DataChannel */,
+				0375F6EE2F539602005BE7A8 /* Srt */,
+				0375FD7A2F539AAC005BE7A8 /* Srt */,
+				03AA00012F6500000000AA00 /* ZipArchive */,
+				035503F12FE7C9B500067E65 /* StreamDeckKit */,
+			);
+			productName = Mobs;
+			productReference = 035E9E332A9A02D6009D4F5A /* Poochcam.app */;
+			productType = "com.apple.product-type.application";
+		};
+		0376F6F62B9511030056B3D2 /* MoblinWidget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0376F7052B9511040056B3D2 /* Build configuration list for PBXNativeTarget "MoblinWidget" */;
+			buildPhases = (
+				0376F6F32B9511030056B3D2 /* Sources */,
+				0376F6F42B9511030056B3D2 /* Frameworks */,
+				0376F6F52B9511030056B3D2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				037D9EFC2E38AC2300C0AF9A /* Moblin Widget */,
+			);
+			name = MoblinWidget;
+			productName = "Moblin Widget App";
+			productReference = 0376F6F72B9511030056B3D2 /* MoblinWidget.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		03AA0002000000000000AA02 /* MoblinLiveActivity */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 03AA000F000000000000AA02 /* Build configuration list for PBXNativeTarget "MoblinLiveActivity" */;
+			buildPhases = (
+				03AA0003000000000000AA02 /* Sources */,
+				03AA0004000000000000AA02 /* Frameworks */,
+				03AA0005000000000000AA02 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				03AA000A000000000000AA02 /* Moblin Live Activity */,
+			);
+			name = MoblinLiveActivity;
+			productName = "Moblin Live Activity";
+			productReference = 03AA0006000000000000AA02 /* MoblinLiveActivity.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		03E649422E634D2800728501 /* MoblinTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 03E649492E634D2800728501 /* Build configuration list for PBXNativeTarget "MoblinTests" */;
+			buildPhases = (
+				03E6493F2E634D2800728501 /* Sources */,
+				03E649402E634D2800728501 /* Frameworks */,
+				03E649412E634D2800728501 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				03E649482E634D2800728501 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				03E649442E634D2800728501 /* MoblinTests */,
+			);
+			name = MoblinTests;
+			packageProductDependencies = (
+			);
+			productName = MoblinTests;
+			productReference = 03E649432E634D2800728501 /* MoblinTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		03ECDF452B8E4E5E00BD920E /* MoblinWatch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 03ECDF542B8E4E6000BD920E /* Build configuration list for PBXNativeTarget "MoblinWatch" */;
+			buildPhases = (
+				03ECDF422B8E4E5E00BD920E /* Sources */,
+				03ECDF432B8E4E5E00BD920E /* Frameworks */,
+				03ECDF442B8E4E5E00BD920E /* Resources */,
+				0376F7082B9511040056B3D2 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0376F7032B9511040056B3D2 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				030AC5AF2F4988A000496F6F /* Config */,
+				037D9EAC2E38AC1B00C0AF9A /* Common */,
+				037D9EE42E38AC2000C0AF9A /* Moblin Watch */,
+			);
+			name = MoblinWatch;
+			packageProductDependencies = (
+				03ECDF5C2B8E5F0B00BD920E /* WrappingHStack */,
+				03A707B02B8EBE4D003BB7BE /* Collections */,
+			);
+			productName = "MoblinWatch Watch App";
+			productReference = 03ECDF462B8E4E5E00BD920E /* Moblin.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		035E9E2B2A9A02D6009D4F5A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1640;
+				LastUpgradeCheck = 2620;
+				TargetAttributes = {
+					0312E42D2C00F24E00C6F878 = {
+						CreatedOnToolsVersion = 15.4;
+					};
+					035E9E322A9A02D6009D4F5A = {
+						CreatedOnToolsVersion = 14.3.1;
+					};
+					0376F6F62B9511030056B3D2 = {
+						CreatedOnToolsVersion = 15.2;
+					};
+					03AA0002000000000000AA02 = {
+						CreatedOnToolsVersion = 16.4;
+					};
+					03E649422E634D2800728501 = {
+						CreatedOnToolsVersion = 16.4;
+						TestTargetID = 035E9E322A9A02D6009D4F5A;
+					};
+					03ECDF452B8E4E5E00BD920E = {
+						CreatedOnToolsVersion = 15.2;
+					};
+				};
+			};
+			buildConfigurationList = 035E9E2E2A9A02D6009D4F5A /* Build configuration list for PBXProject "Moblin" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+				sv,
+				es,
+				de,
+				fr,
+				pl,
+				vi,
+				nl,
+				"zh-HK",
+				"zh-Hans",
+				"zh-Hant",
+				tr,
+				"pt-BR",
+				"pt-PT",
+				id,
+				ja,
+				hi,
+				ko,
+				it,
+				ru,
+				uk,
+				fi,
+				sk,
+				"zh-Hant-TW",
+				sl,
+				eo,
+			);
+			mainGroup = 035E9E2A2A9A02D6009D4F5A;
+			packageReferences = (
+				03A974262AC137A000610E21 /* XCRemoteSwiftPackageReference "swift-collections" */,
+				03A08B7A2AC295620018BA95 /* XCRemoteSwiftPackageReference "AlertToast" */,
+				03BC11652AE5654700C38FC4 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+				03BC11692AE56C2200C38FC4 /* XCRemoteSwiftPackageReference "SDWebImageWebPCoder" */,
+				0320D8742AED36860030418F /* XCRemoteSwiftPackageReference "WrappingHStack" */,
+				03B7DAB32BA6409800CEFC1B /* XCRemoteSwiftPackageReference "XMLCoder" */,
+				033BEAC22C0FCC0B005F4E06 /* XCRemoteSwiftPackageReference "NWWebSocket" */,
+				03F465EA2C441D1400630708 /* XCRemoteSwiftPackageReference "CrcSwift" */,
+				0318D3682CF51D6900E12F3B /* XCRemoteSwiftPackageReference "swift-protobuf" */,
+				03AC6B932D17786700832A7E /* XCRemoteSwiftPackageReference "TrueTime" */,
+				03B279812D45EB9C007DEDB2 /* XCRemoteSwiftPackageReference "SwiftCube" */,
+				037723982DE35191007D040D /* XCRemoteSwiftPackageReference "VRMKit" */,
+				882D0C142DF76F5B0035BFAF /* XCRemoteSwiftPackageReference "BlackSharkLib" */,
+				035351922F1C271700428DAC /* XCRemoteSwiftPackageReference "AppAuth-iOS" */,
+				0360FD142F228EEB00FF8847 /* XCRemoteSwiftPackageReference "MetalPetal" */,
+				0375F6E72F535715005BE7A8 /* XCRemoteSwiftPackageReference "Rist" */,
+				0375F6EA2F53844B005BE7A8 /* XCRemoteSwiftPackageReference "DataChannel" */,
+				0375FD792F539AAC005BE7A8 /* XCRemoteSwiftPackageReference "SrtSwift" */,
+				03AA00002F6500000000AA00 /* XCRemoteSwiftPackageReference "swift-zip-archive" */,
+				035503F02FE7C9B500067E65 /* XCRemoteSwiftPackageReference "streamdeck-kit-ipad" */,
+			);
+			productRefGroup = 035E9E342A9A02D6009D4F5A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				035E9E322A9A02D6009D4F5A /* Moblin */,
+				03ECDF452B8E4E5E00BD920E /* MoblinWatch */,
+				0376F6F62B9511030056B3D2 /* MoblinWidget */,
+				03AA0002000000000000AA02 /* MoblinLiveActivity */,
+				0312E42D2C00F24E00C6F878 /* Moblin Screen Recording */,
+				03E649422E634D2800728501 /* MoblinTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0312E42C2C00F24E00C6F878 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		035E9E312A9A02D6009D4F5A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0376F6F52B9511030056B3D2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		03AA0005000000000000AA02 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		03E649412E634D2800728501 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		03ECDF442B8E4E5E00BD920E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0312E42A2C00F24E00C6F878 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		035E9E2F2A9A02D6009D4F5A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0376F6F32B9511030056B3D2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		03AA0003000000000000AA02 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		03E6493F2E634D2800728501 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		03ECDF422B8E4E5E00BD920E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0376F7032B9511040056B3D2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0376F6F62B9511030056B3D2 /* MoblinWidget */;
+			targetProxy = 0376F7022B9511040056B3D2 /* PBXContainerItemProxy */;
+		};
+		03E649482E634D2800728501 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 035E9E322A9A02D6009D4F5A /* Moblin */;
+			targetProxy = 03E649472E634D2800728501 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		0312E4392C00F24E00C6F878 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 030AC5AF2F4988A000496F6F /* Config */;
+			baseConfigurationReferenceRelativePath = MoblinScreenRecording.xcconfig;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Moblin Screen Recording/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Moblin;
+				INFOPLIST_KEY_NSCameraUsageDescription = Yes;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = Yes;
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = Yes;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = Yes;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		0312E43A2C00F24E00C6F878 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 030AC5AF2F4988A000496F6F /* Config */;
+			baseConfigurationReferenceRelativePath = MoblinScreenRecording.xcconfig;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Moblin Screen Recording/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Moblin;
+				INFOPLIST_KEY_NSCameraUsageDescription = Yes;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = Yes;
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = Yes;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = Yes;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		035E9E3F2A9A02D7009D4F5A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = Yes;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = Yes;
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = Yes;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = Yes;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		035E9E402A9A02D7009D4F5A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = Yes;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = Yes;
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = Yes;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = Yes;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		035E9E422A9A02D7009D4F5A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 030AC5AF2F4988A000496F6F /* Config */;
+			baseConfigurationReferenceRelativePath = Moblin.xcconfig;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "";
+				ASSETCATALOG_COMPILER_APPICON_NAME = PoochcamIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "";
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_INCOMING_NETWORK_CONNECTIONS = YES;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_RESOURCE_ACCESS_AUDIO_INPUT = YES;
+				ENABLE_RESOURCE_ACCESS_BLUETOOTH = YES;
+				ENABLE_RESOURCE_ACCESS_CALENDARS = NO;
+				ENABLE_RESOURCE_ACCESS_CAMERA = YES;
+				ENABLE_RESOURCE_ACCESS_CONTACTS = NO;
+				ENABLE_RESOURCE_ACCESS_LOCATION = YES;
+				ENABLE_RESOURCE_ACCESS_PRINTING = NO;
+				ENABLE_RESOURCE_ACCESS_USB = YES;
+				ENABLE_USER_SELECTED_FILES = readwrite;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Moblin/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Poochcam;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.video";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Poochcam shows your dog’s room on your private viewing link.";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "Poochcam connects to your camera server to send video and audio.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Poochcam sends sound from your dog’s room with the video.";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UIStatusBarHidden = NO;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportsDocumentBrowser = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MTLLINKER_FLAGS = "-fcikernel";
+				MTL_COMPILER_FLAGS = "-fcikernel";
+				MTL_HEADER_SEARCH_PATHS = "$(HEADER_SEARCH_PATHS)";
+				PRODUCT_NAME = Poochcam;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		035E9E432A9A02D7009D4F5A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 030AC5AF2F4988A000496F6F /* Config */;
+			baseConfigurationReferenceRelativePath = Moblin.xcconfig;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "";
+				ASSETCATALOG_COMPILER_APPICON_NAME = PoochcamIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "";
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_INCOMING_NETWORK_CONNECTIONS = YES;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_RESOURCE_ACCESS_AUDIO_INPUT = YES;
+				ENABLE_RESOURCE_ACCESS_BLUETOOTH = YES;
+				ENABLE_RESOURCE_ACCESS_CALENDARS = NO;
+				ENABLE_RESOURCE_ACCESS_CAMERA = YES;
+				ENABLE_RESOURCE_ACCESS_CONTACTS = NO;
+				ENABLE_RESOURCE_ACCESS_LOCATION = YES;
+				ENABLE_RESOURCE_ACCESS_PRINTING = NO;
+				ENABLE_RESOURCE_ACCESS_USB = YES;
+				ENABLE_USER_SELECTED_FILES = readwrite;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Moblin/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Poochcam;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.video";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Poochcam shows your dog’s room on your private viewing link.";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "Poochcam connects to your camera server to send video and audio.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Poochcam sends sound from your dog’s room with the video.";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UIStatusBarHidden = NO;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportsDocumentBrowser = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MTLLINKER_FLAGS = "-fcikernel";
+				MTL_COMPILER_FLAGS = "-fcikernel";
+				MTL_HEADER_SEARCH_PATHS = "$(HEADER_SEARCH_PATHS)";
+				PRODUCT_NAME = Poochcam;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		0376F7062B9511040056B3D2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 030AC5AF2F4988A000496F6F /* Config */;
+			baseConfigurationReferenceRelativePath = MoblinWidget.xcconfig;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Moblin Widget/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Moblin Widget";
+				INFOPLIST_KEY_NSCameraUsageDescription = Yes;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = Yes;
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = Yes;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = Yes;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.2;
+			};
+			name = Debug;
+		};
+		0376F7072B9511040056B3D2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 030AC5AF2F4988A000496F6F /* Config */;
+			baseConfigurationReferenceRelativePath = MoblinWidget.xcconfig;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Moblin Widget/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Moblin Widget";
+				INFOPLIST_KEY_NSCameraUsageDescription = Yes;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = Yes;
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = Yes;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = Yes;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.2;
+			};
+			name = Release;
+		};
+		03AA000D000000000000AA02 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 030AC5AF2F4988A000496F6F /* Config */;
+			baseConfigurationReferenceRelativePath = MoblinLiveActivity.xcconfig;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Moblin Live Activity/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Moblin Live Activity";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		03AA000E000000000000AA02 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 030AC5AF2F4988A000496F6F /* Config */;
+			baseConfigurationReferenceRelativePath = MoblinLiveActivity.xcconfig;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Moblin Live Activity/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Moblin Live Activity";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		03E6494A2E634D2800728501 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 030AC5AF2F4988A000496F6F /* Config */;
+			baseConfigurationReferenceRelativePath = MoblinTests.xcconfig;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Moblin.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Moblin";
+			};
+			name = Debug;
+		};
+		03E6494B2E634D2800728501 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 030AC5AF2F4988A000496F6F /* Config */;
+			baseConfigurationReferenceRelativePath = MoblinTests.xcconfig;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Moblin.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Moblin";
+			};
+			name = Release;
+		};
+		03ECDF552B8E4E6000BD920E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 030AC5AF2F4988A000496F6F /* Config */;
+			baseConfigurationReferenceRelativePath = MoblinWatch.xcconfig;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"Moblin Watch/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Moblin Watch/Info.plist";
+				INFOPLIST_KEY_NSCameraUsageDescription = Yes;
+				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "Moblin can show your heart rate on stream.";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Moblin can show your heart rate on stream.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Moblin can show your heart rate on stream.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = Yes;
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = Yes;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = Yes;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = NO;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				PRODUCT_NAME = Moblin;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.2;
+			};
+			name = Debug;
+		};
+		03ECDF562B8E4E6000BD920E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 030AC5AF2F4988A000496F6F /* Config */;
+			baseConfigurationReferenceRelativePath = MoblinWatch.xcconfig;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"Moblin Watch/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Moblin Watch/Info.plist";
+				INFOPLIST_KEY_NSCameraUsageDescription = Yes;
+				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "Moblin can show your heart rate on stream.";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Moblin can show your heart rate on stream.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Moblin can show your heart rate on stream.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = Yes;
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = Yes;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = Yes;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = NO;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				PRODUCT_NAME = Moblin;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.2;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0312E43B2C00F24E00C6F878 /* Build configuration list for PBXNativeTarget "Moblin Screen Recording" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0312E4392C00F24E00C6F878 /* Debug */,
+				0312E43A2C00F24E00C6F878 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		035E9E2E2A9A02D6009D4F5A /* Build configuration list for PBXProject "Moblin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				035E9E3F2A9A02D7009D4F5A /* Debug */,
+				035E9E402A9A02D7009D4F5A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		035E9E412A9A02D7009D4F5A /* Build configuration list for PBXNativeTarget "Moblin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				035E9E422A9A02D7009D4F5A /* Debug */,
+				035E9E432A9A02D7009D4F5A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0376F7052B9511040056B3D2 /* Build configuration list for PBXNativeTarget "MoblinWidget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0376F7062B9511040056B3D2 /* Debug */,
+				0376F7072B9511040056B3D2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		03AA000F000000000000AA02 /* Build configuration list for PBXNativeTarget "MoblinLiveActivity" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				03AA000D000000000000AA02 /* Debug */,
+				03AA000E000000000000AA02 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		03E649492E634D2800728501 /* Build configuration list for PBXNativeTarget "MoblinTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				03E6494A2E634D2800728501 /* Debug */,
+				03E6494B2E634D2800728501 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		03ECDF542B8E4E6000BD920E /* Build configuration list for PBXNativeTarget "MoblinWatch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				03ECDF552B8E4E6000BD920E /* Debug */,
+				03ECDF562B8E4E6000BD920E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		0318D3682CF51D6900E12F3B /* XCRemoteSwiftPackageReference "swift-protobuf" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-protobuf.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.28.2;
+			};
+		};
+		0320D8742AED36860030418F /* XCRemoteSwiftPackageReference "WrappingHStack" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ksemianov/WrappingHStack";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.3;
+			};
+		};
+		033BEAC22C0FCC0B005F4E06 /* XCRemoteSwiftPackageReference "NWWebSocket" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/eerimoq/NWWebSocket";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		035351922F1C271700428DAC /* XCRemoteSwiftPackageReference "AppAuth-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/openid/AppAuth-iOS.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+		035503F02FE7C9B500067E65 /* XCRemoteSwiftPackageReference "streamdeck-kit-ipad" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/elgatosf/streamdeck-kit-ipad.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.3.0;
+			};
+		};
+		0360FD142F228EEB00FF8847 /* XCRemoteSwiftPackageReference "MetalPetal" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/eerimoq/MetalPetal";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		0375F6E72F535715005BE7A8 /* XCRemoteSwiftPackageReference "Rist" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/eerimoq/Rist";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		0375F6EA2F53844B005BE7A8 /* XCRemoteSwiftPackageReference "DataChannel" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/eerimoq/DataChannel";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		0375FD792F539AAC005BE7A8 /* XCRemoteSwiftPackageReference "SrtSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/eerimoq/SrtSwift";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		037723982DE35191007D040D /* XCRemoteSwiftPackageReference "VRMKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/eerimoq/VRMKit";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		03A08B7A2AC295620018BA95 /* XCRemoteSwiftPackageReference "AlertToast" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/eerimoq/AlertToast.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		03A974262AC137A000610E21 /* XCRemoteSwiftPackageReference "swift-collections" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-collections.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+		03AA00002F6500000000AA00 /* XCRemoteSwiftPackageReference "swift-zip-archive" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/adam-fowler/swift-zip-archive";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.6.4;
+			};
+		};
+		03AC6B932D17786700832A7E /* XCRemoteSwiftPackageReference "TrueTime" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Gisman4ik/TrueTime.swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.2.0;
+			};
+		};
+		03B279812D45EB9C007DEDB2 /* XCRemoteSwiftPackageReference "SwiftCube" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/eerimoq/SwiftCube";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		03B7DAB32BA6409800CEFC1B /* XCRemoteSwiftPackageReference "XMLCoder" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/CoreOffice/XMLCoder";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.17.1;
+			};
+		};
+		03BC11652AE5654700C38FC4 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.1.1;
+			};
+		};
+		03BC11692AE56C2200C38FC4 /* XCRemoteSwiftPackageReference "SDWebImageWebPCoder" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageWebPCoder";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.14.0;
+			};
+		};
+		03F465EA2C441D1400630708 /* XCRemoteSwiftPackageReference "CrcSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/eerimoq/CrcSwift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		882D0C142DF76F5B0035BFAF /* XCRemoteSwiftPackageReference "BlackSharkLib" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Spillmaker/BlackSharkLib.swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.3.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		0318D3692CF51D6900E12F3B /* SwiftProtobuf */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0318D3682CF51D6900E12F3B /* XCRemoteSwiftPackageReference "swift-protobuf" */;
+			productName = SwiftProtobuf;
+		};
+		0320D8752AED36860030418F /* WrappingHStack */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0320D8742AED36860030418F /* XCRemoteSwiftPackageReference "WrappingHStack" */;
+			productName = WrappingHStack;
+		};
+		033BEAC32C0FCC0B005F4E06 /* NWWebSocket */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 033BEAC22C0FCC0B005F4E06 /* XCRemoteSwiftPackageReference "NWWebSocket" */;
+			productName = NWWebSocket;
+		};
+		035351932F1C271700428DAC /* AppAuthCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 035351922F1C271700428DAC /* XCRemoteSwiftPackageReference "AppAuth-iOS" */;
+			productName = AppAuthCore;
+		};
+		035351952F1C27A500428DAC /* AppAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 035351922F1C271700428DAC /* XCRemoteSwiftPackageReference "AppAuth-iOS" */;
+			productName = AppAuth;
+		};
+		035503F12FE7C9B500067E65 /* StreamDeckKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 035503F02FE7C9B500067E65 /* XCRemoteSwiftPackageReference "streamdeck-kit-ipad" */;
+			productName = StreamDeckKit;
+		};
+		0360FD152F228EEB00FF8847 /* MetalPetal */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0360FD142F228EEB00FF8847 /* XCRemoteSwiftPackageReference "MetalPetal" */;
+			productName = MetalPetal;
+		};
+		0375F6E52F5354BE005BE7A8 /* Rist */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Rist;
+		};
+		0375F6E82F535715005BE7A8 /* Rist */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0375F6E72F535715005BE7A8 /* XCRemoteSwiftPackageReference "Rist" */;
+			productName = Rist;
+		};
+		0375F6EB2F53844C005BE7A8 /* DataChannel */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0375F6EA2F53844B005BE7A8 /* XCRemoteSwiftPackageReference "DataChannel" */;
+			productName = DataChannel;
+		};
+		0375F6EE2F539602005BE7A8 /* Srt */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Srt;
+		};
+		0375FD7A2F539AAC005BE7A8 /* Srt */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0375FD792F539AAC005BE7A8 /* XCRemoteSwiftPackageReference "SrtSwift" */;
+			productName = Srt;
+		};
+		037723992DE35191007D040D /* VRMKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 037723982DE35191007D040D /* XCRemoteSwiftPackageReference "VRMKit" */;
+			productName = VRMKit;
+		};
+		0377239B2DE35191007D040D /* VRMSceneKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 037723982DE35191007D040D /* XCRemoteSwiftPackageReference "VRMKit" */;
+			productName = VRMSceneKit;
+		};
+		03A08B7B2AC295620018BA95 /* AlertToast */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 03A08B7A2AC295620018BA95 /* XCRemoteSwiftPackageReference "AlertToast" */;
+			productName = AlertToast;
+		};
+		03A707B02B8EBE4D003BB7BE /* Collections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 03A974262AC137A000610E21 /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = Collections;
+		};
+		03A974272AC137A000610E21 /* Collections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 03A974262AC137A000610E21 /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = Collections;
+		};
+		03AA00012F6500000000AA00 /* ZipArchive */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 03AA00002F6500000000AA00 /* XCRemoteSwiftPackageReference "swift-zip-archive" */;
+			productName = ZipArchive;
+		};
+		03AC6B942D17786700832A7E /* TrueTime */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 03AC6B932D17786700832A7E /* XCRemoteSwiftPackageReference "TrueTime" */;
+			productName = TrueTime;
+		};
+		03B279822D45EB9C007DEDB2 /* SwiftCube */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 03B279812D45EB9C007DEDB2 /* XCRemoteSwiftPackageReference "SwiftCube" */;
+			productName = SwiftCube;
+		};
+		03B7DAB42BA640C100CEFC1B /* XMLCoder */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 03B7DAB32BA6409800CEFC1B /* XCRemoteSwiftPackageReference "XMLCoder" */;
+			productName = XMLCoder;
+		};
+		03BC11662AE5654700C38FC4 /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 03BC11652AE5654700C38FC4 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
+		};
+		03BC116A2AE56C2200C38FC4 /* SDWebImageWebPCoder */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 03BC11692AE56C2200C38FC4 /* XCRemoteSwiftPackageReference "SDWebImageWebPCoder" */;
+			productName = SDWebImageWebPCoder;
+		};
+		03ECDF5C2B8E5F0B00BD920E /* WrappingHStack */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0320D8742AED36860030418F /* XCRemoteSwiftPackageReference "WrappingHStack" */;
+			productName = WrappingHStack;
+		};
+		03F465EB2C441D1400630708 /* CrcSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 03F465EA2C441D1400630708 /* XCRemoteSwiftPackageReference "CrcSwift" */;
+			productName = CrcSwift;
+		};
+		882D0C152DF76F5B0035BFAF /* BlackSharkLib */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 882D0C142DF76F5B0035BFAF /* XCRemoteSwiftPackageReference "BlackSharkLib" */;
+			productName = BlackSharkLib;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 035E9E2B2A9A02D6009D4F5A /* Project object */;
+}
