@@ -32,11 +32,15 @@ still requires the open items below.
   includes the native dog icon and excludes the unused artwork with unclear
   licensing. Public-source content and asset review covered the initial snapshot;
   older local history is excluded from the public branch.
+- The [initial Linux CI run](https://github.com/itsvessy/poochcam/actions/runs/35724315202)
+  passed on September 22, 2026: Docker RTMPS ingestion, authenticated HTTPS HLS,
+  rejection of anonymous viewing, fallback viewer assets, video/audio decoding,
+  and Nginx configuration/reload. This isolated test uses a temporary local
+  certificate; it does not verify public certificate issuance or renewal.
 
 ## Still required
 
-- Full Docker/Nginx RTMPS-to-HTTPS integration and live certificate renewal.
-  The Linux integration test is included in CI; record its result before distribution.
+- Live certificate issuance and renewal on the public reference server.
 - Signed-device reset/update behavior, denied/restored permissions, all resolutions,
   interruption recovery, accessibility and native Safari authentication against
   the reference server. Unsigned simulator Keychain failures do not qualify storage.
