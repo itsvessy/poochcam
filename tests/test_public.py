@@ -13,7 +13,8 @@ class PublicSourceTests(unittest.TestCase):
     def test_private_files_even_when_force_tracked(self):
         for name in ['ios/Config/User.xcconfig', 'server/state/connection.txt', 'runtime/status.json',
                      'diagnostics/session.json', 'ios/Design/reference.png', '.env.production',
-                     'archive.xcarchive/Info.plist', 'signing.p12']:
+                     'archive.xcarchive/Info.plist', 'signing.p12',
+                     '.wrangler/state/local.json', 'node_modules/example/package.json']:
             with self.subTest(name=name):
                 self.assertTrue(public.inspect(name, b''))
 

@@ -39,8 +39,19 @@ python3 -m unittest discover -s tests -p 'test_site.py'
 ```
 
 Run these commands from the repository root. The generated `site/` directory is
-the Cloudflare Pages build output; it contains no server configuration or private
-camera credentials. See [RELEASE.md](RELEASE.md) for deployment settings.
+the only asset directory selected by the root `wrangler.jsonc` for Cloudflare
+Workers. It contains no server configuration or private camera credentials.
+No Worker script is required for this static website. See [RELEASE.md](RELEASE.md)
+for the Git integration's build, deploy and preview commands.
+
+Validate the hosting configuration without uploading anything:
+
+```sh
+npx --yes wrangler@4.70.0 deploy --dry-run
+npx --yes wrangler@4.70.0 versions upload --dry-run
+```
+
+These checks do not verify account access, the live hostname or HTTPS issuance.
 
 The remaining local checks are:
 

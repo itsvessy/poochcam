@@ -21,8 +21,8 @@ and retains continuous 1× playback. Keep the camera phone powered, connected an
 Poochcam in the foreground. Reopening the app never starts streaming automatically.
 
 The reference server uses Linux, Docker, MediaMTX, Nginx and Certbot. The website
-under `site/` is static HTML prepared for Cloudflare Pages at poochcam.ca. The public source
-owner is **itsvessy/poochcam**.
+under `site/` is static HTML prepared for Cloudflare Workers static-asset hosting at
+poochcam.ca. The public source owner is **itsvessy/poochcam**.
 
 Poochcam is based on **Moblin by Erik Moqvist** and is an independent project.
 See [LICENSE](LICENSE) and [third-party notices](ios/Moblin/Poochcam/ThirdPartyNotices.txt).

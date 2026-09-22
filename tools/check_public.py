@@ -12,7 +12,7 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 PRIVATE_DIRECTORIES = {'artifacts', 'runtime', 'diagnostics', 'backups', 'publication-private',
-                       'xcuserdata', '__pycache__', '.build', '.git'}
+                       'xcuserdata', '__pycache__', '.build', '.git', '.wrangler', 'node_modules'}
 PRIVATE_SUFFIXES = {'.mobileprovision', '.p12', '.p8', '.key', '.pem', '.ipa', '.log', '.xcarchive'}
 CONTENT_RULES = (
     ('private key or credential', re.compile(

@@ -1,0 +1,12 @@
+{
+  "name": "poochcam",
+  "compatibility_date": "2026-09-22",
+  "workers_dev": true,
+  "preview_urls": true,
+  "send_metrics": false,
+  "assets": {
+    "directory": "./site",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  }
+}

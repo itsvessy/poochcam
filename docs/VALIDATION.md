@@ -37,6 +37,10 @@ still requires the open items below.
   rejection of anonymous viewing, fallback viewer assets, video/audio decoding,
   and Nginx configuration/reload. This isolated test uses a temporary local
   certificate; it does not verify public certificate issuance or renewal.
+- Cloudflare Workers static-site configuration: production and version-preview
+  dry runs passed with Wrangler 4.70.0. The asset directory contains only the
+  eight public website files. No deployment or account authorization is implied
+  by these local checks.
 
 ## Still required
 
