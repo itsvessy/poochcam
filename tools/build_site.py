@@ -35,7 +35,7 @@ PAGES = {
 <h2>Contact</h2><p>Email <a href="mailto:support@poochcam.ca">support@poochcam.ca</a> with the app version, iOS version and what happened. Replies may come from the developer’s existing mailbox. Do not send publishing passwords, private viewing links, pet footage or personal logs unless specifically needed and agreed.</p>
 <p>You can also <a href="https://github.com/itsvessy/poochcam/issues">report a software issue on GitHub</a>. GitHub issues are public; keep private details out.</p></section>'''),
     'privacy': ('Privacy policy', '''
-<p class="eyebrow">Privacy · Updated September 13, 2026</p><h1>Your room stays your business.</h1>
+<p class="eyebrow">Privacy · Updated September 22, 2026</p><h1>Your room stays your business.</h1>
 <section class="prose"><p>This policy describes Poochcam, an independent iPhone camera app developed by Vessy Stroumsky, and poochcam.ca.</p>
 <h2>Camera and microphone</h2><p>The app uses your camera and microphone to send live video and sound to the publishing server you configure. It does not provide a developer-hosted camera service or upload ordinary self-hosted feeds to the developer. The server operator and people with valid viewing credentials can access the media.</p>
 <p>RTMPS and HTTPS encrypt transport to and from the server. This is not end-to-end encryption that hides media from the server operator. Plain RTMP does not encrypt media or credentials and should only be used inside a trusted private network or VPN.</p>
@@ -44,7 +44,7 @@ PAGES = {
 <h2>Your server and viewers</h2><p>The reference server keeps a short rolling HLS buffer in memory to deliver live video and audio. It does not record an archive. It uses authentication and transient session cookies to serve media. Routine webpage access logging is disabled; bounded operational logs may contain connection errors and IP addresses. Your server provider may separately process traffic and infrastructure logs under its own policy. The server operator controls deletion and retention.</p>
 <p>The browser viewer keeps your sound preference for the current page and uses your browser’s authentication state. It does not include advertising or analytics.</p>
 <h2>Beta and App Review</h2><p>A temporary developer-operated server may be offered specifically for beta testing or App Review. If you use those supplied credentials, your video, audio and connection information reach that server and may be accessible to the developer. Use a non-sensitive test scene. The service has no recording archive and is removed after testing and review finish. Ordinary self-hosting does not use this server.</p>
-<h2>This website</h2><p>The static website is intended to be hosted by GitHub Pages. GitHub processes visitors’ IP addresses for security. It has its own <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">privacy statement</a>. Cloudflare provides DNS and support-email routing. We do not add analytics, tracking pixels or advertising cookies.</p>
+<h2>This website</h2><p>This static website uses Cloudflare Pages for hosting and Cloudflare for DNS and support-email routing. Cloudflare processes connection and request information, including IP addresses, to deliver and protect the site. See <a href="https://www.cloudflare.com/privacypolicy/">Cloudflare’s privacy policy</a> for its data handling. We do not add analytics, tracking pixels or advertising cookies.</p>
 <h2>Support messages</h2><p>If you email support@poochcam.ca, Cloudflare forwards the message to the developer’s existing mailbox, hosted by Google. The developer receives your address, message and any attachments to answer the request. Messages are retained while needed to resolve the request and for up to 12 months afterward, unless you request earlier deletion or a legal obligation requires retention.</p>
 <h2>Your choices and contact</h2><p>You can stop streaming, revoke Camera or Microphone permission in iPhone Settings, reset the app’s connection settings and delete the app. Contact <a href="mailto:support@poochcam.ca">support@poochcam.ca</a> for privacy questions or deletion of support messages. For your server’s records, contact its operator.</p>
 <h2>Changes</h2><p>Changes to this policy will be published here with an updated date.</p></section>'''),
@@ -74,8 +74,6 @@ def build():
         directory = SITE / slug
         directory.mkdir(parents=True, exist_ok=True)
         (directory / 'index.html').write_text(html)
-    (SITE / '.nojekyll').write_text('')
-    (SITE / 'CNAME').write_text('poochcam.ca\n')
     (SITE / 'assets/notices.txt').write_text((ROOT / 'ios/Moblin/Poochcam/ThirdPartyNotices.txt').read_text())
     print('Built five static website routes.')
 

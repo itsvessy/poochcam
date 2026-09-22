@@ -31,6 +31,19 @@ fresh onboarding; restoring to a different device requires setup again.
 
 ## Verification
 
+The public website uses only Python's standard library:
+
+```sh
+python3 tools/build_site.py
+python3 -m unittest discover -s tests -p 'test_site.py'
+```
+
+Run these commands from the repository root. The generated `site/` directory is
+the Cloudflare Pages build output; it contains no server configuration or private
+camera credentials. See [RELEASE.md](RELEASE.md) for deployment settings.
+
+The remaining local checks are:
+
 ```sh
 python3 -m unittest discover -s tests -p 'test_*.py'
 node --test tests/*.test.mjs

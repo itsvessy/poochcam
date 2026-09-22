@@ -10,7 +10,7 @@
 | Quality | App-owned UserDefaults; configuration installation marker is also app-owned. |
 | Diagnostics | URL and credential-parameter redaction; RTMP server error text is replaced before logging. Local bounded logs, no automatic uploads. File sharing is disabled. |
 | Integrations | Fixed profile disables platform features; connection reload and NTP initialization return early. No purchases, Watch discovery, broadcast extension or app settings-import scheme. |
-| Website | Static pages; no scripts, trackers, analytics or forms. GitHub Pages security logging is disclosed. |
+| Website | Static pages; no scripts, trackers, analytics or forms. Cloudflare Pages hosting and processing of connection/request information are disclosed. Keep optional Web Analytics and injected scripts disabled; verify the deployed site. |
 | Self-hosted viewer | Same-origin HTTP Basic over HTTPS; browser session/authentication and transient HLS cookies. No cross-origin media or URL credentials. |
 | Review server | Explicitly disclosed developer-operated test service. Use non-sensitive scenes; do not claim the developer cannot access that service's media. |
 | Support | Forwarding through Cloudflare to the existing Google-hosted mailbox. Draft policy specifies deletion within 12 months after resolution, or earlier on request. Confirm and follow this practice before publication. |
