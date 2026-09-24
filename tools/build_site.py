@@ -4,15 +4,16 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 SITE = ROOT / 'site'
+ORIGIN = 'https://poochcam.ca'
 PAGES = {
     '': ('A little closer to home.', '''
 <section class="hero"><div><p class="eyebrow">An iPhone dog camera · Self-hosted</p>
 <h1>Your spare iPhone.<br>Your dog’s room.</h1>
 <p class="lead">See the room and hear your dog, with a camera you run yourself.</p>
 <p>Poochcam turns an iPhone into a simple portrait camera. Plug it in, choose your picture quality and tap Start Camera. Open your private viewer on another phone.</p>
-<a class="button" href="./setup/">Set up your camera <span aria-hidden="true">↗</span></a>
+<a class="button" href="/setup/">Set up your camera <span aria-hidden="true">↗</span></a>
 <p class="small">Preparing for a free App Store release. Your own server is required and may cost money to run.</p></div>
-<figure class="app-mark"><img src="./assets/icon.png" width="256" height="256" alt="Poochcam paw-print app icon"><figcaption>One camera. Picture and sound.</figcaption></figure></section>
+<figure class="app-mark"><img src="/assets/icon.png" width="256" height="256" alt="Poochcam paw-print app icon"><figcaption>One camera. Picture and sound.</figcaption></figure></section>
 <section class="features" aria-label="Camera features"><article><h2>Start, then settle in.</h2><p>One camera button and a dark screen. Keep the phone powered and the app open while you’re away.</p></article>
 <article><h2>Hear the little things.</h2><p>Built-in microphone audio travels with the picture. Check both in your browser before leaving.</p></article>
 <article><h2>Your choice of detail.</h2><p>Choose 480p, 720p or 1080p before starting. 720p is a good place to begin.</p></article></section>
@@ -20,6 +21,7 @@ PAGES = {
     'setup': ('Set up your camera', '''
 <p class="eyebrow">Setup</p><h1>A home for your camera feed.</h1>
 <p class="lead">Set up a server once. Then everyday use is one button.</p>
+<p>Poochcam is not yet available on the App Store. This guide is for people preparing their server or building from <a href="https://github.com/itsvessy/poochcam/blob/main/docs/BUILD.md">the public source</a>.</p>
 <ol class="steps"><li><h2>Prepare your server</h2><p>You need a Linux server with Docker Compose, a public DNS hostname and ports 80, 443 and 1936 available. It can be a small VPS. Keep it updated and protect access to it.</p>
 <p>Use the <a href="https://github.com/itsvessy/poochcam/blob/main/docs/SERVER.md">complete server guide</a> to generate passwords, install a certificate and enable renewal. Plain RTMP is only suitable inside a trusted private network or VPN.</p></li>
 <li><h2>Add the connection on your iPhone</h2><p>Open Poochcam and paste the complete publishing address from the server setup into Camera connection. Add the HTTPS viewing link if you want to share it with a QR code. Save, then allow Camera and Microphone access.</p></li>
@@ -54,28 +56,62 @@ PAGES = {
 <section class="prose"><p>Moblin provides the camera, media and streaming foundation. Poochcam adapts it into a simple portrait dog camera with a browser viewer and self-hosted server guide. Poochcam is independent and is not endorsed by Moblin.</p>
 <p><a href="https://github.com/eerimoq/moblin">Visit Moblin</a> · <a href="https://github.com/itsvessy/poochcam">Poochcam source</a></p>
 <h2>Licenses and acknowledgements</h2><p>Moblin’s MIT copyright and permission notice are preserved. The embedded HaishinKit code carries its BSD 3-Clause notice. Bundled libraries and assets retain their own terms and attribution.</p>
-<p><a href="../assets/notices.txt">Read third-party notices</a>. The same notices are accessible inside Poochcam under About &amp; open-source licenses.</p></section>'''),
+<p><a href="/assets/notices.txt">Read third-party notices</a>. The same notices are accessible inside Poochcam under About &amp; open-source licenses.</p></section>'''),
 }
+
+DESCRIPTIONS = {
+    '': 'Turn a spare iPhone into a portrait dog camera with live sound and a private, self-hosted browser viewer. Preparing for a free App Store release.',
+    'setup': 'Prepare your own Poochcam server, connect your iPhone camera and check live picture and sound in your private browser viewer.',
+    'support': 'Get help with Poochcam picture, sound and connection problems, or contact support for the self-hosted iPhone dog camera.',
+    'privacy': 'How Poochcam handles camera and microphone access, connection settings, self-hosted video, website requests and support messages.',
+    'credits': 'Poochcam is based on Moblin by Erik Moqvist. Find the source code, third-party licenses and acknowledgements.',
+}
+
+
+def render_page(slug, title, body, description, *, indexable=True):
+    page_title = escape(title + ' · Poochcam')
+    description = escape(description, quote=True)
+    canonical = ORIGIN + '/' + (slug + '/' if slug else '')
+    metadata = (f'''<link rel="canonical" href="{canonical}">
+<meta property="og:type" content="website"><meta property="og:site_name" content="Poochcam">
+<meta property="og:title" content="{page_title}"><meta property="og:description" content="{description}">
+<meta property="og:url" content="{canonical}"><meta property="og:image" content="{ORIGIN}/assets/icon.png">
+<meta property="og:image:alt" content="Poochcam paw-print app icon">
+<meta name="twitter:card" content="summary">''' if indexable else '<meta name="robots" content="noindex">')
+    nav = ''.join(f'<a href="/{name + "/" if name else ""}"' +
+                  (' aria-current="page"' if name == slug else '') + f'>{label}</a>'
+                  for name, label in [('', 'Home'), ('setup', 'Setup'), ('support', 'Support'), ('privacy', 'Privacy'), ('credits', 'Credits')])
+    # Root-relative links also work when Cloudflare serves 404.html at a deep URL.
+    return f'''<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="{description}">
+<meta name="referrer" content="no-referrer"><title>{page_title}</title>
+{metadata}
+<link rel="icon" href="/assets/icon.png"><link rel="apple-touch-icon" href="/assets/icon.png"><link rel="stylesheet" href="/style.css"></head>
+<body><a class="skip" href="#main">Skip to content</a><header><a class="brand" href="/"><img src="/assets/icon.png" width="36" height="36" alt="">Poochcam</a><nav aria-label="Main navigation">{nav}</nav></header>
+<main id="main">{body}</main><footer><p>Poochcam · Based on <a href="https://github.com/eerimoq/moblin">Moblin</a>.</p><p>Preparing for a free App Store release.<br>Your own server is required.</p></footer></body></html>'''
 
 
 def build():
     for slug, (title, body) in PAGES.items():
-        prefix = '../' if slug else './'
-        nav = ''.join(f'<a href="{prefix}{name + "/" if name else ""}"'+
-                      (' aria-current="page"' if name == slug else '') + f'>{label}</a>'
-                      for name, label in [('', 'Home'), ('setup', 'Setup'), ('support', 'Support'), ('privacy', 'Privacy'), ('credits', 'Credits')])
-        html = f'''<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Poochcam: a simple portrait iPhone dog camera with audio and a self-hosted browser viewer.">
-<meta name="referrer" content="no-referrer"><title>{escape(title)} · Poochcam</title>
-<link rel="icon" href="{prefix}assets/icon.png"><link rel="stylesheet" href="{prefix}style.css"></head>
-<body><a class="skip" href="#main">Skip to content</a><header><a class="brand" href="{prefix}"><img src="{prefix}assets/icon.png" width="36" height="36" alt="">Poochcam</a><nav aria-label="Main navigation">{nav}</nav></header>
-<main id="main">{body}</main><footer><p>Poochcam · Based on <a href="https://github.com/eerimoq/moblin">Moblin</a>.</p><p>A free app for your own server.</p></footer></body></html>'''
         directory = SITE / slug
         directory.mkdir(parents=True, exist_ok=True)
-        (directory / 'index.html').write_text(html)
+        (directory / 'index.html').write_text(render_page(slug, title, body, DESCRIPTIONS[slug]), encoding='utf-8')
+    (SITE / '404.html').write_text(render_page(
+        '404', 'Page not found', '''
+<section class="prose"><p class="eyebrow">404 · Page not found</p>
+<h1>This page wandered off.</h1>
+<p class="lead">We couldn’t find that address. Let’s get you back home.</p>
+<a class="button" href="/">Back to Poochcam <span aria-hidden="true">↗</span></a>
+<p>Looking for help? Visit <a href="/setup/">Setup</a> or <a href="/support/">Support</a>.</p></section>''',
+        'This page could not be found. Return to Poochcam or find setup and support.', indexable=False), encoding='utf-8')
+    urls = '\n'.join(f'  <url><loc>{ORIGIN}/{slug + "/" if slug else ""}</loc></url>' for slug in PAGES)
+    (SITE / 'sitemap.xml').write_text(
+        '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
+        urls + '\n</urlset>\n', encoding='utf-8')
+    (SITE / 'robots.txt').write_text(f'User-agent: *\nAllow: /\n\nSitemap: {ORIGIN}/sitemap.xml\n', encoding='utf-8')
     (SITE / 'assets/notices.txt').write_text((ROOT / 'ios/Moblin/Poochcam/ThirdPartyNotices.txt').read_text())
-    print('Built five static website routes.')
+    print('Built five static website routes, a custom 404, robots.txt and sitemap.xml.')
 
 
 if __name__ == '__main__':
