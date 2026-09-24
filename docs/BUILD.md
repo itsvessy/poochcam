@@ -1,8 +1,12 @@
 # Build the iPhone app
 
-Open `ios/Moblin.xcodeproj` in Xcode 26 or later with its iOS SDK and Metal toolchain.
-The scheme remains **Moblin**; the product is **Poochcam**. The deployment target is
+Open `ios/Poochcam.xcodeproj` in Xcode 26 or later with its iOS SDK and Metal toolchain.
+The main target, scheme and product are **Poochcam**. The deployment target is
 iOS 16.4, iPhone only. Keep the package revisions in `Package.resolved` unchanged.
+
+If you previously opened `Moblin.xcodeproj`, close that Xcode window and open
+`Poochcam.xcodeproj`. The inherited source folder and internal Swift module retain
+their Moblin names; upstream notices and attribution are preserved.
 
 For signing, copy `ios/Config/User.xcconfig.example` to the ignored
 `ios/Config/User.xcconfig`. Set your personal `DEVELOPMENT_TEAM`. The intended App

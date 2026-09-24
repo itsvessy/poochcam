@@ -9,7 +9,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def generate(checkouts):
-    pins = json.loads((ROOT / 'ios/Moblin.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved').read_text())['pins']
+    pins = json.loads((ROOT / 'ios/Poochcam.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved').read_text())['pins']
     packages = {path.name.lower(): path for path in checkouts.iterdir() if path.is_dir()}
     sections = ['Poochcam — third-party notices\n\nBased on Moblin by Erik Moqvist. Independent project; not endorsed by Moblin.\n']
     for title, path in [('Moblin — MIT', ROOT / 'ios/LICENSE'),

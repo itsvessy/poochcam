@@ -14,10 +14,24 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "03ECDF452B8E4E5E00BD920E"
+               BuildableName = "Moblin.app"
+               BlueprintName = "MoblinWatch"
+               ReferencedContainer = "container:Poochcam.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "035E9E322A9A02D6009D4F5A"
                BuildableName = "Poochcam.app"
-               BlueprintName = "Moblin"
-               ReferencedContainer = "container:Moblin.xcodeproj">
+               BlueprintName = "Poochcam"
+               ReferencedContainer = "container:Poochcam.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -37,7 +51,7 @@
                BlueprintIdentifier = "03E649422E634D2800728501"
                BuildableName = "MoblinTests.xctest"
                BlueprintName = "MoblinTests"
-               ReferencedContainer = "container:Moblin.xcodeproj">
+               ReferencedContainer = "container:Poochcam.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -51,16 +65,15 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
-      enableGPUValidationMode = "1"
       allowLocationSimulation = "YES">
       <BuildableProductRunnable
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "035E9E322A9A02D6009D4F5A"
-            BuildableName = "Poochcam.app"
-            BlueprintName = "Moblin"
-            ReferencedContainer = "container:Moblin.xcodeproj">
+            BlueprintIdentifier = "03ECDF452B8E4E5E00BD920E"
+            BuildableName = "Moblin.app"
+            BlueprintName = "MoblinWatch"
+            ReferencedContainer = "container:Poochcam.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -74,10 +87,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "035E9E322A9A02D6009D4F5A"
-            BuildableName = "Poochcam.app"
-            BlueprintName = "Moblin"
-            ReferencedContainer = "container:Moblin.xcodeproj">
+            BlueprintIdentifier = "03ECDF452B8E4E5E00BD920E"
+            BuildableName = "Moblin.app"
+            BlueprintName = "MoblinWatch"
+            ReferencedContainer = "container:Poochcam.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
