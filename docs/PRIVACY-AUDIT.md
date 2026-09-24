@@ -73,6 +73,12 @@ package products from the dedicated release target, then inspect the built produ
 regenerate notices and recheck RTMP/RTMPS capture and reconnect. This has not yet been
 implemented; permission/source-provenance review is still required if they are retained.
 
+The planned removal, checkpoint branch, acceptance checks and restoration procedure
+are documented in [PROTOCOL-REMOVAL-PLAN.md](PROTOCOL-REMOVAL-PLAN.md). The checkpoint
+is `checkpoint/before-protocol-removal` at
+`e8c64905dda8b6b10ac6e16a3eb1e68421638d10`. Creating the checkpoint and plan does not
+remove dependencies or clear this distribution gate.
+
 The unused `Alerts.bundle/-100.gif` has been removed from the public source and
 release product, along with its gallery entry, because the upstream attribution
 did not establish redistribution permission. The private pre-publication history

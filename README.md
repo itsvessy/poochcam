@@ -13,6 +13,7 @@ The app is intended to be free; running your own server may cost money.
 - [Server setup and maintenance](docs/SERVER.md)
 - [Build the iPhone app](docs/BUILD.md)
 - [Privacy and data-flow audit](docs/PRIVACY-AUDIT.md)
+- [Protocol dependency removal plan and restore checkpoint](docs/PROTOCOL-REMOVAL-PLAN.md)
 - [Release checklist and rollback](docs/RELEASE.md)
 - [Upstream provenance](UPSTREAM.md)
 

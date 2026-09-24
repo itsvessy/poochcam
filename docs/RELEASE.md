@@ -8,6 +8,8 @@ handles website deployment, TestFlight and App Store submission.
 
 - Resolve the dependency licensing and native-binary provenance items in
   [PRIVACY-AUDIT.md](PRIVACY-AUDIT.md). A build passing does not clear these items.
+  The [protocol-removal plan](PROTOCOL-REMOVAL-PLAN.md) records the restore checkpoint,
+  scoped implementation, acceptance checks and rollback procedure.
 - Run the checks in [BUILD.md](BUILD.md), including the public-source scan.
 - Verify the Docker/Nginx RTMPS-to-HTTPS package with
   `python3 tests/integration_docker.py` on Linux with Docker, FFmpeg and OpenSSL.
