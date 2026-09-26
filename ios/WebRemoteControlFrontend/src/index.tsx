@@ -49,7 +49,7 @@ const filterNames = {
   blurFaces: "Blur faces",
   privacy: "Blur background",
   beauty: "Beauty",
-  moblinInMouth: "Moblin in mouth",
+  moblinInMouth: "Poochcam in mouth",
   cameraMan: "Camera man",
 };
 
@@ -769,7 +769,7 @@ function App() {
 
   return (
     <div class="max-w-3xl mx-auto space-y-2">
-      <Title title="Moblin Remote Control" />
+      <Title title="Poochcam Remote Control" />
       <Links />
       <ConnectingOverlay status={status} />
       <VideoPreview />

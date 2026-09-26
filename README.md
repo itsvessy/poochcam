@@ -26,4 +26,4 @@ under `site/` is static HTML prepared for Cloudflare Workers static-asset hostin
 poochcam.ca. The public source owner is **itsvessy/poochcam**.
 
 Poochcam is based on **Moblin by Erik Moqvist** and is an independent project.
-See [LICENSE](LICENSE) and [third-party notices](ios/Moblin/Poochcam/ThirdPartyNotices.txt).
+See [LICENSE](LICENSE) and [third-party notices](ios/Poochcam/Poochcam/ThirdPartyNotices.txt).

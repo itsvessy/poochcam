@@ -1,0 +1,88 @@
+import Foundation
+import UniformTypeIdentifiers
+
+extension URL {
+    var attributes: [FileAttributeKey: Any]? {
+        do {
+            return try FileManager.default.attributesOfItem(atPath: path)
+        } catch {
+            logger.info("file-system: Failed to get attributes for file \(self)")
+        }
+        return nil
+    }
+
+    var fileSize: UInt64 {
+        attributes?[.size] as? UInt64 ?? UInt64(0)
+    }
+
+    func remove() {
+        try? FileManager.default.removeItem(at: self)
+    }
+
+    func exists() -> Bool {
+        FileManager.default.fileExists(atPath: path())
+    }
+}
+
+extension FileManager {
+    func ids(directory: String) -> [UUID] {
+        var ids: [UUID] = []
+        for file in (try? contentsOfDirectory(atPath: directory)) ?? [] {
+            guard let id = UUID(uuidString: file) else {
+                continue
+            }
+            ids.append(id)
+        }
+        return ids
+    }
+
+    func idsBeforeDot(directory: String) -> [UUID] {
+        var ids: [UUID] = []
+        for file in (try? contentsOfDirectory(atPath: directory)) ?? [] {
+            let parts = file.components(separatedBy: ".")
+            guard parts.count > 1, let id = UUID(uuidString: parts[0]) else {
+                continue
+            }
+            ids.append(id)
+        }
+        return ids
+    }
+}
+
+func getAvailableDiskSpace() -> UInt64? {
+    #if POOCHCAM_APP
+    return nil
+    #else
+    guard let attributes = try? FileManager.default.attributesOfFileSystem(forPath: URL.homeDirectory.path())
+    else {
+        return nil
+    }
+    return attributes[.systemFreeSize] as? UInt64
+    #endif
+}
+
+func deleteTrash() {
+    let folders = [
+        URL.temporaryDirectory,
+        URL.documentsDirectory.appending(component: ".Trash"),
+    ]
+    for folder in folders {
+        guard let paths = try? FileManager.default.contentsOfDirectory(atPath: folder.path()) else {
+            continue
+        }
+        for path in paths {
+            try? FileManager.default.removeItem(at: folder.appending(component: path))
+        }
+    }
+}
+
+func createAndGetDirectory(name: String...) -> URL {
+    var directory = URL.documentsDirectory
+    for name in name {
+        directory = directory.appending(component: name)
+    }
+    try? FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
+    return directory
+}
+
+let poochcamSettingsFileType = UTType(exportedAs: "com.eerimoq.moblin.settings", conformingTo: .data)

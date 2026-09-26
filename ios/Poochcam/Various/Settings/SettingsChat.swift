@@ -1,0 +1,831 @@
+import Foundation
+import SwiftUI
+
+class SettingsChatFilter: Identifiable, Codable, ObservableObject {
+    var id = UUID()
+    @Published var enabled: Bool = false
+    @Published var user: String = ""
+    @Published var messageStart: String = ""
+    var messageStartWords: [String] = []
+    @Published var showOnScreen: Bool = false
+    @Published var textToSpeech: Bool = false
+    @Published var chatBot: Bool = false
+    @Published var poll: Bool = false
+    @Published var print: Bool = false
+
+    func isMatching(user: String?, segments: [ChatPostSegment]) -> Bool {
+        guard enabled else {
+            return false
+        }
+        if self.user.count > 0, user != self.user {
+            return false
+        }
+        var segmentsIterator = segments.makeIterator()
+        for (index, messageWord) in messageStartWords.enumerated() {
+            if let text = firstText(segmentsIterator: &segmentsIterator) {
+                if index == messageStartWords.count - 1 {
+                    if !text.starts(with: messageWord) {
+                        return false
+                    }
+                } else {
+                    if text != messageWord {
+                        return false
+                    }
+                }
+            } else {
+                return false
+            }
+        }
+        return true
+    }
+
+    func username() -> String {
+        if user.isEmpty {
+            String(localized: "-- Any --")
+        } else {
+            user
+        }
+    }
+
+    func message() -> String {
+        if messageStart.isEmpty {
+            String(localized: "-- Any --")
+        } else {
+            messageStart
+        }
+    }
+
+    private func firstText(segmentsIterator: inout IndexingIterator<[ChatPostSegment]>) -> String? {
+        while let segment = segmentsIterator.next() {
+            if let text = segment.text, !text.isEmpty {
+                return text
+            }
+        }
+        return nil
+    }
+
+    enum CodingKeys: CodingKey {
+        case id
+        case enabled
+        case value
+        case messageWords
+        case showOnScreen
+        case textToSpeech
+        case chatBot
+        case poll
+        case print
+    }
+
+    func encode(to encoder: any Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(.id, id)
+        try container.encode(.enabled, enabled)
+        try container.encode(.value, user)
+        try container.encode(.messageWords, messageStartWords)
+        try container.encode(.showOnScreen, showOnScreen)
+        try container.encode(.textToSpeech, textToSpeech)
+        try container.encode(.chatBot, chatBot)
+        try container.encode(.poll, poll)
+        try container.encode(.print, print)
+    }
+
+    init() {}
+
+    required init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = container.decode(.id, UUID.self, .init())
+        enabled = container.decode(.enabled, Bool.self, true)
+        user = container.decode(.value, String.self, "")
+        messageStartWords = container.decode(.messageWords, [String].self, [])
+        messageStart = messageStartWords.joined(separator: " ")
+        showOnScreen = container.decode(.showOnScreen, Bool.self, false)
+        textToSpeech = container.decode(.textToSpeech, Bool.self, false)
+        chatBot = container.decode(.chatBot, Bool.self, false)
+        poll = container.decode(.poll, Bool.self, false)
+        print = container.decode(.print, Bool.self, false)
+    }
+}
+
+class SettingsChatBotPermissionsCommand: Codable, ObservableObject, @unchecked Sendable {
+    @Published var moderatorsEnabled: Bool = true
+    @Published var subscribersEnabled: Bool = false
+    @Published var minimumSubscriberTier: Int = 1
+    @Published var othersEnabled: Bool = false
+    @Published var sendChatMessages: Bool = false
+    @Published var cooldown: Int?
+    var latestExecutionTime: ContinuousClock.Instant?
+
+    enum CodingKeys: CodingKey {
+        case moderatorsEnabled
+        case subscribersEnabled
+        case minimumSubscriberTier
+        case othersEnabled
+        case sendChatMessages
+        case cooldown
+    }
+
+    func encode(to encoder: any Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(.moderatorsEnabled, moderatorsEnabled)
+        try container.encode(.subscribersEnabled, subscribersEnabled)
+        try container.encode(.minimumSubscriberTier, minimumSubscriberTier)
+        try container.encode(.othersEnabled, othersEnabled)
+        try container.encode(.sendChatMessages, sendChatMessages)
+        try container.encode(.cooldown, cooldown)
+    }
+
+    init(moderatorsEnabled: Bool = true) {
+        self.moderatorsEnabled = moderatorsEnabled
+    }
+
+    required init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        moderatorsEnabled = container.decode(.moderatorsEnabled, Bool.self, true)
+        subscribersEnabled = container.decode(.subscribersEnabled, Bool.self, false)
+        minimumSubscriberTier = container.decode(.minimumSubscriberTier, Int.self, 1)
+        othersEnabled = container.decode(.othersEnabled, Bool.self, false)
+        sendChatMessages = container.decode(.sendChatMessages, Bool.self, false)
+        cooldown = container.decode(.cooldown, Int?.self, nil)
+    }
+}
+
+class SettingsChatBotPermissions: Codable {
+    var tts: SettingsChatBotPermissionsCommand = .init()
+    var fix: SettingsChatBotPermissionsCommand = .init()
+    var map: SettingsChatBotPermissionsCommand = .init()
+    var alert: SettingsChatBotPermissionsCommand = .init()
+    var fax: SettingsChatBotPermissionsCommand = .init()
+    var snapshot: SettingsChatBotPermissionsCommand = .init()
+    var filter: SettingsChatBotPermissionsCommand = .init()
+    var zoom: SettingsChatBotPermissionsCommand = .init()
+    var tesla: SettingsChatBotPermissionsCommand = .init()
+    var audio: SettingsChatBotPermissionsCommand = .init()
+    var reaction: SettingsChatBotPermissionsCommand = .init()
+    var scene: SettingsChatBotPermissionsCommand = .init(moderatorsEnabled: false)
+    var stream: SettingsChatBotPermissionsCommand = .init(moderatorsEnabled: false)
+    var widget: SettingsChatBotPermissionsCommand = .init()
+    var location: SettingsChatBotPermissionsCommand = .init()
+    var ai: SettingsChatBotPermissionsCommand = .init()
+    var twitch: SettingsChatBotPermissionsCommand = .init()
+    var gimbal: SettingsChatBotPermissionsCommand = .init()
+    var macro: SettingsChatBotPermissionsCommand = .init(moderatorsEnabled: false)
+    var send: SettingsChatBotPermissionsCommand = .init()
+    var music: SettingsChatBotPermissionsCommand = .init()
+    var migrated: Bool = false
+
+    enum CodingKeys: CodingKey {
+        case tts
+        case fix
+        case map
+        case alert
+        case fax
+        case snapshot
+        case filter
+        case zoom
+        case tesla
+        case audio
+        case reaction
+        case scene
+        case stream
+        case widget
+        case location
+        case ai
+        case twitch
+        case gimbal
+        case macro
+        case send
+        case music
+        case migrated
+    }
+
+    func encode(to encoder: any Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(.tts, tts)
+        try container.encode(.fix, fix)
+        try container.encode(.map, map)
+        try container.encode(.alert, alert)
+        try container.encode(.fax, fax)
+        try container.encode(.snapshot, snapshot)
+        try container.encode(.filter, filter)
+        try container.encode(.zoom, zoom)
+        try container.encode(.tesla, tesla)
+        try container.encode(.audio, audio)
+        try container.encode(.reaction, reaction)
+        try container.encode(.scene, scene)
+        try container.encode(.stream, stream)
+        try container.encode(.widget, widget)
+        try container.encode(.location, location)
+        try container.encode(.ai, ai)
+        try container.encode(.twitch, twitch)
+        try container.encode(.gimbal, gimbal)
+        try container.encode(.macro, macro)
+        try container.encode(.send, send)
+        try container.encode(.music, music)
+        try container.encode(.migrated, migrated)
+    }
+
+    init() {}
+
+    required init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        tts = container.decode(.tts, SettingsChatBotPermissionsCommand.self, .init())
+        fix = container.decode(.fix, SettingsChatBotPermissionsCommand.self, .init())
+        map = container.decode(.map, SettingsChatBotPermissionsCommand.self, .init())
+        alert = container.decode(.alert, SettingsChatBotPermissionsCommand.self, .init())
+        fax = container.decode(.fax, SettingsChatBotPermissionsCommand.self, .init())
+        snapshot = container.decode(.snapshot, SettingsChatBotPermissionsCommand.self, .init())
+        filter = container.decode(.filter, SettingsChatBotPermissionsCommand.self, .init())
+        zoom = container.decode(.zoom, SettingsChatBotPermissionsCommand.self, .init())
+        tesla = container.decode(.tesla, SettingsChatBotPermissionsCommand.self, .init())
+        audio = container.decode(.audio, SettingsChatBotPermissionsCommand.self, .init())
+        reaction = container.decode(.reaction, SettingsChatBotPermissionsCommand.self, .init())
+        scene = container.decode(.scene, SettingsChatBotPermissionsCommand.self, .init())
+        stream = container.decode(.stream, SettingsChatBotPermissionsCommand.self, .init())
+        widget = container.decode(.widget, SettingsChatBotPermissionsCommand.self, .init())
+        location = container.decode(.location, SettingsChatBotPermissionsCommand.self, .init())
+        ai = container.decode(.ai, SettingsChatBotPermissionsCommand.self, .init())
+        twitch = container.decode(.twitch, SettingsChatBotPermissionsCommand.self, .init())
+        gimbal = container.decode(.gimbal, SettingsChatBotPermissionsCommand.self, .init())
+        macro = container.decode(.macro,
+                                 SettingsChatBotPermissionsCommand.self,
+                                 .init(moderatorsEnabled: false))
+        send = container.decode(.send, SettingsChatBotPermissionsCommand.self, .init())
+        music = container.decode(.music, SettingsChatBotPermissionsCommand.self, .init())
+        migrated = container.decode(.migrated, Bool.self, false)
+        if !migrated {
+            scene.moderatorsEnabled = false
+            stream.moderatorsEnabled = false
+            migrated = true
+        }
+    }
+}
+
+class SettingsChatBotAlias: Codable, ObservableObject, Identifiable {
+    var id: UUID = .init()
+    @Published var alias: String = "!myalias"
+    @Published var replacement: String = "!poochcam"
+
+    enum CodingKeys: CodingKey {
+        case alias
+        case replacement
+    }
+
+    func encode(to encoder: any Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(.alias, alias)
+        try container.encode(.replacement, replacement)
+    }
+
+    init() {}
+
+    required init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        alias = container.decode(.alias, String.self, "")
+        replacement = container.decode(.replacement, String.self, "")
+    }
+}
+
+class SettingsChatPredefinedMessage: Codable, Identifiable, ObservableObject {
+    static let tagRed = "🌹"
+    static let tagGreen = "🐸"
+    static let tagBlue = "🐳"
+    static let tagYellow = "🐥"
+    static let tagOrange = "🦊"
+    var id: UUID = .init()
+    @Published var text: String = ""
+    @Published var blueTag: Bool = false
+    @Published var greenTag: Bool = false
+    @Published var yellowTag: Bool = false
+    @Published var orangeTag: Bool = false
+    @Published var redTag: Bool = false
+
+    enum CodingKeys: CodingKey {
+        case id
+        case text
+        case blueTag
+        case greenTag
+        case yellowTag
+        case orangeTag
+        case redTag
+    }
+
+    func encode(to encoder: any Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(.id, id)
+        try container.encode(.text, text)
+        try container.encode(.blueTag, blueTag)
+        try container.encode(.greenTag, greenTag)
+        try container.encode(.yellowTag, yellowTag)
+        try container.encode(.orangeTag, orangeTag)
+        try container.encode(.redTag, redTag)
+    }
+
+    init() {}
+
+    required init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = container.decode(.id, UUID.self, .init())
+        text = container.decode(.text, String.self, "")
+        blueTag = container.decode(.blueTag, Bool.self, false)
+        greenTag = container.decode(.greenTag, Bool.self, false)
+        yellowTag = container.decode(.yellowTag, Bool.self, false)
+        orangeTag = container.decode(.orangeTag, Bool.self, false)
+        redTag = container.decode(.redTag, Bool.self, false)
+    }
+
+    func tagsString() -> String {
+        var tags = ""
+        if blueTag {
+            tags += Self.tagBlue
+        }
+        if greenTag {
+            tags += Self.tagGreen
+        }
+        if yellowTag {
+            tags += Self.tagYellow
+        }
+        if orangeTag {
+            tags += Self.tagOrange
+        }
+        if redTag {
+            tags += Self.tagRed
+        }
+        return tags
+    }
+}
+
+class SettingsChatPredefinedMessagesFilter: Codable, ObservableObject {
+    @Published var redTag: Bool = false
+    @Published var greenTag: Bool = false
+    @Published var blueTag: Bool = false
+    @Published var yellowTag: Bool = false
+    @Published var orangeTag: Bool = false
+
+    enum CodingKeys: CodingKey {
+        case redTag
+        case greenTag
+        case blueTag
+        case yellowTag
+        case orangeTag
+    }
+
+    func encode(to encoder: any Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(.redTag, redTag)
+        try container.encode(.greenTag, greenTag)
+        try container.encode(.blueTag, blueTag)
+        try container.encode(.yellowTag, yellowTag)
+        try container.encode(.orangeTag, orangeTag)
+    }
+
+    init() {}
+
+    required init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        redTag = container.decode(.redTag, Bool.self, false)
+        greenTag = container.decode(.greenTag, Bool.self, false)
+        blueTag = container.decode(.blueTag, Bool.self, false)
+        yellowTag = container.decode(.yellowTag, Bool.self, false)
+        orangeTag = container.decode(.orangeTag, Bool.self, false)
+    }
+
+    func isEnabled() -> Bool {
+        redTag || greenTag || blueTag || yellowTag || orangeTag
+    }
+}
+
+class SettingsChatNickname: Codable, Identifiable, ObservableObject {
+    var id: UUID = .init()
+    @Published var user: String = ""
+    @Published var nickname: String = ""
+
+    enum CodingKeys: CodingKey {
+        case id
+        case user
+        case nickname
+    }
+
+    func encode(to encoder: any Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(.id, id)
+        try container.encode(.user, user)
+        try container.encode(.nickname, nickname)
+    }
+
+    init() {}
+
+    required init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = container.decode(.id, UUID.self, .init())
+        user = container.decode(.user, String.self, "")
+        nickname = container.decode(.nickname, String.self, "")
+    }
+}
+
+class SettingsChatNicknames: Codable, ObservableObject {
+    @Published var nicknames: [SettingsChatNickname] = []
+
+    enum CodingKeys: CodingKey {
+        case nicknames
+    }
+
+    func encode(to encoder: any Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(.nicknames, nicknames)
+    }
+
+    init() {}
+
+    required init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        nicknames = container.decode(.nicknames, [SettingsChatNickname].self, [])
+    }
+
+    func getNickname(user: String) -> String? {
+        nicknames.first(where: { $0.user == user })?.nickname
+    }
+}
+
+class SettingsOpenAi: Codable, ObservableObject {
+    private static let defaultPersonality = "You give fast and short answers."
+    @Published var baseUrl: String = "https://generativelanguage.googleapis.com/v1beta/openai"
+    @Published var apiKey: String = ""
+    @Published var model: String = "gemini-2.0-flash"
+    @Published var personality: String
+
+    init(personality: String? = nil) {
+        self.personality = personality ?? SettingsOpenAi.defaultPersonality
+    }
+
+    enum CodingKeys: CodingKey {
+        case baseUrl
+        case apiKey
+        case model
+        case role
+    }
+
+    func encode(to encoder: any Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(.baseUrl, baseUrl)
+        try container.encode(.apiKey, apiKey)
+        try container.encode(.model, model)
+        try container.encode(.role, personality)
+    }
+
+    required init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        baseUrl = container.decode(
+            .baseUrl,
+            String.self,
+            "https://generativelanguage.googleapis.com/v1beta/openai"
+        )
+        apiKey = container.decode(.apiKey, String.self, "")
+        model = container.decode(.model, String.self, "gemini-2.0-flash")
+        personality = container.decode(.role, String.self, SettingsOpenAi.defaultPersonality)
+    }
+
+    func clone() -> SettingsOpenAi {
+        let new = SettingsOpenAi()
+        new.baseUrl = baseUrl
+        new.apiKey = apiKey
+        new.model = model
+        new.personality = personality
+        return new
+    }
+
+    func isConfigured() -> Bool {
+        if isValidHttpUrl(url: baseUrl) != nil {
+            return false
+        }
+        if apiKey.isEmpty {
+            return false
+        }
+        if model.isEmpty {
+            return false
+        }
+        if personality.isEmpty {
+            return false
+        }
+        return true
+    }
+}
+
+enum SettingsChatDisplayStyle: String, Codable, CaseIterable {
+    case internationalName
+    case internationalNameAndUsername
+    case username
+
+    func toString() -> String {
+        switch self {
+        case .internationalName:
+            String(localized: "International name")
+        case .internationalNameAndUsername:
+            String(localized: "International name (Username)")
+        case .username:
+            String(localized: "Username")
+        }
+    }
+}
+
+enum SettingsVoiceType: String, Codable, CaseIterable {
+    case apple
+    case ttsMonster
+
+    init(from decoder: any Decoder) throws {
+        self = try SettingsVoiceType(rawValue: decoder.singleValueContainer()
+            .decode(RawValue.self)) ?? .apple
+    }
+}
+
+class SettingsVoiceApple: Codable {
+    var voice: String = ""
+}
+
+class SettingsVoiceTtsMonster: Codable {
+    var name: String = ""
+    var voiceId: String = ""
+}
+
+class SettingsVoice: Codable, @unchecked Sendable {
+    var type: SettingsVoiceType = .apple
+    var apple: SettingsVoiceApple = .init()
+    var ttsMonster: SettingsVoiceTtsMonster = .init()
+}
+
+class SettingsChat: Codable, ObservableObject {
+    @Published var fontSize: Float = 19.0
+    var usernameColor: RgbColor = .init(red: 255, green: 163, blue: 0)
+    @Published var usernameColorColor: Color = RgbColor(red: 255, green: 163, blue: 0).color()
+    var messageColor: RgbColor = .init(red: 255, green: 255, blue: 255)
+    @Published var messageColorColor: Color = RgbColor(red: 255, green: 255, blue: 255).color()
+    var backgroundColor: RgbColor = .init(red: 0, green: 0, blue: 0)
+    @Published var backgroundColorColor: Color = RgbColor(red: 0, green: 0, blue: 0).color()
+    @Published var backgroundColorEnabled: Bool = false
+    var shadowColor: RgbColor = .init(red: 0, green: 0, blue: 0)
+    @Published var shadowColorColor: Color = RgbColor(red: 0, green: 0, blue: 0).color()
+    @Published var shadowColorEnabled: Bool = true
+    @Published var boldUsername: Bool = true
+    @Published var boldMessage: Bool = true
+    @Published var animatedEmotes: Bool = false
+    var timestampColor: RgbColor = .init(red: 180, green: 180, blue: 180)
+    @Published var timestampColorColor: Color = RgbColor(red: 180, green: 180, blue: 180).color()
+    @Published var timestampColorEnabled: Bool = false
+    @Published var height: Double = 0.7
+    @Published var width: Double = 1.0
+    @Published var maximumAge: Int = 30
+    @Published var maximumAgeEnabled: Bool = false
+    @Published var meInUsernameColor: Bool = true
+    @Published var enabled: Bool = true
+    @Published var filters: [SettingsChatFilter] = []
+    var textToSpeechEnabled: Bool = false
+    @Published var textToSpeechDefaultLanguage: String?
+    @Published var textToSpeechDetectLanguagePerMessage: Bool = false
+    @Published var textToSpeechSayUsername: Bool = true
+    @Published var textToSpeechRate: Float = 0.4
+    @Published var textToSpeechSayVolume: Float = 0.6
+    @Published var textToSpeechLanguageVoices: [String: SettingsVoice] = .init()
+    @Published var textToSpeechSubscribersOnly: Bool = false
+    @Published var textToSpeechFilter: Bool = true
+    @Published var textToSpeechFilterMentions: Bool = true
+    @Published var ttsMonster: SettingsTtsMonster = .init()
+    @Published var mirrored: Bool = false
+    @Published var botEnabled: Bool = false
+    var botCommandPermissions: SettingsChatBotPermissions = .init()
+    var botSendLowBatteryWarning: Bool = false
+    var botCommandAi: SettingsOpenAi = .init()
+    @Published var badges: Bool = true
+    var showFirstTimeChatterMessage: Bool = true
+    var showNewFollowerMessage: Bool = true
+    @Published var bottomPoints: Double = 80
+    @Published var newMessagesAtTop: Bool = false
+    @Published var textToSpeechPauseBetweenMessages: Double = 1.0
+    @Published var showDeletedMessages: Bool = false
+    @Published var aliases: [SettingsChatBotAlias] = []
+    @Published var predefinedMessages: [SettingsChatPredefinedMessage] = []
+    @Published var predefinedMessagesFilter: SettingsChatPredefinedMessagesFilter = .init()
+    @Published var nicknames: SettingsChatNicknames = .init()
+    @Published var displayStyle: SettingsChatDisplayStyle = .internationalNameAndUsername
+    @Published var background: Bool = false
+    @Published var sharedChatIcons: Bool = true
+
+    enum CodingKeys: CodingKey {
+        case fontSize
+        case usernameColor
+        case messageColor
+        case backgroundColor
+        case backgroundColorEnabled
+        case shadowColor
+        case shadowColorEnabled
+        case boldUsername
+        case boldMessage
+        case animatedEmotes
+        case timestampColor
+        case timestampColorEnabled
+        case height
+        case width
+        case maximumAge
+        case maximumAgeEnabled
+        case meInUsernameColor
+        case enabled
+        case usernamesToIgnore
+        case textToSpeechEnabled
+        case textToSpeechDefaultLanguage
+        case textToSpeechDetectLanguagePerMessage
+        case textToSpeechSayUsername
+        case textToSpeechRate
+        case textToSpeechSayVolume
+        case textToSpeechLanguageVoices
+        case textToSpeechSubscribersOnly
+        case textToSpeechFilter
+        case textToSpeechFilterMentions
+        case ttsMonster
+        case mirrored
+        case botEnabled
+        case botCommandPermissions
+        case botSendLowBatteryWarning
+        case botCommandAi
+        case badges
+        case showFirstTimeChatterMessage
+        case showNewFollowerMessage
+        case bottomPoints
+        case newMessagesAtTop
+        case textToSpeechPauseBetweenMessages
+        case showDeletedMessages
+        case aliases
+        case predefinedMessages
+        case predefinedMessagesFilter
+        case sendMessagesTo
+        case nicknames
+        case displayStyle
+        case background
+        case sharedChatIcons
+    }
+
+    func encode(to encoder: any Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(.fontSize, fontSize)
+        try container.encode(.usernameColor, usernameColor)
+        try container.encode(.messageColor, messageColor)
+        try container.encode(.backgroundColor, backgroundColor)
+        try container.encode(.backgroundColorEnabled, backgroundColorEnabled)
+        try container.encode(.shadowColor, shadowColor)
+        try container.encode(.shadowColorEnabled, shadowColorEnabled)
+        try container.encode(.boldUsername, boldUsername)
+        try container.encode(.boldMessage, boldMessage)
+        try container.encode(.animatedEmotes, animatedEmotes)
+        try container.encode(.timestampColor, timestampColor)
+        try container.encode(.timestampColorEnabled, timestampColorEnabled)
+        try container.encode(.height, height)
+        try container.encode(.width, width)
+        try container.encode(.maximumAge, maximumAge)
+        try container.encode(.maximumAgeEnabled, maximumAgeEnabled)
+        try container.encode(.meInUsernameColor, meInUsernameColor)
+        try container.encode(.enabled, enabled)
+        try container.encode(.usernamesToIgnore, filters)
+        try container.encode(.textToSpeechEnabled, textToSpeechEnabled)
+        try container.encode(.textToSpeechDefaultLanguage, textToSpeechDefaultLanguage)
+        try container.encode(.textToSpeechDetectLanguagePerMessage, textToSpeechDetectLanguagePerMessage)
+        try container.encode(.textToSpeechSayUsername, textToSpeechSayUsername)
+        try container.encode(.textToSpeechRate, textToSpeechRate)
+        try container.encode(.textToSpeechSayVolume, textToSpeechSayVolume)
+        try container.encode(.textToSpeechLanguageVoices, textToSpeechLanguageVoices)
+        try container.encode(.textToSpeechSubscribersOnly, textToSpeechSubscribersOnly)
+        try container.encode(.textToSpeechFilter, textToSpeechFilter)
+        try container.encode(.textToSpeechFilterMentions, textToSpeechFilterMentions)
+        try container.encode(.ttsMonster, ttsMonster)
+        try container.encode(.mirrored, mirrored)
+        try container.encode(.botEnabled, botEnabled)
+        try container.encode(.botCommandPermissions, botCommandPermissions)
+        try container.encode(.botSendLowBatteryWarning, botSendLowBatteryWarning)
+        try container.encode(.botCommandAi, botCommandAi)
+        try container.encode(.badges, badges)
+        try container.encode(.showFirstTimeChatterMessage, showFirstTimeChatterMessage)
+        try container.encode(.showNewFollowerMessage, showNewFollowerMessage)
+        try container.encode(.bottomPoints, bottomPoints)
+        try container.encode(.newMessagesAtTop, newMessagesAtTop)
+        try container.encode(.textToSpeechPauseBetweenMessages, textToSpeechPauseBetweenMessages)
+        try container.encode(.showDeletedMessages, showDeletedMessages)
+        try container.encode(.aliases, aliases)
+        try container.encode(.predefinedMessages, predefinedMessages)
+        try container.encode(.predefinedMessagesFilter, predefinedMessagesFilter)
+        try container.encode(.nicknames, nicknames)
+        try container.encode(.displayStyle, displayStyle)
+        try container.encode(.background, background)
+        try container.encode(.sharedChatIcons, sharedChatIcons)
+    }
+
+    init() {}
+
+    required init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        fontSize = container.decode(.fontSize, Float.self, 19.0)
+        usernameColor = container.decode(.usernameColor, RgbColor.self, .init(red: 255, green: 163, blue: 0))
+        usernameColorColor = usernameColor.color()
+        messageColor = container.decode(.messageColor, RgbColor.self, .init(red: 255, green: 255, blue: 255))
+        messageColorColor = messageColor.color()
+        backgroundColor = container.decode(.backgroundColor, RgbColor.self, .init(red: 0, green: 0, blue: 0))
+        backgroundColorColor = backgroundColor.color()
+        backgroundColorEnabled = container.decode(.backgroundColorEnabled, Bool.self, false)
+        shadowColor = container.decode(.shadowColor, RgbColor.self, .init(red: 0, green: 0, blue: 0))
+        shadowColorColor = shadowColor.color()
+        shadowColorEnabled = container.decode(.shadowColorEnabled, Bool.self, true)
+        boldUsername = container.decode(.boldUsername, Bool.self, true)
+        boldMessage = container.decode(.boldMessage, Bool.self, true)
+        animatedEmotes = container.decode(.animatedEmotes, Bool.self, false)
+        timestampColor = container.decode(
+            .timestampColor,
+            RgbColor.self,
+            .init(red: 180, green: 180, blue: 180)
+        )
+        timestampColorColor = timestampColor.color()
+        timestampColorEnabled = container.decode(.timestampColorEnabled, Bool.self, false)
+        height = container.decode(.height, Double.self, 0.7)
+        width = container.decode(.width, Double.self, 1.0)
+        maximumAge = container.decode(.maximumAge, Int.self, 30)
+        maximumAgeEnabled = container.decode(.maximumAgeEnabled, Bool.self, false)
+        meInUsernameColor = container.decode(.meInUsernameColor, Bool.self, true)
+        enabled = container.decode(.enabled, Bool.self, true)
+        filters = container.decode(.usernamesToIgnore, [SettingsChatFilter].self, [])
+        textToSpeechEnabled = container.decode(.textToSpeechEnabled, Bool.self, false)
+        textToSpeechDefaultLanguage = container.decode(.textToSpeechDefaultLanguage, String?.self, nil)
+        textToSpeechDetectLanguagePerMessage = container.decode(
+            .textToSpeechDetectLanguagePerMessage,
+            Bool.self,
+            false
+        )
+        textToSpeechSayUsername = container.decode(.textToSpeechSayUsername, Bool.self, true)
+        textToSpeechRate = container.decode(.textToSpeechRate, Float.self, 0.4)
+        textToSpeechSayVolume = container.decode(.textToSpeechSayVolume, Float.self, 0.6)
+        textToSpeechLanguageVoices = container.decode(.textToSpeechLanguageVoices,
+                                                      [String: SettingsVoice].self,
+                                                      .init())
+        for (languageCode, voice) in container.decode(
+            .textToSpeechLanguageVoices,
+            [String: String].self,
+            .init()
+        ) {
+            let settingsVoice = SettingsVoice()
+            settingsVoice.apple.voice = voice
+            textToSpeechLanguageVoices[languageCode] = settingsVoice
+        }
+        textToSpeechSubscribersOnly = container.decode(.textToSpeechSubscribersOnly, Bool.self, false)
+        textToSpeechFilter = container.decode(.textToSpeechFilter, Bool.self, true)
+        textToSpeechFilterMentions = container.decode(.textToSpeechFilterMentions, Bool.self, true)
+        ttsMonster = container.decode(.ttsMonster, SettingsTtsMonster.self, .init())
+        mirrored = container.decode(.mirrored, Bool.self, false)
+        botEnabled = container.decode(.botEnabled, Bool.self, false)
+        botCommandPermissions = container.decode(
+            .botCommandPermissions,
+            SettingsChatBotPermissions.self,
+            .init()
+        )
+        botSendLowBatteryWarning = container.decode(.botSendLowBatteryWarning, Bool.self, false)
+        botCommandAi = container.decode(.botCommandAi, SettingsOpenAi.self, .init())
+        badges = container.decode(.badges, Bool.self, true)
+        showFirstTimeChatterMessage = container.decode(.showFirstTimeChatterMessage, Bool.self, true)
+        showNewFollowerMessage = container.decode(.showNewFollowerMessage, Bool.self, true)
+        bottomPoints = container.decode(.bottomPoints, Double.self, 80)
+        newMessagesAtTop = container.decode(.newMessagesAtTop, Bool.self, false)
+        textToSpeechPauseBetweenMessages = container.decode(
+            .textToSpeechPauseBetweenMessages,
+            Double.self,
+            1.0
+        )
+        showDeletedMessages = container.decode(.showDeletedMessages, Bool.self, false)
+        aliases = container.decode(.aliases, [SettingsChatBotAlias].self, [])
+        predefinedMessages = container.decode(.predefinedMessages, [SettingsChatPredefinedMessage].self, [])
+        predefinedMessagesFilter = container.decode(
+            .predefinedMessagesFilter,
+            SettingsChatPredefinedMessagesFilter.self,
+            .init()
+        )
+        nicknames = container.decode(.nicknames, SettingsChatNicknames.self, .init())
+        displayStyle = container.decode(.displayStyle, SettingsChatDisplayStyle.self, .internationalName)
+        background = container.decode(.background, Bool.self, false)
+        sharedChatIcons = container.decode(.sharedChatIcons, Bool.self, true)
+    }
+
+    func getRotation() -> Double {
+        if newMessagesAtTop {
+            0.0
+        } else {
+            180.0
+        }
+    }
+
+    func getScaleX() -> Double {
+        if newMessagesAtTop {
+            1.0
+        } else {
+            -1.0
+        }
+    }
+
+    func isMirrored() -> CGFloat {
+        if mirrored {
+            -1
+        } else {
+            1
+        }
+    }
+}

@@ -109,4 +109,5 @@ FfmpegTestStream.wav
 tests/ltc.wav
 *~
 tests/*.moblinSettings
+tests/*.poochcamSettings
 tests/cache/

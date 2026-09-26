@@ -197,7 +197,7 @@
 		03A0001F2E00000000000001 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Shared/MoblinLiveActivity.swift,
+				Shared/PoochcamLiveActivity.swift,
 			);
 			target = 035E9E322A9A02D6009D4F5A /* Poochcam */;
 		};
@@ -219,13 +219,13 @@
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		030AC5AF2F4988A000496F6F /* Config */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (030AC5B02F4988A600496F6F /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 030AC5B12F4988A600496F6F /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 030AC5B22F4988A600496F6F /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Config; sourceTree = "<group>"; };
-		037D9C902E38AC1600C0AF9A /* Poochcam */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (037D9E9F2E38AC1600C0AF9A /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); name = Poochcam; path = Moblin; sourceTree = "<group>"; };
+		037D9C902E38AC1600C0AF9A /* Poochcam */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (037D9E9F2E38AC1600C0AF9A /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); name = Poochcam; path = Poochcam; sourceTree = "<group>"; };
 		037D9EAC2E38AC1B00C0AF9A /* Common */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (037D9ECB2E38AC1B00C0AF9A /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 03CBFBF12F0063CF0001864A /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 03298F0B2F991AD6009E4D0C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 037D9ECC2E38AC1B00C0AF9A /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Common; sourceTree = "<group>"; };
-		037D9EE42E38AC2000C0AF9A /* Poochcam Watch */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (037D9EF52E38AC2000C0AF9A /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 037D9EF62E38AC2000C0AF9A /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); name = "Poochcam Watch"; path = "Moblin Watch"; sourceTree = "<group>"; };
-		037D9EFC2E38AC2300C0AF9A /* Poochcam Widget */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (037D9F022E38AC2300C0AF9A /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); name = "Poochcam Widget"; path = "Moblin Widget"; sourceTree = "<group>"; };
-		037D9F0C2E38AC2600C0AF9A /* Poochcam Screen Recording */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (037D9F162E38AC2700C0AF9A /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 037D9F172E38AC2700C0AF9A /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); name = "Poochcam Screen Recording"; path = "Moblin Screen Recording"; sourceTree = "<group>"; };
-		03AA000A000000000000AA02 /* Poochcam Live Activity */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (03A0001F2E00000000000001 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 03AA000B000000000000AA02 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); name = "Poochcam Live Activity"; path = "Moblin Live Activity"; sourceTree = "<group>"; };
-		03E649442E634D2800728501 /* PoochcamTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); name = PoochcamTests; path = MoblinTests; sourceTree = "<group>"; };
+		037D9EE42E38AC2000C0AF9A /* Poochcam Watch */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (037D9EF52E38AC2000C0AF9A /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 037D9EF62E38AC2000C0AF9A /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); name = "Poochcam Watch"; path = "Poochcam Watch"; sourceTree = "<group>"; };
+		037D9EFC2E38AC2300C0AF9A /* Poochcam Widget */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (037D9F022E38AC2300C0AF9A /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); name = "Poochcam Widget"; path = "Poochcam Widget"; sourceTree = "<group>"; };
+		037D9F0C2E38AC2600C0AF9A /* Poochcam Screen Recording */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (037D9F162E38AC2700C0AF9A /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 037D9F172E38AC2700C0AF9A /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); name = "Poochcam Screen Recording"; path = "Poochcam Screen Recording"; sourceTree = "<group>"; };
+		03AA000A000000000000AA02 /* Poochcam Live Activity */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (03A0001F2E00000000000001 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 03AA000B000000000000AA02 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); name = "Poochcam Live Activity"; path = "Poochcam Live Activity"; sourceTree = "<group>"; };
+		03E649442E634D2800728501 /* PoochcamTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); name = PoochcamTests; path = PoochcamTests; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -720,7 +720,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Moblin Screen Recording/Info.plist";
+				INFOPLIST_FILE = "Poochcam Screen Recording/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Poochcam;
 				INFOPLIST_KEY_NSCameraUsageDescription = Yes;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -755,7 +755,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Moblin Screen Recording/Info.plist";
+				INFOPLIST_FILE = "Poochcam Screen Recording/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Poochcam;
 				INFOPLIST_KEY_NSCameraUsageDescription = Yes;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -939,7 +939,7 @@
 				ENABLE_RESOURCE_ACCESS_USB = YES;
 				ENABLE_USER_SELECTED_FILES = readwrite;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Moblin/Info.plist;
+				INFOPLIST_FILE = Poochcam/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Poochcam;
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.video";
@@ -997,7 +997,7 @@
 				ENABLE_RESOURCE_ACCESS_USB = YES;
 				ENABLE_USER_SELECTED_FILES = readwrite;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Moblin/Info.plist;
+				INFOPLIST_FILE = Poochcam/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Poochcam;
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.video";
@@ -1041,7 +1041,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Moblin Widget/Info.plist";
+				INFOPLIST_FILE = "Poochcam Widget/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Poochcam Widget";
 				INFOPLIST_KEY_NSCameraUsageDescription = Yes;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -1077,7 +1077,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Moblin Widget/Info.plist";
+				INFOPLIST_FILE = "Poochcam Widget/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Poochcam Widget";
 				INFOPLIST_KEY_NSCameraUsageDescription = Yes;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -1111,7 +1111,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Moblin Live Activity/Info.plist";
+				INFOPLIST_FILE = "Poochcam Live Activity/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Poochcam Live Activity";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
@@ -1143,7 +1143,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Moblin Live Activity/Info.plist";
+				INFOPLIST_FILE = "Poochcam Live Activity/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Poochcam Live Activity";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
@@ -1213,16 +1213,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"Moblin Watch/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Poochcam Watch/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Moblin Watch/Info.plist";
+				INFOPLIST_FILE = "Poochcam Watch/Info.plist";
 				INFOPLIST_KEY_NSCameraUsageDescription = Yes;
-				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "Moblin can show your heart rate on stream.";
-				INFOPLIST_KEY_NSHealthShareUsageDescription = "Moblin can show your heart rate on stream.";
-				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Moblin can show your heart rate on stream.";
+				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "Poochcam can show your heart rate on stream.";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Poochcam can show your heart rate on stream.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Poochcam can show your heart rate on stream.";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = Yes;
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = Yes;
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = Yes;
@@ -1252,16 +1252,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"Moblin Watch/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Poochcam Watch/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Moblin Watch/Info.plist";
+				INFOPLIST_FILE = "Poochcam Watch/Info.plist";
 				INFOPLIST_KEY_NSCameraUsageDescription = Yes;
-				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "Moblin can show your heart rate on stream.";
-				INFOPLIST_KEY_NSHealthShareUsageDescription = "Moblin can show your heart rate on stream.";
-				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Moblin can show your heart rate on stream.";
+				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "Poochcam can show your heart rate on stream.";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Poochcam can show your heart rate on stream.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Poochcam can show your heart rate on stream.";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = Yes;
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = Yes;
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = Yes;

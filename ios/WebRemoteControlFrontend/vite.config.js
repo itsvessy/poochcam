@@ -11,7 +11,7 @@ export default defineConfig({
   plugins: [solidPlugin(), tailwindcss()],
   publicDir: false,
   build: {
-    outDir: resolve(__dirname, "../Moblin/RemoteControl/Web"),
+    outDir: resolve(__dirname, "../Poochcam/RemoteControl/Web"),
     emptyOutDir: false,
     rollupOptions: {
       input: {

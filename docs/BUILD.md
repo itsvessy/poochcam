@@ -5,17 +5,19 @@ The main target, scheme and product are **Poochcam**. The deployment target is
 iOS 16.4, iPhone only. Keep the package revisions in `Package.resolved` unchanged.
 
 If you previously opened `Moblin.xcodeproj`, close that Xcode window and open
-`Poochcam.xcodeproj`. The inherited source folder and internal Swift module retain
-their Moblin names; upstream notices and attribution are preserved.
+`Poochcam.xcodeproj`. The main source folder is `ios/Poochcam` and its Swift module
+is `Poochcam`; upstream notices and attribution are preserved.
 
 The inherited Watch, Widget, Live Activity, Screen Recording and Tests targets
 also use Poochcam names in Xcode, including the shared **Poochcam Watch** scheme.
 These auxiliary targets are retained upstream code, not supported features of
 the dedicated iPhone release; the main Poochcam build does not embed them. Select
-**Poochcam** to build the camera app. The auxiliary configurations explicitly keep
-their original Swift module names and bundle identifiers. Source filenames and
-license credits can therefore still contain Moblin. Package schemes such as
-AlertToast and SwiftCube keep their library names.
+**Poochcam** to build the camera app. Auxiliary source folders, app entrypoints and
+Swift modules also use Poochcam names. License credits still identify Moblin.
+Package schemes such as AlertToast and SwiftCube keep their library names.
+Bundle identifiers are unchanged. Existing storage keys and protocol identifiers
+retain their original values for compatibility; the Moblink protocol name is unchanged.
+See [BRANDING.md](BRANDING.md) for the retained names and their purposes.
 
 For signing, copy `ios/Config/User.xcconfig.example` to the ignored
 `ios/Config/User.xcconfig`. Set your personal `DEVELOPMENT_TEAM`. The intended App
@@ -72,18 +74,18 @@ The remaining local checks are:
 python3 -m unittest discover -s tests -p 'test_*.py'
 node --test tests/*.test.mjs
 mkdir -p artifacts
-swiftc -module-cache-path artifacts/swift-module-cache ios/Moblin/Poochcam/PoochcamConfiguration.swift tests/ConfigurationTests.swift -o artifacts/configuration-tests
+swiftc -module-cache-path artifacts/swift-module-cache ios/Poochcam/Poochcam/PoochcamConfiguration.swift tests/ConfigurationTests.swift -o artifacts/configuration-tests
 artifacts/configuration-tests
 python3 tools/check_public.py
 ```
 
 The focused configuration checks run on macOS without the full app. The inherited
-Moblin test target expects Mac Catalyst, which the dedicated iPhone target disables;
+PoochcamTests target expects Mac Catalyst, which the dedicated iPhone target disables;
 it is not the release test suite. Follow the physical-device checklist separately.
 
 ## App icon
 
-The editable app icon is `ios/Moblin/PoochcamIcon.icon`. Open it in Icon Composer;
+The editable app icon is `ios/Poochcam/PoochcamIcon.icon`. Open it in Icon Composer;
 the seven SVG layers and `icon.json` are the production source. Preserve front-to-back
 layer ordering. The app-icon build setting is `PoochcamIcon`.
 

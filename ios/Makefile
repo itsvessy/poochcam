@@ -1,7 +1,7 @@
 SWIFTFORMAT_ARGS = \
 	--maxwidth 110 \
 	--swiftversion 5.9 \
-	--exclude Moblin/Integrations/Tesla/Protobuf \
+	--exclude Poochcam/Integrations/Tesla/Protobuf \
 	--disable docComments \
 	--ifdef no-indent
 SWIFTLINT_ARGS = --strict --quiet
@@ -14,7 +14,7 @@ RUFF_FORMAT_ARGS = \
 	--line-length 110 \
 	$(PYTHON_DIRS)
 PERIPHERY_ARGS = \
-	--index-exclude "Moblin/Integrations/Tesla/Protobuf/*" \
+	--index-exclude "Poochcam/Integrations/Tesla/Protobuf/*" \
 	--disable-update-check
 CODESPELL_ARGS = \
 	--skip "*.xcstrings,libsrt.xcframework,VoicesView.swift,TextAlignerSuite.swift,Web,node_modules,package-lock.json,*.log" \
@@ -56,12 +56,12 @@ RUFF_CHECK_ARGS = \
 	$(PYTHON_DIRS)
 
 CODE_DIRS += "Common"
-CODE_DIRS += "Moblin"
-CODE_DIRS += "Moblin Watch"
-CODE_DIRS += "Moblin Widget"
-CODE_DIRS += "Moblin Live Activity"
-CODE_DIRS += "Moblin Screen Recording"
-CODE_DIRS += "MoblinTests"
+CODE_DIRS += "Poochcam"
+CODE_DIRS += "Poochcam Watch"
+CODE_DIRS += "Poochcam Widget"
+CODE_DIRS += "Poochcam Live Activity"
+CODE_DIRS += "Poochcam Screen Recording"
+CODE_DIRS += "PoochcamTests"
 CODE_DIRS += "WebRemoteControlFrontend"
 
 TEST_MAKE_ARGS = -C tests TEST_ARGS="$(TEST_ARGS)"
@@ -118,7 +118,7 @@ machine-translate:
 	python utils/translate.py Common/Localizable.xcstrings
 
 pack-exported-localizations:
-	cd Moblin\ Localizations && \
+	cd Poochcam\ Localizations && \
 	for f in * ; do \
 	    python ../utils/xliff.py $$f/Localized\ Contents/*.xliff && \
 	    zip -qr $$f.zip $$f && \

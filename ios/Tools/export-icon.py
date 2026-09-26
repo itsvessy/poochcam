@@ -30,7 +30,7 @@ def run(command):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--icon", type=Path, default=IOS_ROOT / "Moblin" / "PoochcamIcon.icon")
+    parser.add_argument("--icon", type=Path, default=IOS_ROOT / "Poochcam" / "PoochcamIcon.icon")
     parser.add_argument("--output", type=Path, default=DESIGN_ROOT / "Exports")
     parser.add_argument("--preview", type=Path, default=DESIGN_ROOT / "PoochcamIcon-preview.png")
     parser.add_argument("--background", default="233D33", help="Opaque export corner color (RRGGBB)")
@@ -85,7 +85,7 @@ def main():
         digest.update(b"\0")
         digest.update(source.read_bytes())
     metadata = {
-        "sourcePackage": "Moblin/PoochcamIcon.icon" if icon == IOS_ROOT / "Moblin" / "PoochcamIcon.icon" else str(icon),
+        "sourcePackage": "Poochcam/PoochcamIcon.icon" if icon == IOS_ROOT / "Poochcam" / "PoochcamIcon.icon" else str(icon),
         "sourceSHA256": digest.hexdigest(),
         "xcode": command_output(["xcodebuild", "-version"]),
         "renderer": command_output([str(renderer), "--version"]),

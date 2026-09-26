@@ -13,7 +13,7 @@ def generate(checkouts):
     packages = {path.name.lower(): path for path in checkouts.iterdir() if path.is_dir()}
     sections = ['Poochcam — third-party notices\n\nBased on Moblin by Erik Moqvist. Independent project; not endorsed by Moblin.\n']
     for title, path in [('Moblin — MIT', ROOT / 'ios/LICENSE'),
-                        ('Embedded HaishinKit — BSD 3-Clause', ROOT / 'ios/Moblin/Media/HaishinKit/LICENSE.md')]:
+                        ('Embedded HaishinKit — BSD 3-Clause', ROOT / 'ios/Poochcam/Media/HaishinKit/LICENSE.md')]:
         sections.append(title + '\n\n' + path.read_text())
     inventory = []
     for pin in pins:
@@ -32,7 +32,7 @@ def generate(checkouts):
                 sections.append(f"{pin['identity']} — {pin['location']}\nRevision: {revision}\n{relative}\n\n" + path.read_text())
         entry['status'] = 'notice-found' if entry['notices'] else 'license-not-found-review-required'
         inventory.append(entry)
-    attribution = (ROOT / 'ios/Moblin/View/Settings/About/AboutAttributionsSettingsView.swift').read_text().split('private let imageAttributions')[0]
+    attribution = (ROOT / 'ios/Poochcam/View/Settings/About/AboutAttributionsSettingsView.swift').read_text().split('private let imageAttributions')[0]
     strings = re.findall(r'"([^"\n]+)"', attribution)
     sections.append('Bundled upstream sound attribution\n\n' + '\n'.join(strings) +
                     '\n\nCC0: https://creativecommons.org/publicdomain/zero/1.0/\n'
@@ -42,7 +42,7 @@ def generate(checkouts):
                     'Their checksums are in the pinned package manifests. Full transitive native-library license '
                     'and source-provision requirements must be verified before distributing an app archive. '
                     'This notice file is not evidence that that review is complete.')
-    (ROOT / 'ios/Moblin/Poochcam/ThirdPartyNotices.txt').write_text(('\n\n' + '=' * 72 + '\n\n').join(sections) + '\n')
+    (ROOT / 'ios/Poochcam/Poochcam/ThirdPartyNotices.txt').write_text(('\n\n' + '=' * 72 + '\n\n').join(sections) + '\n')
     (ROOT / 'docs').mkdir(exist_ok=True)
     (ROOT / 'docs/dependency-inventory.json').write_text(json.dumps(inventory, indent=2) + '\n')
     print(f'Generated notices for {len(pins)} locked packages; {sum(not p["notices"] for p in inventory)} require license review.')

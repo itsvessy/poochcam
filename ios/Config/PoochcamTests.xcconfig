@@ -2,5 +2,4 @@
 
 PRODUCT_BUNDLE_IDENTIFIER = $(BASE_PRODUCT_BUNDLE_IDENTIFIER).Tests
 
-// Retain the inherited Swift module while renaming Xcode labels.
-PRODUCT_MODULE_NAME = MoblinTests
+PRODUCT_MODULE_NAME = PoochcamTests

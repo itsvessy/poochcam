@@ -63,7 +63,7 @@ as the current candidate.
    completed cleanup when merging to main.
 
    The main integration is
-   `ios/Moblin/Various/Media.swift`: protocol objects, factories, start/stop paths,
+   `ios/Poochcam/Various/Media.swift`: protocol objects, factories, start/stop paths,
    statistics and delegate implementations. Follow references through Model and
    ingest code, including `ModelStream`, `ModelSrtlaServer`, `ModelSrtClient`,
    `ModelRistServer`, `ModelWhipServer`, `ModelWhepClient`, camera/audio/scene
@@ -83,7 +83,7 @@ as the current candidate.
    `SrtPerformanceData` has a native `CBytePerfMon` adapter despite also serving
    pure-Swift helpers; isolate that native dependency if retaining the helpers.
    Keep inherited test membership consistent for affected RIST/SRT suites without
-   deleting RTMP checks. The synchronized Moblin source group automatically
+   deleting RTMP checks. The synchronized Poochcam source group automatically
    includes files: moving them into a differently named navigator group is not
    a compilation exclusion.
 
