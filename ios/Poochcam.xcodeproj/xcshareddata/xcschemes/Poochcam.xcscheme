@@ -35,8 +35,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "03E649422E634D2800728501"
-               BuildableName = "MoblinTests.xctest"
-               BlueprintName = "MoblinTests"
+               BuildableName = "PoochcamTests.xctest"
+               BlueprintName = "PoochcamTests"
                ReferencedContainer = "container:Poochcam.xcodeproj">
             </BuildableReference>
          </TestableReference>

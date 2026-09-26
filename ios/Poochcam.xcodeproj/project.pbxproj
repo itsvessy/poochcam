@@ -23,7 +23,7 @@
 		0375FD7B2F539AAC005BE7A8 /* Srt in Frameworks */ = {isa = PBXBuildFile; productRef = 0375FD7A2F539AAC005BE7A8 /* Srt */; };
 		0376F6F92B9511030056B3D2 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0376F6F82B9511030056B3D2 /* WidgetKit.framework */; };
 		0376F6FB2B9511030056B3D2 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0376F6FA2B9511030056B3D2 /* SwiftUI.framework */; };
-		0376F7042B9511040056B3D2 /* MoblinWidget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 0376F6F72B9511030056B3D2 /* MoblinWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		0376F7042B9511040056B3D2 /* PoochcamWidget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 0376F6F72B9511030056B3D2 /* PoochcamWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0377239A2DE35191007D040D /* VRMKit in Frameworks */ = {isa = PBXBuildFile; productRef = 037723992DE35191007D040D /* VRMKit */; };
 		0377239C2DE35191007D040D /* VRMSceneKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0377239B2DE35191007D040D /* VRMSceneKit */; };
 		03A08B7C2AC295620018BA95 /* AlertToast in Frameworks */ = {isa = PBXBuildFile; productRef = 03A08B7B2AC295620018BA95 /* AlertToast */; };
@@ -45,7 +45,7 @@
 			containerPortal = 035E9E2B2A9A02D6009D4F5A /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 0376F6F62B9511030056B3D2;
-			remoteInfo = "Moblin Widget App Extension";
+			remoteInfo = "Poochcam Widget App Extension";
 		};
 		03E649472E634D2800728501 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -63,7 +63,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				0376F7042B9511040056B3D2 /* MoblinWidget.appex in Embed Foundation Extensions */,
+				0376F7042B9511040056B3D2 /* PoochcamWidget.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -71,15 +71,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0312E42E2C00F24E00C6F878 /* Moblin Screen Recording.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Moblin Screen Recording.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0312E42E2C00F24E00C6F878 /* Poochcam Screen Recording.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Poochcam Screen Recording.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0312E42F2C00F24E00C6F878 /* ReplayKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReplayKit.framework; path = System/Library/Frameworks/ReplayKit.framework; sourceTree = SDKROOT; };
 		035E9E332A9A02D6009D4F5A /* Poochcam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Poochcam.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		0376F6F72B9511030056B3D2 /* MoblinWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MoblinWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		0376F6F72B9511030056B3D2 /* PoochcamWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PoochcamWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		0376F6F82B9511030056B3D2 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		0376F6FA2B9511030056B3D2 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
-		03AA0006000000000000AA02 /* MoblinLiveActivity.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MoblinLiveActivity.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		03E649432E634D2800728501 /* MoblinTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MoblinTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		03ECDF462B8E4E5E00BD920E /* Moblin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Moblin.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		03AA0006000000000000AA02 /* PoochcamLiveActivity.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PoochcamLiveActivity.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		03E649432E634D2800728501 /* PoochcamTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PoochcamTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		03ECDF462B8E4E5E00BD920E /* PoochcamWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PoochcamWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -88,11 +88,11 @@
 			membershipExceptions = (
 				Base.xcconfig,
 				Poochcam.xcconfig,
-				MoblinLiveActivity.xcconfig,
-				MoblinScreenRecording.xcconfig,
-				MoblinTests.xcconfig,
-				MoblinWatch.xcconfig,
-				MoblinWidget.xcconfig,
+				PoochcamLiveActivity.xcconfig,
+				PoochcamScreenRecording.xcconfig,
+				PoochcamTests.xcconfig,
+				PoochcamWatch.xcconfig,
+				PoochcamWidget.xcconfig,
 				User.xcconfig,
 			);
 			target = 035E9E322A9A02D6009D4F5A /* Poochcam */;
@@ -102,35 +102,35 @@
 			membershipExceptions = (
 				Base.xcconfig,
 				Poochcam.xcconfig,
-				MoblinLiveActivity.xcconfig,
-				MoblinScreenRecording.xcconfig,
-				MoblinTests.xcconfig,
-				MoblinWatch.xcconfig,
-				MoblinWidget.xcconfig,
+				PoochcamLiveActivity.xcconfig,
+				PoochcamScreenRecording.xcconfig,
+				PoochcamTests.xcconfig,
+				PoochcamWatch.xcconfig,
+				PoochcamWidget.xcconfig,
 				User.xcconfig,
 			);
-			target = 03ECDF452B8E4E5E00BD920E /* MoblinWatch */;
+			target = 03ECDF452B8E4E5E00BD920E /* PoochcamWatch */;
 		};
 		030AC5B22F4988A600496F6F /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Base.xcconfig,
 				Poochcam.xcconfig,
-				MoblinLiveActivity.xcconfig,
-				MoblinScreenRecording.xcconfig,
-				MoblinTests.xcconfig,
-				MoblinWatch.xcconfig,
-				MoblinWidget.xcconfig,
+				PoochcamLiveActivity.xcconfig,
+				PoochcamScreenRecording.xcconfig,
+				PoochcamTests.xcconfig,
+				PoochcamWatch.xcconfig,
+				PoochcamWidget.xcconfig,
 				User.xcconfig,
 			);
-			target = 0312E42D2C00F24E00C6F878 /* Moblin Screen Recording */;
+			target = 0312E42D2C00F24E00C6F878 /* Poochcam Screen Recording */;
 		};
 		03298F0B2F991AD6009E4D0C /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Localizable.xcstrings,
 			);
-			target = 03AA0002000000000000AA02 /* MoblinLiveActivity */;
+			target = 03AA0002000000000000AA02 /* PoochcamLiveActivity */;
 		};
 		037D9E9F2E38AC1600C0AF9A /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
@@ -145,7 +145,7 @@
 				"Various/CMFormatDescription+Extension.swift",
 				"Various/CMSampleBuffer+Extension.swift",
 			);
-			target = 03ECDF452B8E4E5E00BD920E /* MoblinWatch */;
+			target = 03ECDF452B8E4E5E00BD920E /* PoochcamWatch */;
 		};
 		037D9ECC2E38AC1B00C0AF9A /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
@@ -154,7 +154,7 @@
 				View/StreamOverlayTextView.swift,
 				View/ThermalStateView.swift,
 			);
-			target = 0312E42D2C00F24E00C6F878 /* Moblin Screen Recording */;
+			target = 0312E42D2C00F24E00C6F878 /* Poochcam Screen Recording */;
 		};
 		037D9EF52E38AC2000C0AF9A /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
@@ -169,14 +169,14 @@
 			membershipExceptions = (
 				Info.plist,
 			);
-			target = 03ECDF452B8E4E5E00BD920E /* MoblinWatch */;
+			target = 03ECDF452B8E4E5E00BD920E /* PoochcamWatch */;
 		};
 		037D9F022E38AC2300C0AF9A /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
 			);
-			target = 0376F6F62B9511030056B3D2 /* MoblinWidget */;
+			target = 0376F6F62B9511030056B3D2 /* PoochcamWidget */;
 		};
 		037D9F162E38AC2700C0AF9A /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
@@ -192,7 +192,7 @@
 				Info.plist,
 				Shared/SampleBufferReceiver.swift,
 			);
-			target = 0312E42D2C00F24E00C6F878 /* Moblin Screen Recording */;
+			target = 0312E42D2C00F24E00C6F878 /* Poochcam Screen Recording */;
 		};
 		03A0001F2E00000000000001 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
@@ -206,14 +206,14 @@
 			membershipExceptions = (
 				Info.plist,
 			);
-			target = 03AA0002000000000000AA02 /* MoblinLiveActivity */;
+			target = 03AA0002000000000000AA02 /* PoochcamLiveActivity */;
 		};
 		03CBFBF12F0063CF0001864A /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Localizable.xcstrings,
 			);
-			target = 0376F6F62B9511030056B3D2 /* MoblinWidget */;
+			target = 0376F6F62B9511030056B3D2 /* PoochcamWidget */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
@@ -221,11 +221,11 @@
 		030AC5AF2F4988A000496F6F /* Config */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (030AC5B02F4988A600496F6F /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 030AC5B12F4988A600496F6F /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 030AC5B22F4988A600496F6F /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Config; sourceTree = "<group>"; };
 		037D9C902E38AC1600C0AF9A /* Poochcam */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (037D9E9F2E38AC1600C0AF9A /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); name = Poochcam; path = Moblin; sourceTree = "<group>"; };
 		037D9EAC2E38AC1B00C0AF9A /* Common */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (037D9ECB2E38AC1B00C0AF9A /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 03CBFBF12F0063CF0001864A /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 03298F0B2F991AD6009E4D0C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 037D9ECC2E38AC1B00C0AF9A /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Common; sourceTree = "<group>"; };
-		037D9EE42E38AC2000C0AF9A /* Moblin Watch */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (037D9EF52E38AC2000C0AF9A /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 037D9EF62E38AC2000C0AF9A /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = "Moblin Watch"; sourceTree = "<group>"; };
-		037D9EFC2E38AC2300C0AF9A /* Moblin Widget */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (037D9F022E38AC2300C0AF9A /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = "Moblin Widget"; sourceTree = "<group>"; };
-		037D9F0C2E38AC2600C0AF9A /* Moblin Screen Recording */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (037D9F162E38AC2700C0AF9A /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 037D9F172E38AC2700C0AF9A /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = "Moblin Screen Recording"; sourceTree = "<group>"; };
-		03AA000A000000000000AA02 /* Moblin Live Activity */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (03A0001F2E00000000000001 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 03AA000B000000000000AA02 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = "Moblin Live Activity"; sourceTree = "<group>"; };
-		03E649442E634D2800728501 /* MoblinTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = MoblinTests; sourceTree = "<group>"; };
+		037D9EE42E38AC2000C0AF9A /* Poochcam Watch */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (037D9EF52E38AC2000C0AF9A /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 037D9EF62E38AC2000C0AF9A /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); name = "Poochcam Watch"; path = "Moblin Watch"; sourceTree = "<group>"; };
+		037D9EFC2E38AC2300C0AF9A /* Poochcam Widget */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (037D9F022E38AC2300C0AF9A /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); name = "Poochcam Widget"; path = "Moblin Widget"; sourceTree = "<group>"; };
+		037D9F0C2E38AC2600C0AF9A /* Poochcam Screen Recording */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (037D9F162E38AC2700C0AF9A /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 037D9F172E38AC2700C0AF9A /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); name = "Poochcam Screen Recording"; path = "Moblin Screen Recording"; sourceTree = "<group>"; };
+		03AA000A000000000000AA02 /* Poochcam Live Activity */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (03A0001F2E00000000000001 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 03AA000B000000000000AA02 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); name = "Poochcam Live Activity"; path = "Moblin Live Activity"; sourceTree = "<group>"; };
+		03E649442E634D2800728501 /* PoochcamTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); name = PoochcamTests; path = MoblinTests; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -319,11 +319,11 @@
 				030AC5AF2F4988A000496F6F /* Config */,
 				037D9EAC2E38AC1B00C0AF9A /* Common */,
 				037D9C902E38AC1600C0AF9A /* Poochcam */,
-				037D9EE42E38AC2000C0AF9A /* Moblin Watch */,
-				037D9EFC2E38AC2300C0AF9A /* Moblin Widget */,
-				03AA000A000000000000AA02 /* Moblin Live Activity */,
-				037D9F0C2E38AC2600C0AF9A /* Moblin Screen Recording */,
-				03E649442E634D2800728501 /* MoblinTests */,
+				037D9EE42E38AC2000C0AF9A /* Poochcam Watch */,
+				037D9EFC2E38AC2300C0AF9A /* Poochcam Widget */,
+				03AA000A000000000000AA02 /* Poochcam Live Activity */,
+				037D9F0C2E38AC2600C0AF9A /* Poochcam Screen Recording */,
+				03E649442E634D2800728501 /* PoochcamTests */,
 				035E9E342A9A02D6009D4F5A /* Products */,
 				035D372A2AB103E600045B92 /* Frameworks */,
 			);
@@ -333,11 +333,11 @@
 			isa = PBXGroup;
 			children = (
 				035E9E332A9A02D6009D4F5A /* Poochcam.app */,
-				03ECDF462B8E4E5E00BD920E /* Moblin.app */,
-				0376F6F72B9511030056B3D2 /* MoblinWidget.appex */,
-				0312E42E2C00F24E00C6F878 /* Moblin Screen Recording.appex */,
-				03E649432E634D2800728501 /* MoblinTests.xctest */,
-				03AA0006000000000000AA02 /* MoblinLiveActivity.appex */,
+				03ECDF462B8E4E5E00BD920E /* PoochcamWatch.app */,
+				0376F6F72B9511030056B3D2 /* PoochcamWidget.appex */,
+				0312E42E2C00F24E00C6F878 /* Poochcam Screen Recording.appex */,
+				03E649432E634D2800728501 /* PoochcamTests.xctest */,
+				03AA0006000000000000AA02 /* PoochcamLiveActivity.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -345,9 +345,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		0312E42D2C00F24E00C6F878 /* Moblin Screen Recording */ = {
+		0312E42D2C00F24E00C6F878 /* Poochcam Screen Recording */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0312E43B2C00F24E00C6F878 /* Build configuration list for PBXNativeTarget "Moblin Screen Recording" */;
+			buildConfigurationList = 0312E43B2C00F24E00C6F878 /* Build configuration list for PBXNativeTarget "Poochcam Screen Recording" */;
 			buildPhases = (
 				0312E42A2C00F24E00C6F878 /* Sources */,
 				0312E42B2C00F24E00C6F878 /* Frameworks */,
@@ -360,11 +360,11 @@
 			fileSystemSynchronizedGroups = (
 				030AC5AF2F4988A000496F6F /* Config */,
 				037D9EAC2E38AC1B00C0AF9A /* Common */,
-				037D9F0C2E38AC2600C0AF9A /* Moblin Screen Recording */,
+				037D9F0C2E38AC2600C0AF9A /* Poochcam Screen Recording */,
 			);
-			name = "Moblin Screen Recording";
-			productName = "Moblin Capture";
-			productReference = 0312E42E2C00F24E00C6F878 /* Moblin Screen Recording.appex */;
+			name = "Poochcam Screen Recording";
+			productName = "Poochcam Capture";
+			productReference = 0312E42E2C00F24E00C6F878 /* Poochcam Screen Recording.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 		035E9E322A9A02D6009D4F5A /* Poochcam */ = {
@@ -415,9 +415,9 @@
 			productReference = 035E9E332A9A02D6009D4F5A /* Poochcam.app */;
 			productType = "com.apple.product-type.application";
 		};
-		0376F6F62B9511030056B3D2 /* MoblinWidget */ = {
+		0376F6F62B9511030056B3D2 /* PoochcamWidget */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0376F7052B9511040056B3D2 /* Build configuration list for PBXNativeTarget "MoblinWidget" */;
+			buildConfigurationList = 0376F7052B9511040056B3D2 /* Build configuration list for PBXNativeTarget "PoochcamWidget" */;
 			buildPhases = (
 				0376F6F32B9511030056B3D2 /* Sources */,
 				0376F6F42B9511030056B3D2 /* Frameworks */,
@@ -428,16 +428,16 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				037D9EFC2E38AC2300C0AF9A /* Moblin Widget */,
+				037D9EFC2E38AC2300C0AF9A /* Poochcam Widget */,
 			);
-			name = MoblinWidget;
-			productName = "Moblin Widget App";
-			productReference = 0376F6F72B9511030056B3D2 /* MoblinWidget.appex */;
+			name = PoochcamWidget;
+			productName = "Poochcam Widget App";
+			productReference = 0376F6F72B9511030056B3D2 /* PoochcamWidget.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
-		03AA0002000000000000AA02 /* MoblinLiveActivity */ = {
+		03AA0002000000000000AA02 /* PoochcamLiveActivity */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 03AA000F000000000000AA02 /* Build configuration list for PBXNativeTarget "MoblinLiveActivity" */;
+			buildConfigurationList = 03AA000F000000000000AA02 /* Build configuration list for PBXNativeTarget "PoochcamLiveActivity" */;
 			buildPhases = (
 				03AA0003000000000000AA02 /* Sources */,
 				03AA0004000000000000AA02 /* Frameworks */,
@@ -448,16 +448,16 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				03AA000A000000000000AA02 /* Moblin Live Activity */,
+				03AA000A000000000000AA02 /* Poochcam Live Activity */,
 			);
-			name = MoblinLiveActivity;
-			productName = "Moblin Live Activity";
-			productReference = 03AA0006000000000000AA02 /* MoblinLiveActivity.appex */;
+			name = PoochcamLiveActivity;
+			productName = "Poochcam Live Activity";
+			productReference = 03AA0006000000000000AA02 /* PoochcamLiveActivity.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
-		03E649422E634D2800728501 /* MoblinTests */ = {
+		03E649422E634D2800728501 /* PoochcamTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 03E649492E634D2800728501 /* Build configuration list for PBXNativeTarget "MoblinTests" */;
+			buildConfigurationList = 03E649492E634D2800728501 /* Build configuration list for PBXNativeTarget "PoochcamTests" */;
 			buildPhases = (
 				03E6493F2E634D2800728501 /* Sources */,
 				03E649402E634D2800728501 /* Frameworks */,
@@ -469,18 +469,18 @@
 				03E649482E634D2800728501 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				03E649442E634D2800728501 /* MoblinTests */,
+				03E649442E634D2800728501 /* PoochcamTests */,
 			);
-			name = MoblinTests;
+			name = PoochcamTests;
 			packageProductDependencies = (
 			);
-			productName = MoblinTests;
-			productReference = 03E649432E634D2800728501 /* MoblinTests.xctest */;
+			productName = PoochcamTests;
+			productReference = 03E649432E634D2800728501 /* PoochcamTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		03ECDF452B8E4E5E00BD920E /* MoblinWatch */ = {
+		03ECDF452B8E4E5E00BD920E /* PoochcamWatch */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 03ECDF542B8E4E6000BD920E /* Build configuration list for PBXNativeTarget "MoblinWatch" */;
+			buildConfigurationList = 03ECDF542B8E4E6000BD920E /* Build configuration list for PBXNativeTarget "PoochcamWatch" */;
 			buildPhases = (
 				03ECDF422B8E4E5E00BD920E /* Sources */,
 				03ECDF432B8E4E5E00BD920E /* Frameworks */,
@@ -495,15 +495,15 @@
 			fileSystemSynchronizedGroups = (
 				030AC5AF2F4988A000496F6F /* Config */,
 				037D9EAC2E38AC1B00C0AF9A /* Common */,
-				037D9EE42E38AC2000C0AF9A /* Moblin Watch */,
+				037D9EE42E38AC2000C0AF9A /* Poochcam Watch */,
 			);
-			name = MoblinWatch;
+			name = PoochcamWatch;
 			packageProductDependencies = (
 				03ECDF5C2B8E5F0B00BD920E /* WrappingHStack */,
 				03A707B02B8EBE4D003BB7BE /* Collections */,
 			);
-			productName = "MoblinWatch Watch App";
-			productReference = 03ECDF462B8E4E5E00BD920E /* Moblin.app */;
+			productName = "PoochcamWatch Watch App";
+			productReference = 03ECDF462B8E4E5E00BD920E /* PoochcamWatch.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -598,11 +598,11 @@
 			projectRoot = "";
 			targets = (
 				035E9E322A9A02D6009D4F5A /* Poochcam */,
-				03ECDF452B8E4E5E00BD920E /* MoblinWatch */,
-				0376F6F62B9511030056B3D2 /* MoblinWidget */,
-				03AA0002000000000000AA02 /* MoblinLiveActivity */,
-				0312E42D2C00F24E00C6F878 /* Moblin Screen Recording */,
-				03E649422E634D2800728501 /* MoblinTests */,
+				03ECDF452B8E4E5E00BD920E /* PoochcamWatch */,
+				0376F6F62B9511030056B3D2 /* PoochcamWidget */,
+				03AA0002000000000000AA02 /* PoochcamLiveActivity */,
+				0312E42D2C00F24E00C6F878 /* Poochcam Screen Recording */,
+				03E649422E634D2800728501 /* PoochcamTests */,
 			);
 		};
 /* End PBXProject section */
@@ -700,7 +700,7 @@
 /* Begin PBXTargetDependency section */
 		0376F7032B9511040056B3D2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 0376F6F62B9511030056B3D2 /* MoblinWidget */;
+			target = 0376F6F62B9511030056B3D2 /* PoochcamWidget */;
 			targetProxy = 0376F7022B9511040056B3D2 /* PBXContainerItemProxy */;
 		};
 		03E649482E634D2800728501 /* PBXTargetDependency */ = {
@@ -714,14 +714,14 @@
 		0312E4392C00F24E00C6F878 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReferenceAnchor = 030AC5AF2F4988A000496F6F /* Config */;
-			baseConfigurationReferenceRelativePath = MoblinScreenRecording.xcconfig;
+			baseConfigurationReferenceRelativePath = PoochcamScreenRecording.xcconfig;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Moblin Screen Recording/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = Moblin;
+				INFOPLIST_KEY_CFBundleDisplayName = Poochcam;
 				INFOPLIST_KEY_NSCameraUsageDescription = Yes;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = Yes;
@@ -749,14 +749,14 @@
 		0312E43A2C00F24E00C6F878 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReferenceAnchor = 030AC5AF2F4988A000496F6F /* Config */;
-			baseConfigurationReferenceRelativePath = MoblinScreenRecording.xcconfig;
+			baseConfigurationReferenceRelativePath = PoochcamScreenRecording.xcconfig;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Moblin Screen Recording/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = Moblin;
+				INFOPLIST_KEY_CFBundleDisplayName = Poochcam;
 				INFOPLIST_KEY_NSCameraUsageDescription = Yes;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = Yes;
@@ -1033,7 +1033,7 @@
 		0376F7062B9511040056B3D2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReferenceAnchor = 030AC5AF2F4988A000496F6F /* Config */;
-			baseConfigurationReferenceRelativePath = MoblinWidget.xcconfig;
+			baseConfigurationReferenceRelativePath = PoochcamWidget.xcconfig;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
@@ -1042,7 +1042,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Moblin Widget/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Moblin Widget";
+				INFOPLIST_KEY_CFBundleDisplayName = "Poochcam Widget";
 				INFOPLIST_KEY_NSCameraUsageDescription = Yes;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = Yes;
@@ -1069,7 +1069,7 @@
 		0376F7072B9511040056B3D2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReferenceAnchor = 030AC5AF2F4988A000496F6F /* Config */;
-			baseConfigurationReferenceRelativePath = MoblinWidget.xcconfig;
+			baseConfigurationReferenceRelativePath = PoochcamWidget.xcconfig;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
@@ -1078,7 +1078,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Moblin Widget/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Moblin Widget";
+				INFOPLIST_KEY_CFBundleDisplayName = "Poochcam Widget";
 				INFOPLIST_KEY_NSCameraUsageDescription = Yes;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = Yes;
@@ -1104,7 +1104,7 @@
 		03AA000D000000000000AA02 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReferenceAnchor = 030AC5AF2F4988A000496F6F /* Config */;
-			baseConfigurationReferenceRelativePath = MoblinLiveActivity.xcconfig;
+			baseConfigurationReferenceRelativePath = PoochcamLiveActivity.xcconfig;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -1112,7 +1112,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Moblin Live Activity/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Moblin Live Activity";
+				INFOPLIST_KEY_CFBundleDisplayName = "Poochcam Live Activity";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1136,7 +1136,7 @@
 		03AA000E000000000000AA02 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReferenceAnchor = 030AC5AF2F4988A000496F6F /* Config */;
-			baseConfigurationReferenceRelativePath = MoblinLiveActivity.xcconfig;
+			baseConfigurationReferenceRelativePath = PoochcamLiveActivity.xcconfig;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -1144,7 +1144,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Moblin Live Activity/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Moblin Live Activity";
+				INFOPLIST_KEY_CFBundleDisplayName = "Poochcam Live Activity";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1167,7 +1167,7 @@
 		03E6494A2E634D2800728501 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReferenceAnchor = 030AC5AF2F4988A000496F6F /* Config */;
-			baseConfigurationReferenceRelativePath = MoblinTests.xcconfig;
+			baseConfigurationReferenceRelativePath = PoochcamTests.xcconfig;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -1188,7 +1188,7 @@
 		03E6494B2E634D2800728501 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReferenceAnchor = 030AC5AF2F4988A000496F6F /* Config */;
-			baseConfigurationReferenceRelativePath = MoblinTests.xcconfig;
+			baseConfigurationReferenceRelativePath = PoochcamTests.xcconfig;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -1208,7 +1208,7 @@
 		03ECDF552B8E4E6000BD920E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReferenceAnchor = 030AC5AF2F4988A000496F6F /* Config */;
-			baseConfigurationReferenceRelativePath = MoblinWatch.xcconfig;
+			baseConfigurationReferenceRelativePath = PoochcamWatch.xcconfig;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1233,7 +1233,7 @@
 					"@executable_path/Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				PRODUCT_NAME = Moblin;
+				PRODUCT_NAME = PoochcamWatch;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
@@ -1247,7 +1247,7 @@
 		03ECDF562B8E4E6000BD920E /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReferenceAnchor = 030AC5AF2F4988A000496F6F /* Config */;
-			baseConfigurationReferenceRelativePath = MoblinWatch.xcconfig;
+			baseConfigurationReferenceRelativePath = PoochcamWatch.xcconfig;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1272,7 +1272,7 @@
 					"@executable_path/Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				PRODUCT_NAME = Moblin;
+				PRODUCT_NAME = PoochcamWatch;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1285,7 +1285,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0312E43B2C00F24E00C6F878 /* Build configuration list for PBXNativeTarget "Moblin Screen Recording" */ = {
+		0312E43B2C00F24E00C6F878 /* Build configuration list for PBXNativeTarget "Poochcam Screen Recording" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0312E4392C00F24E00C6F878 /* Debug */,
@@ -1312,7 +1312,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0376F7052B9511040056B3D2 /* Build configuration list for PBXNativeTarget "MoblinWidget" */ = {
+		0376F7052B9511040056B3D2 /* Build configuration list for PBXNativeTarget "PoochcamWidget" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0376F7062B9511040056B3D2 /* Debug */,
@@ -1321,7 +1321,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		03AA000F000000000000AA02 /* Build configuration list for PBXNativeTarget "MoblinLiveActivity" */ = {
+		03AA000F000000000000AA02 /* Build configuration list for PBXNativeTarget "PoochcamLiveActivity" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				03AA000D000000000000AA02 /* Debug */,
@@ -1330,7 +1330,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		03E649492E634D2800728501 /* Build configuration list for PBXNativeTarget "MoblinTests" */ = {
+		03E649492E634D2800728501 /* Build configuration list for PBXNativeTarget "PoochcamTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				03E6494A2E634D2800728501 /* Debug */,
@@ -1339,7 +1339,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		03ECDF542B8E4E6000BD920E /* Build configuration list for PBXNativeTarget "MoblinWatch" */ = {
+		03ECDF542B8E4E6000BD920E /* Build configuration list for PBXNativeTarget "PoochcamWatch" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				03ECDF552B8E4E6000BD920E /* Debug */,

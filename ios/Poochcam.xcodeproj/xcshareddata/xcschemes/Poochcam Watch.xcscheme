@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "03ECDF452B8E4E5E00BD920E"
-               BuildableName = "Moblin.app"
-               BlueprintName = "MoblinWatch"
+               BuildableName = "PoochcamWatch.app"
+               BlueprintName = "PoochcamWatch"
                ReferencedContainer = "container:Poochcam.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -49,8 +49,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "03E649422E634D2800728501"
-               BuildableName = "MoblinTests.xctest"
-               BlueprintName = "MoblinTests"
+               BuildableName = "PoochcamTests.xctest"
+               BlueprintName = "PoochcamTests"
                ReferencedContainer = "container:Poochcam.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -71,8 +71,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "03ECDF452B8E4E5E00BD920E"
-            BuildableName = "Moblin.app"
-            BlueprintName = "MoblinWatch"
+            BuildableName = "PoochcamWatch.app"
+            BlueprintName = "PoochcamWatch"
             ReferencedContainer = "container:Poochcam.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -88,8 +88,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "03ECDF452B8E4E5E00BD920E"
-            BuildableName = "Moblin.app"
-            BlueprintName = "MoblinWatch"
+            BuildableName = "PoochcamWatch.app"
+            BlueprintName = "PoochcamWatch"
             ReferencedContainer = "container:Poochcam.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

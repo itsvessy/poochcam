@@ -8,6 +8,15 @@ If you previously opened `Moblin.xcodeproj`, close that Xcode window and open
 `Poochcam.xcodeproj`. The inherited source folder and internal Swift module retain
 their Moblin names; upstream notices and attribution are preserved.
 
+The inherited Watch, Widget, Live Activity, Screen Recording and Tests targets
+also use Poochcam names in Xcode, including the shared **Poochcam Watch** scheme.
+These auxiliary targets are retained upstream code, not supported features of
+the dedicated iPhone release; the main Poochcam build does not embed them. Select
+**Poochcam** to build the camera app. The auxiliary configurations explicitly keep
+their original Swift module names and bundle identifiers. Source filenames and
+license credits can therefore still contain Moblin. Package schemes such as
+AlertToast and SwiftCube keep their library names.
+
 For signing, copy `ios/Config/User.xcconfig.example` to the ignored
 `ios/Config/User.xcconfig`. Set your personal `DEVELOPMENT_TEAM`. The intended App
 Store bundle identifier is `com.vessy.poochcam`; use a unique identifier when building

@@ -14,9 +14,11 @@ credential storage, runtime feature initialization and audio-session defaults. T
 RTMP capture/encoding/reconnect engine is retained. It also supplies an independent
 browser viewer, Docker server package and documentation website.
 
-The Xcode project, main target and shared scheme are named Poochcam. These names
-identify this adaptation; the original copyright, license text and Moblin credits
-remain intact. Internal source-folder and Swift-module names still use Moblin.
+The Xcode project, targets, shared schemes, products and navigator group labels use
+Poochcam names. These names identify this adaptation; the original copyright,
+license text and Moblin credits remain intact. Internal source-folder and
+Swift-module names still use Moblin. The inherited auxiliary targets are not
+embedded in the dedicated iPhone release.
 
 This repository begins with a clean source export. Personal capture evidence,
 server settings, signing material, build artifacts and earlier private history are

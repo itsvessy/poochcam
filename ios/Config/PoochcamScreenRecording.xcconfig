@@ -2,3 +2,6 @@
 
 PRODUCT_BUNDLE_IDENTIFIER = $(BASE_PRODUCT_BUNDLE_IDENTIFIER).Moblin-Capture
 CODE_SIGN_ENTITLEMENTS = Moblin Screen Recording/Moblin Screen Recording.$(CAPABILITIES).entitlements
+
+// Retain the inherited Swift module while renaming Xcode labels.
+PRODUCT_MODULE_NAME = Moblin_Screen_Recording
